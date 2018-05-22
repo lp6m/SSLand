@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Codeplex.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,7 +31,6 @@ namespace SSLand {
             this.account = account;
         }
 
-        
 
         //新着商品を取得する
         public List<SecondStreetListItem> getNewItems(int count = 30, string max_id = "")
