@@ -8,3 +8,4 @@ C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.csproj.GenerateRes
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.csproj.CoreCompileInputs.cache
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.exe
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.pdb
+C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.Account.resources

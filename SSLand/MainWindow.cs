@@ -19,7 +19,8 @@ namespace SSLand
 
         private void アカウント管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form account_form = new Account();
+            account_form.Show();
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
