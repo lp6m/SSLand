@@ -17,6 +17,55 @@ namespace SSLand {
             public bool error = true;
             public string response = "";
         }
+
+        public Common.Account account;
+        public SecondStreetAPI(string email, string password)
+        {
+            this.account = new Common.Account();
+            this.account.email = email;
+            this.account.password = password;
+        }
+
+        public SecondStreetAPI(Common.Account account){
+            this.account = account;
+        }
+
+        
+
+        //新着商品を取得する
+        public List<SecondStreetListItem> getNewItems(int count = 30, string max_id = "")
+        {
+            List<SecondStreetListItem> rst = new List<SecondStreetListItem>();
+            Dictionary<string, string> param = new Dictionary<string, string>();
+            param.Add("auth_token", this.account.fril_auth_token);
+            param.Add("count", count.ToString());
+            //if (string.IsNullOrEmpty(max_id) == false) param.Add("max_id", max_id);
+            string url = "http://api.fril.jp/api/v3/timelines/current";
+            SecondStreetRawResponse rawres = getFrilAPI(url, param);
+            if (rawres.error)
+            {
+                Log.Logger.Error(string.Format("フリルタイムライン取得失敗"));
+                return null;
+            }
+            dynamic resjson = DynamicJson.Parse(rawres.response);
+            try
+            {
+                foreach (var itemjson in resjson.items)
+                {
+                    rst.Add(new SecondStreetListItem(itemjson));
+                }
+                Console.WriteLine("start: " + rst[0].item_id + " end: " + rst[rst.Count - 1].item_id);
+                return rst;
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("フリルタイムラインjsonパース失敗");
+                return rst;
+            }
+        }
+        
+
+
         //FrilAPIをGETでたたく
         private SecondStreetRawResponse getFrilAPI(string url, Dictionary<string, string> param)
         {
@@ -65,7 +114,6 @@ namespace SSLand {
                 return res;
             }
         }
-
         private string executeGetRequest(HttpWebRequest req)
         {
             try
@@ -104,7 +152,6 @@ namespace SSLand {
                 return "";
             }
         }
-        
         private CookieContainer cc = new CookieContainer();
         private string postMultipartFril(string url, Dictionary<string, string> param, string file) {
             Encoding encoding = Encoding.GetEncoding("UTF-8");
@@ -118,7 +165,7 @@ namespace SSLand {
             string text2 = "";
             foreach (KeyValuePair<string, string> current in param) {
                 text2 = string.Concat(new string[]
-				{
+				{   
 					text2,
 					"--",
 					text,

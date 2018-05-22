@@ -17,7 +17,7 @@ namespace SSLand
     public partial class MainWindow : Form
     {
         WebClient webClient = new WebClient();
-
+        SecondStreetAPI api = new SecondStreetAPI();
         public MainWindow()
         {
             InitializeComponent();
@@ -29,18 +29,20 @@ namespace SSLand
             account_form.Show();
         }
 
+
         private void MainWindow_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Console.WriteLine("button");
-            string jsonstr = "";
-            byte[] bytes = webClient.DownloadData("https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getNewGoods");
-            jsonstr = Encoding.UTF8.GetString(bytes);
-            Console.WriteLine(jsonstr);
+            
+            //string jsonstr = "";
+            //byte[] bytes = webClient.DownloadData("https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getNewGoods");
+            //jsonstr = Encoding.UTF8.GetString(bytes);
+            //Console.WriteLine(jsonstr);
             //DownloadAsync();
 
         }
