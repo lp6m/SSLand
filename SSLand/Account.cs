@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SSLand
 {
-    public partial class Form1 : Form
+    public partial class Account : Form
     {
-        public Form1()
+        public Account()
         {
             InitializeComponent();
         }
