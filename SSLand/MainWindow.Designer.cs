@@ -33,6 +33,7 @@
             this.メニューToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.購入者管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             // 購入者管理ToolStripMenuItem
             // 
             this.購入者管理ToolStripMenuItem.Name = "購入者管理ToolStripMenuItem";
-            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.購入者管理ToolStripMenuItem.Text = "アカウント管理";
             this.購入者管理ToolStripMenuItem.Click += new System.EventHandler(this.アカウント管理ToolStripMenuItem_Click);
             // 
@@ -68,11 +69,22 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(184, 218);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(295, 114);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "search";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainWindow";
@@ -91,6 +103,7 @@
         private System.Windows.Forms.ToolStripMenuItem メニューToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 購入者管理ToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
