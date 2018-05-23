@@ -46,11 +46,12 @@ namespace SSLand
             //jsonstr = Encoding.UTF8.GetString(bytes);
             //Console.WriteLine(jsonstr);
             //DownloadAsync();
-            postNewBrands();
+            postNewBrand();
         }
 
-        private List<SecondStreetListItem> postNewBrands() {
-            Console.WriteLine("\r\n\r\n-----------\r\n\r\n\r\n");
+        private List<SecondStreetListBrand> postNewBrand() {
+
+            //リクエスト部
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.2ndstreet.jp/index.php/api_2_0/AppMaster/getBrands");
             req.Method = "POST";
             req.UserAgent = agent;
@@ -58,27 +59,27 @@ namespace SSLand
             Stream s = rawres.GetResponseStream();
             StreamReader sr = new StreamReader(s);
             string content = sr.ReadToEnd();
-            dynamic resjson = DynamicJson.Parse(content);//ブランド名のjsonがはいっている
-            Console.WriteLine(resjson);
-            List<SecondStreetListItem> rst = new List<SecondStreetListItem>();
+            //パース部
+            dynamic resjson = DynamicJson.Parse(content);
+            List<SecondStreetListBrand> rst = new List<SecondStreetListBrand>();
             try
             {
                 foreach (var itemjson in resjson.value)
                 {
+                    rst.Add(new SecondStreetListBrand(itemjson));
                     Console.WriteLine(itemjson);
-                    //rst.Add(new SecondStreetListItem(itemjson));
                 }
-                //Console.WriteLine("start: " + rst[0].item_id + " end: " + rst[rst.Count - 1].item_id);
+                label1.Text = "待機";
                 return rst;
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("フリルタイムラインjsonパース失敗");
+                Log.Logger.Error("セカンドストリートタイムラインjsonパース失敗");
+                label1.Text = "ブランド名取得エラー";
                 return rst;
             }
-            Console.WriteLine(resjson.value);
 
-            label1.Text = "待機";
+            
         }
 
         // Step5: メソッド内でawaitキーワードを使ったら、メソッドの先頭でasyncを加えなければならない。
