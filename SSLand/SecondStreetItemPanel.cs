@@ -28,6 +28,9 @@ namespace SSLand
                 ChangeComponentSize();
                 this.item = item;
                 this.itemNameLabel.Text = item.goods_name;
+                this.shopNameLabel.Text = item.shop_name;
+                this.brandNameLabel.Text = item.brand_name;
+                this.sizeLabel.Text = item.size_detail;
                 if (!string.IsNullOrEmpty(item.image_url)) this.pictureBox1.ImageLocation = item.image_url;
                 //if (!string.IsNullOrEmpty(item.imageurls[1])) this.pictureBox2.ImageLocation = item.imageurls[1];
                 //if (!string.IsNullOrEmpty(item.imageurls[2])) this.pictureBox3.ImageLocation = item.imageurls[2];

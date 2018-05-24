@@ -12,8 +12,13 @@ namespace SSLand {
     public class SecondStreetAPI{
 
         private const string USER_AGENT = "Mozilla/5.0 (iPad; COU OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Mobile/14F89 Fril/6.7.1";
-        string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
+        private const string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
         private string proxy;
+
+        public SecondStreetAPI()
+        {
+        }
+
         private class SecondStreetRawResponse
         {
             public bool error = true;
@@ -33,7 +38,7 @@ namespace SSLand {
         }
 
         //FIXIT:新着アイテムの取得
-        public List<SecondStreetListItem> postNewItem()
+        static public List<SecondStreetListItem> postNewItem()
         {
             //リクエスト部
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getNewGoods");

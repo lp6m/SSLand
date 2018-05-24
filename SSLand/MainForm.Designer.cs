@@ -40,6 +40,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button4 = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.startProcessButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +52,7 @@
             this.メニューToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1434, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -77,9 +79,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(15, 325);
+            this.button1.Location = new System.Drawing.Point(15, 557);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(228, 90);
+            this.button1.Size = new System.Drawing.Size(87, 65);
             this.button1.TabIndex = 1;
             this.button1.Text = "ブランド名取得ボタン";
             this.button1.UseVisualStyleBackColor = true;
@@ -87,7 +89,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(12, 418);
+            this.label1.Location = new System.Drawing.Point(12, 625);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(776, 23);
             this.label1.TabIndex = 2;
@@ -95,9 +97,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(249, 325);
+            this.button2.Location = new System.Drawing.Point(108, 555);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(225, 90);
+            this.button2.Size = new System.Drawing.Size(95, 67);
             this.button2.TabIndex = 3;
             this.button2.Text = "新着アイテム取得ボタン";
             this.button2.UseVisualStyleBackColor = true;
@@ -105,9 +107,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(480, 325);
+            this.button3.Location = new System.Drawing.Point(209, 557);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(191, 90);
+            this.button3.Size = new System.Drawing.Size(106, 65);
             this.button3.TabIndex = 4;
             this.button3.Text = "（まだ）条件付き新着アイテム取得ボタン";
             this.button3.UseVisualStyleBackColor = true;
@@ -115,17 +117,18 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 31);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(773, 288);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1407, 463);
             this.flowLayoutPanel1.TabIndex = 5;
             this.flowLayoutPanel1.WrapContents = false;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(677, 325);
+            this.button4.Location = new System.Drawing.Point(321, 558);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(111, 90);
+            this.button4.Size = new System.Drawing.Size(83, 64);
             this.button4.TabIndex = 6;
             this.button4.Text = "更新";
             this.button4.UseVisualStyleBackColor = true;
@@ -135,13 +138,31 @@
             // 
             this.backgroundWorker1.WorkerReportsProgress = true;
             this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            // 
+            // startProcessButton
+            // 
+            this.startProcessButton.Location = new System.Drawing.Point(672, 559);
+            this.startProcessButton.Margin = new System.Windows.Forms.Padding(4);
+            this.startProcessButton.Name = "startProcessButton";
+            this.startProcessButton.Size = new System.Drawing.Size(116, 63);
+            this.startProcessButton.TabIndex = 16;
+            this.startProcessButton.Text = "監視開始(z)";
+            this.startProcessButton.UseVisualStyleBackColor = true;
+            this.startProcessButton.Click += new System.EventHandler(this.startProcessButton_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1434, 658);
+            this.Controls.Add(this.startProcessButton);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.button3);
@@ -153,6 +174,8 @@
             this.Name = "MainForm";
             this.Text = "SSLand";
             this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -173,6 +196,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button4;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button startProcessButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

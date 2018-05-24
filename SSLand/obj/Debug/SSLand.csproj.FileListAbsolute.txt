@@ -21,3 +21,8 @@ C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.pdb
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.csprojResolveAssemblyReference.cache
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.SecondStreetItemPanel.resources
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.SettingForm.resources
+C:\Users\sekib\Documents\Tasks\SSLand\SSLand\bin\Debug\System.Data.SQLite.dll
+C:\Users\sekib\Documents\Tasks\SSLand\SSLand\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\sekib\Documents\Tasks\SSLand\SSLand\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\sekib\Documents\Tasks\SSLand\SSLand\bin\Debug\System.Data.SQLite.xml
+C:\Users\sekib\Documents\Tasks\SSLand\SSLand\bin\Debug\System.Data.SQLite.dll.config

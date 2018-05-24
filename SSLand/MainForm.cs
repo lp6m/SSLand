@@ -22,8 +22,18 @@ namespace SSLand
         List<SecondStreetListItem> bindlist = new List<SecondStreetListItem>();//タイムラインにバインドされている商品
         List<SecondStreetListItem> oldlist = new List<SecondStreetListItem>(); //1回前のリクエストで取得した商品リスト(重複を避ける)
         List<SecondStreetListItem> addlist = new List<SecondStreetListItem>(); //GUI更新時にタイムラインに追加すべき商品リスト
+        //static List<string> boughtItemIDList = new List<string>(); //手動・自動購入した商品IDのリスト
+        //static List<BoughtItemListForm.BoughtItem> boughtItemList = new List<BoughtItemListForm.BoughtItem>();
+        int nowfocus = 0; //タイムラインの中の上から何個目を選択しているか
+        bool soundOn = false;//新着商品時に音をならすか
+        static BackgroundWorker bgWorker;
+        static int dummy_report_progress = 0;
+        //public const string Key_LicenseKey = "LicenseKey";
+        //public const string Registry_Path = @"HKEY_CURRENT_USER\Software\FriWatcher";
 
+        //SSLandのエージェント
         string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
+
         public MainForm()
         {
             InitializeComponent();
@@ -138,7 +148,7 @@ namespace SSLand
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //GUI更新
-            //リストに存在していないものだけをリストンにいれる
+            //リストに存在していないものだけをリストにいれる
             //まだリストに存在していないものだけをリストにいれる
             foreach (var item in addlist)
             {
@@ -147,14 +157,14 @@ namespace SSLand
                 if (isexist == false)
                 {
                     bindlist.Add(item);
-                    AddFrilItemPanel(item);
+                    AddSecondStreetItemPanel(item);
                 }
             }
-            if (addlist.Count > 0 && soundOn)
-            {
-                SoundPlayer simpleSound = new SoundPlayer(@".\notification.wav");
-                simpleSound.Play();
-            }
+            //if (addlist.Count > 0 && soundOn)
+            //{
+            //    SoundPlayer simpleSound = new SoundPlayer(@".\notification.wav");
+            //    simpleSound.Play();
+            //}
             //追加が終わったあとにmax_timelineを超えていれば超えた分だけ削除する
             //max_sizeを超えている場合は一番上のデータを削除する
             if (bindlist.Count > MAX_PANEL_NUM)
@@ -177,7 +187,7 @@ namespace SSLand
             this.flowLayoutPanel1.Controls.Add(panel);
             if (SettingForm.getAutoScroll()) 
             {
-                panel.SetFocusBuyButton();
+                //panel.SetFocusBuyButton();
                 this.flowLayoutPanel1.AutoScrollPosition = new Point(0, 0);
                 nowfocus = 0;
             }
@@ -187,8 +197,237 @@ namespace SSLand
             }
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (this.backgroundWorker1.IsBusy) return;
+            else this.backgroundWorker1.RunWorkerAsync();
+        }
 
 
+        private void startProcessButton_Click(object sender, EventArgs e)
+        {
+            ToggleMonitoring();
+        }
+        private void ToggleMonitoring()
+        {
+            //監視の開始・停止を行う
+            //api = Common.getFrilAPIFromDB();
+            //if (api == null)
+            //{
+            //    MessageBox.Show("アカウントを確認してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            if (this.startProcessButton.BackColor != Color.Red)
+            {
+                if (this.backgroundWorker1.IsBusy)
+                {
+                    MessageBox.Show("しばらくたってから再実行してください");
+                    return;
+                }
+                //OFF -> ON
+                this.startProcessButton.BackColor = Color.Red;
+                this.startProcessButton.Text = "監視停止(z)";
+                this.timer1.Enabled = true;
+                addlist.Clear();
+                bindlist.Clear();
+                ClearSecondStreetItemPanel();
+                oldlist.Clear();
+                //boughtItemIDList.Clear();
+                SecondStreetItemPanel.ReloadPhotoSize();
+                //GetItemProcess.resetMaxID();
+            }
+            else
+            {
+                //ON -> OFF
+                this.startProcessButton.BackColor = Color.Transparent;
+                this.startProcessButton.Text = "監視開始(z)";
+                this.timer1.Enabled = false;
+                this.backgroundWorker1.CancelAsync();
+            }
+        }
+        private void ClearSecondStreetItemPanel()
+        {
+            this.flowLayoutPanel1.Controls.Clear();
+        }
+
+        //こちらは動かなかった
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 'z') ToggleMonitoring();
+        }
+        
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Home)
+            {
+                this.flowLayoutPanel1.AutoScrollPosition = new Point(0, 0);
+                int panel_cnt = this.flowLayoutPanel1.Controls.Count;
+                if (panel_cnt <= 0) return;
+                try
+                {
+                    SecondStreetItemPanel panel = (SecondStreetItemPanel)this.flowLayoutPanel1.Controls[panel_cnt - 1];
+                    //panel.SetFocusBuyButton();
+                    nowfocus = 0;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            if (e.KeyCode == System.Windows.Forms.Keys.PageUp)
+            {
+                this.flowLayoutPanel1.AutoScrollPosition = new Point(-this.flowLayoutPanel1.AutoScrollPosition.X, -this.flowLayoutPanel1.AutoScrollPosition.Y - 120);
+            }
+            else if (e.KeyCode == System.Windows.Forms.Keys.PageDown)
+            {
+                this.flowLayoutPanel1.AutoScrollPosition = new Point(-this.flowLayoutPanel1.AutoScrollPosition.X, -this.flowLayoutPanel1.AutoScrollPosition.Y + 120);
+            }
+            else if (e.KeyCode == System.Windows.Forms.Keys.Tab && e.Shift != true)
+            {
+                int old = nowfocus;
+                nowfocus++;
+                if (nowfocus >= bindlist.Count) nowfocus = 0;
+                try
+                {
+                    //フォーカスする
+                    int panel_cnt = this.flowLayoutPanel1.Controls.Count;
+                    SecondStreetItemPanel panel = (SecondStreetItemPanel)this.flowLayoutPanel1.Controls[panel_cnt - 1 - nowfocus];
+                    //panel.SetFocusBuyButton();
+                }
+                catch (Exception ex)
+                {
+                    //失敗したので戻す
+                    nowfocus = old;
+                }
+            }
+            else if (e.KeyCode == System.Windows.Forms.Keys.Tab && e.Shift == true)
+            {
+                int old = nowfocus;
+                nowfocus--;
+                if (nowfocus < 0) nowfocus = 0;
+                if (nowfocus >= bindlist.Count) nowfocus = 0;
+                try
+                {
+                    //フォーカスする
+                    int panel_cnt = this.flowLayoutPanel1.Controls.Count;
+                    SecondStreetItemPanel panel = (SecondStreetItemPanel)this.flowLayoutPanel1.Controls[panel_cnt - 1 - nowfocus];
+                    //panel.SetFocusBuyButton();
+                }
+                catch (Exception ex)
+                {
+                    //失敗したので戻す
+                    nowfocus = old;
+                }
+            }
+            else if (e.KeyCode == System.Windows.Forms.Keys.F1)
+            {
+                //bool execute = SettingForm.getf1f4Enable();
+                //if (execute)
+                //{
+                    //int panel_cnt = this.flowLayoutPanel1.Controls.Count;
+                    //if (panel_cnt >= 1)
+                    //{
+                    //    SecondStreetItemPanel panel = (SecondStreetItemPanel)this.flowLayoutPanel1.Controls[panel_cnt - 1];
+                    //    SecondStreetItem item = (SecondStreetItem)panel.Tag;
+                    //    ExecuteBuyItem(item, true);
+                    //}
+                //}
+            }
+            else if (e.KeyCode == System.Windows.Forms.Keys.F2)
+            {
+                //bool execute = SettingForm.getf1f4Enable();
+                //if (execute)
+                //{
+                //    int panel_cnt = this.flowLayoutPanel1.Controls.Count;
+                //    if (panel_cnt >= 2)
+                //    {
+                //        SecondStreetItemPanel panel = (SecondStreetItemPanel)this.flowLayoutPanel1.Controls[panel_cnt - 2];
+                //        SecondStreetItem item = (SecondStreetItem)panel.Tag;
+                //        ExecuteBuyItem(item, true);
+                //    }
+                //}
+            }
+            else if (e.KeyCode == System.Windows.Forms.Keys.F3)
+            {
+                //bool execute = SettingForm.getf1f4Enable();
+                //if (execute)
+                //{
+                //    int panel_cnt = this.flowLayoutPanel1.Controls.Count;
+                //    if (panel_cnt >= 3)
+                //    {
+                //        SecondStreetItemPanel panel = (SecondStreetItemPanel)this.flowLayoutPanel1.Controls[panel_cnt - 3];
+                //        SecondStreetItem item = (SecondStreetItem)panel.Tag;
+                //        ExecuteBuyItem(item, true);
+                //    }
+                //}
+            }
+            else if (e.KeyCode == System.Windows.Forms.Keys.F4)
+            {
+                //bool execute = SettingForm.getf1f4Enable();
+                //if (execute)
+                //{
+                //    int panel_cnt = this.flowLayoutPanel1.Controls.Count;
+                //    if (panel_cnt >= 4)
+                //    {
+                //        SecondStreetItemPanel panel = (SecondStreetItemPanel)this.flowLayoutPanel1.Controls[panel_cnt - 4];
+                //        SecondStreetItem item = (SecondStreetItem)panel.Tag;
+                //        ExecuteBuyItem(item, true);
+                //    }
+                //}
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //api = Common.checkFrilAPI(api);
+            try
+            {
+                bgWorker = (BackgroundWorker)sender;
+                //停止リクエストがあれば終了
+                if (bgWorker.CancellationPending) return;
+                addlist.Clear();
+                List<SecondStreetListItem> rst = new List<SecondStreetListItem>();
+                //新着商品を取得
+                //rst = GetItemProcess.getNewMatchingItems();
+                rst = SecondStreetAPI.postNewItem();
+                //出品者指定の新着商品を取得
+                //rst.AddRange(GetItemProcess.getNewSpecificSellerItems());
+                foreach (var newitem in rst)
+                {
+                    bool isnew = true;
+                    foreach (var olditem in oldlist)
+                    {
+                        if (newitem.goods_id == olditem.goods_id)
+                        {
+                            isnew = false;
+                            break;
+                        }
+                    }
+                    if (isnew)
+                    {
+                        addlist.Add(newitem);
+                    }
+                }
+                oldlist = new List<SecondStreetListItem>(rst);
+                if (addlist.Count != 0)
+                {
+                    //GUI更新リクエスト
+                    dummy_report_progress += 1;
+                    if (dummy_report_progress > 100) dummy_report_progress = 0;
+                    bgWorker.ReportProgress(dummy_report_progress);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
+
+
+
+        //////////////////////////////このへんは開発中のもの///////////////////////////////////////////
         // Step5: メソッド内でawaitキーワードを使ったら、メソッドの先頭でasyncを加えなければならない。
         // Step6: メソッド内でawaitキーワードを使ったら、戻り値の型はTask<T>型で返さなければならない。
         //        T型は本来返すべき戻り値の型。。

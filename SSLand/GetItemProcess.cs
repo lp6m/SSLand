@@ -8,6 +8,75 @@ namespace SSLand
 {
     class GetItemProcess
     {
+
+        //static string max_id;
+        //static public void resetMaxID() { max_id = ""; }
+        //static public List<FrilItem> getNewMatchingItems()
+        //{
+        //    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+        //    sw.Start();
+        //    var conditions = SearchConditionSettingsForm.LoadSearchConditions();
+        //    var rst = new List<FrilItem>();
+        //    try
+        //    {
+        //        var searchrst = MainForm.api.getNewItems(60, GetItemProcess.max_id);
+        //        if (searchrst.Count == 0) return rst;
+        //        GetItemProcess.max_id = searchrst[0].tl_id;
+        //        Dictionary<string, FrilItem> detailItemDictionary = new Dictionary<string, FrilItem>();
+        //        foreach (var item in searchrst)
+        //        {
+        //            foreach (var con in conditions)
+        //            {
+        //                //FrilListItemの時点でまず検索条件にマッチするか調べる
+        //                bool isMatch = isMatchConditionLite(item, con);
+        //                //FrilListItemの時点でマッチしていなければスキップ
+        //                if (isMatch == false) continue;
+        //                //検索条件がカテゴリ指定・商品の状態指定の場合のみ詳細情報をふくめて調べる
+        //                if (con.usecategory || con.usecondition)
+        //                {
+        //                    //詳細情報を取得
+        //                    if (!detailItemDictionary.ContainsKey(item.item_id)) detailItemDictionary[item.item_id] = MainForm.api.getItemDetailInfo(item.item_id);
+        //                    //詳細情報をふくめて検索条件にマッチするか調べる
+        //                    FrilItem detailitem = detailItemDictionary[item.item_id];
+        //                    isMatch = isMatchCondition(detailitem, con);
+        //                }
+        //                //マッチしていたら結果にするor自動購入
+        //                if (isMatch)
+        //                {
+        //                    //商品の詳細情報取得
+        //                    if (!detailItemDictionary.ContainsKey(item.item_id)) detailItemDictionary[item.item_id] = MainForm.api.getItemDetailInfo(item.item_id);
+        //                    FrilItem detailitem = detailItemDictionary[item.item_id];
+        //                    if (con.autobuyoption)
+        //                    {
+        //                        Log.Logger.Info("自動購入呼び出し1:" + item.item_id + " 検索条件:" + con.ToString());
+        //                        MainForm.ExecuteBuyItem(detailitem, true);
+        //                    }
+        //                    else
+        //                    {
+        //                        rst.Add(detailitem);
+        //                    }
+        //                    Log.Logger.Info(item.item_id + ": " + "採用");
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.Logger.Error("getNewMatchingItemsでエラー" + ex.Message);
+        //    }
+        //    TimeSpan ts = sw.Elapsed;
+        //    Console.WriteLine("　{ts}");
+        //    return rst;
+        //}
+
+
+
+
+
+
+
+
     }
 
 
