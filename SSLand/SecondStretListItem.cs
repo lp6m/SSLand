@@ -9,18 +9,21 @@ namespace SSLand
     //一括取得した場合の商品概要クラス
     public class SecondStreetListItem
     {
-        public string tl_id;
-        public string item_id;
-        public string item_name;
-        public string item_detail;
-        public int price;
-        public int t_status;
-        public string user_id;
-        public int brand_id;
+        public long goods_id;
+        public int shops_id;
+        public string goods_name;
         public string brand_name;
-        public int i_brand_id;
-        public string i_brand_name;
-        public DateTime created_at;
+        public string shop_name;
+        public int price;
+        public int price_org;
+        public string sale_label;
+        public int is_favorite_goods;
+        public int is_favorite_shop;
+        public string size_detail;
+        public string color_name;
+        public string pattern_name;
+        public string image_url;
+        
 
         public SecondStreetListItem()
         {
@@ -30,19 +33,24 @@ namespace SSLand
         {
             try
             {
-                this.tl_id = ((long)json.tl_id).ToString();
-                this.item_id = ((long)json.item_id).ToString();
-                this.item_name = json.item_name;
-                this.item_detail = json.item_detail;
-                this.price = (int)json.price;
-                this.t_status = (int)json.t_status;
-                this.user_id = ((long)json.user_id).ToString();
-                this.brand_id = (json.brand_id == null) ? -1 : (int)json.brand_id;
-                this.i_brand_id = (json.i_brand_id == null) ? -1 : (int)json.i_brand_id;
-                this.created_at = DateTime.Parse((string)json.created_at);
+                this.goods_id = Int64.Parse(json.goods_id);
+                this.shops_id = int.Parse(json.shops_id);
+                this.goods_name = json.goods_name;
+                this.brand_name = json.brand_name;
+                this.shop_name = json.shop_name;
+                this.price = (int)json.price;//なぜかdouble
+                this.price_org = (int)json.price_org;//なぜかdouble
+                this.sale_label = json.sale_label;
+                this.is_favorite_goods = int.Parse(json.is_favorite_goods);
+                this.is_favorite_shop = int.Parse(json.is_favorite_shop);
+                this.size_detail = json.size_detail;
+                this.color_name = json.color_name;
+                this.pattern_name = json.pattern_name;
+                this.image_url = json.image_url;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 Log.Logger.Error("SecondStreetListItem json parse error:" + ex.Message);
             }
         }

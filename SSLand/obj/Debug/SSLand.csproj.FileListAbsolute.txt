@@ -1,8 +1,8 @@
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.Account.resources
+C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.MainForm.resources
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.Properties.Resources.resources
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.csproj.GenerateResource.cache
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.csproj.CoreCompileInputs.cache
-C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.MainForm.resources
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\bin\Debug\SSLand.exe.config
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\bin\Debug\SSLand.exe
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\bin\Debug\SSLand.pdb
@@ -19,3 +19,5 @@ C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.csproj.CopyComplet
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.exe
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.pdb
 C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.csprojResolveAssemblyReference.cache
+C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.SecondStreetItemPanel.resources
+C:\Users\sekib\Documents\Tasks\SSLand\SSLand\obj\Debug\SSLand.SettingForm.resources

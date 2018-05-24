@@ -12,6 +12,7 @@ namespace SSLand {
     public class SecondStreetAPI{
 
         private const string USER_AGENT = "Mozilla/5.0 (iPad; COU OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Mobile/14F89 Fril/6.7.1";
+        string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
         private string proxy;
         private class SecondStreetRawResponse
         {
@@ -31,89 +32,120 @@ namespace SSLand {
             this.account = account;
         }
 
-
-        //新着商品を取得する
-        public List<SecondStreetListItem> getNewItems(int count = 30, string max_id = "")
+        //FIXIT:新着アイテムの取得
+        public List<SecondStreetListItem> postNewItem()
         {
+            //リクエスト部
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getNewGoods");
+            req.Method = "POST";
+            req.UserAgent = agent;
+            HttpWebResponse rawres = (HttpWebResponse)req.GetResponse();
+            Stream s = rawres.GetResponseStream();
+            StreamReader sr = new StreamReader(s);
+            string content = sr.ReadToEnd();
+            //パース部
+            dynamic resjson = DynamicJson.Parse(content);
             List<SecondStreetListItem> rst = new List<SecondStreetListItem>();
-            Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("auth_token", this.account.fril_auth_token);
-            param.Add("count", count.ToString());
-            //if (string.IsNullOrEmpty(max_id) == false) param.Add("max_id", max_id);
-            string url = "http://api.fril.jp/api/v3/timelines/current";
-            SecondStreetRawResponse rawres = getFrilAPI(url, param);
-            if (rawres.error)
-            {
-                Log.Logger.Error(string.Format("フリルタイムライン取得失敗"));
-                return null;
-            }
-            dynamic resjson = DynamicJson.Parse(rawres.response);
             try
             {
-                foreach (var itemjson in resjson.items)
+                foreach (var itemjson in resjson.value)
                 {
                     rst.Add(new SecondStreetListItem(itemjson));
+                    Console.WriteLine(itemjson);
+                    //MainForm.label1.Text = "待機状態";
                 }
-                Console.WriteLine("start: " + rst[0].item_id + " end: " + rst[rst.Count - 1].item_id);
+                
                 return rst;
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("フリルタイムラインjsonパース失敗");
+                Log.Logger.Error("セカンドストリートタイムラインjsonパース失敗");
+                //MainForm.label1.Text = "新着アイテム取得エラー";
                 return rst;
             }
         }
-        
+        //新着商品を取得する
+        //public List<SecondStreetListItem> getNewItems(int count = 30, string max_id = "")
+        //{
+        //    List<SecondStreetListItem> rst = new List<SecondStreetListItem>();
+        //    Dictionary<string, string> param = new Dictionary<string, string>();
+        //    param.Add("auth_token", this.account.fril_auth_token);
+        //    param.Add("count", count.ToString());
+        //    //if (string.IsNullOrEmpty(max_id) == false) param.Add("max_id", max_id);
+        //    string url = "http://api.fril.jp/api/v3/timelines/current";
+        //    SecondStreetRawResponse rawres = getFrilAPI(url, param);
+        //    if (rawres.error)
+        //    {
+        //        Log.Logger.Error(string.Format("フリルタイムライン取得失敗"));
+        //        return null;
+        //    }
+        //    dynamic resjson = DynamicJson.Parse(rawres.response);
+        //    try
+        //    {
+        //        foreach (var itemjson in resjson.items)
+        //        {
+        //            rst.Add(new SecondStreetListItem(itemjson));
+        //        }
+        //        Console.WriteLine("start: " + rst[0].item_id + " end: " + rst[rst.Count - 1].item_id);
+        //        return rst;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.Logger.Error("フリルタイムラインjsonパース失敗");
+        //        return rst;
+        //    }
+        //}
+
 
 
         //FrilAPIをGETでたたく
-        private SecondStreetRawResponse getFrilAPI(string url, Dictionary<string, string> param)
-        {
-            SecondStreetRawResponse res = new SecondStreetRawResponse();
-            try
-            {
-                //url = Uri.EscapeUriString(url);//日本語などを％エンコードする
-                //パラメータをURLに付加 ?param1=val1&param2=val2...
-                url += "?";
-                List<string> paramstr = new List<string>();
-                foreach (KeyValuePair<string, string> p in param)
-                {
-                    string k = Uri.EscapeDataString(p.Key);
-                    string v = Uri.EscapeDataString(p.Value);
-                    paramstr.Add(k + "=" + v);
-                }
-                url += string.Join("&", paramstr);
-                //HttpWebRequestの作成
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                req.CookieContainer = this.cc;
-                req.UserAgent = SecondStreetAPI.USER_AGENT;
-                req.Method = "GET";
-                //プロキシの設定
-                if (string.IsNullOrEmpty(this.proxy) == false)
-                {
-                    System.Net.WebProxy proxy = new System.Net.WebProxy(this.proxy);
-                    req.Proxy = proxy;
-                }
-                //結果取得
-                string content = "";
-                var task = Task.Factory.StartNew(() => executeGetRequest(req));
-                task.Wait(10000);
-                if (task.IsCompleted)
-                    content = task.Result;
-                else
-                    throw new Exception("Timed out");
-                if (string.IsNullOrEmpty(content)) throw new Exception("webrequest error");
-                res.error = false;
-                res.response = content;
-                Log.Logger.Info("SecondStreetGETリクエスト成功");
-                return res;
-            }
-            catch (Exception e)
-            {
-                Log.Logger.Error("SecondStreetGETリクエスト失敗");
-                return res;
-            }
-        }
+        //private SecondStreetRawResponse getFrilAPI(string url, Dictionary<string, string> param)
+        //{
+        //    SecondStreetRawResponse res = new SecondStreetRawResponse();
+        //    try
+        //    {
+        //        //url = Uri.EscapeUriString(url);//日本語などを％エンコードする
+        //        //パラメータをURLに付加 ?param1=val1&param2=val2...
+        //        url += "?";
+        //        List<string> paramstr = new List<string>();
+        //        foreach (KeyValuePair<string, string> p in param)
+        //        {
+        //            string k = Uri.EscapeDataString(p.Key);
+        //            string v = Uri.EscapeDataString(p.Value);
+        //            paramstr.Add(k + "=" + v);
+        //        }
+        //        url += string.Join("&", paramstr);
+        //        //HttpWebRequestの作成
+        //        HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+        //        req.CookieContainer = this.cc;
+        //        req.UserAgent = SecondStreetAPI.USER_AGENT;
+        //        req.Method = "GET";
+        //        //プロキシの設定
+        //        if (string.IsNullOrEmpty(this.proxy) == false)
+        //        {
+        //            System.Net.WebProxy proxy = new System.Net.WebProxy(this.proxy);
+        //            req.Proxy = proxy;
+        //        }
+        //        //結果取得
+        //        string content = "";
+        //        var task = Task.Factory.StartNew(() => executeGetRequest(req));
+        //        task.Wait(10000);
+        //        if (task.IsCompleted)
+        //            content = task.Result;
+        //        else
+        //            throw new Exception("Timed out");
+        //        if (string.IsNullOrEmpty(content)) throw new Exception("webrequest error");
+        //        res.error = false;
+        //        res.response = content;
+        //        Log.Logger.Info("SecondStreetGETリクエスト成功");
+        //        return res;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Log.Logger.Error("SecondStreetGETリクエスト失敗");
+        //        return res;
+        //    }
+        //}
         private string executeGetRequest(HttpWebRequest req)
         {
             try
