@@ -296,7 +296,6 @@ namespace SSLand
                     SaveSearchConditions(nowsclist);
                     RefreshListBox();
                     //ResetGUIComponent();
-                    Console.WriteLine("aaa");
 
                 }
                 else
@@ -308,7 +307,6 @@ namespace SSLand
                     RefreshListBox();
                     //ResetGUIComponent();
                     //this.addSearchConditionButton.Text = "追加";
-                    Console.WriteLine("bbb");
                 }
 
 

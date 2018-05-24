@@ -56,7 +56,7 @@ namespace SSLand {
                 foreach (var itemjson in resjson.value)
                 {
                     rst.Add(new SecondStreetListItem(itemjson));
-                    Console.WriteLine(itemjson);
+                    //Console.WriteLine(itemjson);
                     //MainForm.label1.Text = "待機状態";
                 }
                 

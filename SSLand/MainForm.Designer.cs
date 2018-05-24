@@ -43,6 +43,8 @@
             this.startProcessButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.brandConditionLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +71,7 @@
             // 購入者管理ToolStripMenuItem
             // 
             this.購入者管理ToolStripMenuItem.Name = "購入者管理ToolStripMenuItem";
-            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.購入者管理ToolStripMenuItem.Text = "アカウント管理";
             this.購入者管理ToolStripMenuItem.Click += new System.EventHandler(this.アカウント管理ToolStripMenuItem_Click);
             // 
@@ -166,11 +168,31 @@
             this.設定ToolStripMenuItem.Text = "設定";
             this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 508);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "絞り込みブランド：";
+            // 
+            // brandConditionLabel
+            // 
+            this.brandConditionLabel.AutoSize = true;
+            this.brandConditionLabel.Location = new System.Drawing.Point(128, 508);
+            this.brandConditionLabel.Name = "brandConditionLabel";
+            this.brandConditionLabel.Size = new System.Drawing.Size(31, 15);
+            this.brandConditionLabel.TabIndex = 17;
+            this.brandConditionLabel.Text = "なし";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1434, 658);
+            this.Controls.Add(this.brandConditionLabel);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.startProcessButton);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -208,6 +230,8 @@
         private System.Windows.Forms.Button startProcessButton;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem 設定ToolStripMenuItem;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label brandConditionLabel;
     }
 }
 

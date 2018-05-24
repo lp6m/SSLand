@@ -152,7 +152,6 @@ namespace SSLand
                 foreach (var itemjson in resjson.value)
                 {
                     rst.Add(new SecondStreetListItem(itemjson));
-                    Console.WriteLine(itemjson);
                 }
                 label1.Text = "待機状態";
                 return rst;
@@ -239,6 +238,20 @@ namespace SSLand
 
         private void startProcessButton_Click(object sender, EventArgs e)
         {
+            //if (SettingForm.getBrandEnable())//ブランド絞りがある場合
+            //{
+            //    var nowsclist = SettingForm.LoadSearchConditions();
+            //    string search_brand = "";
+            //    foreach (var val in nowsclist)
+            //    {
+            //        search_brand += val + "/";
+            //    }
+            //    brandConditionLabel.Text = search_brand;
+            //}
+            //else
+            //{
+            //    brandConditionLabel.Text = "なし";
+            //}
             ToggleMonitoring();
         }
         private void ToggleMonitoring()
@@ -456,7 +469,7 @@ namespace SSLand
             }
         }
 
- 
+
 
 
 
