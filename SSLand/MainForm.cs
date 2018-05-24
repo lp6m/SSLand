@@ -45,10 +45,23 @@ namespace SSLand
             Form account_form = new Account();
             account_form.Show();
         }
-
-        private void MainWindow_Load(object sender, EventArgs e)
+        private void 設定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form setting_form = new SettingForm();
+            setting_form.Show();
+
+        }
+
+
+        private async void MainWindow_Load(object sender, EventArgs e)
+        {
+
             new SettingsDBHelper().onCreate();
+            if (await Task.Run(() => SecondStreetMaster.init()) == false)
+            {
+                MessageBox.Show("フリルからデータの読み込みに失敗しました.プログラムを終了します.\nインターネット環境を確認してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,7 +72,25 @@ namespace SSLand
             //jsonstr = Encoding.UTF8.GetString(bytes);
             //Console.WriteLine(jsonstr);
             //DownloadAsync();
-            postNewBrand();
+
+            //postNewBrand();
+
+            //FIXIT:並べ替え用///////////////
+            Console.WriteLine("----------ソート開始--------------------");
+            List<SecondStreetListBrand> sortrst = new List<SecondStreetListBrand>();
+            sortrst = postNewBrand();
+            var sorted = sortrst.OrderBy((x) => x.sort_key);
+            foreach(var val in sorted)
+            {
+               
+                
+                if (val.section == 1)
+                {
+                    Console.WriteLine(val.id.ToString()+":"+val.name);
+                }
+            }
+            /////////////////////////////////
+
             label1.Text ="待機中";
         }
         //ブランド情報の取得
@@ -76,12 +107,14 @@ namespace SSLand
             //パース部
             dynamic resjson = DynamicJson.Parse(content);
             List<SecondStreetListBrand> rst = new List<SecondStreetListBrand>();
+
+
             try
             {
                 foreach (var itemjson in resjson.value)
                 {
                     rst.Add(new SecondStreetListBrand(itemjson));
-                    Console.WriteLine(itemjson);
+                    //Console.WriteLine(itemjson);
                 }
                 label1.Text = "待機";
                 return rst;
@@ -422,6 +455,8 @@ namespace SSLand
                 Console.WriteLine(ex.Message);
             }
         }
+
+ 
 
 
 

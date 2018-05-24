@@ -99,6 +99,7 @@
       <DependentUpon>SecondStreetItemPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="SecondStreetListBrand.cs" />
+    <Compile Include="SecondStreetMaster.cs" />
     <Compile Include="SecondStretListItem.cs" />
     <Compile Include="SettingForm.cs">
       <SubType>Form</SubType>

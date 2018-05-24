@@ -12,7 +12,7 @@ namespace SSLand {
     public class SecondStreetAPI{
 
         private const string USER_AGENT = "Mozilla/5.0 (iPad; COU OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Mobile/14F89 Fril/6.7.1";
-        private const string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
+        public const string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
         private string proxy;
 
         public SecondStreetAPI()
@@ -69,6 +69,10 @@ namespace SSLand {
                 return rst;
             }
         }
+
+
+
+
         //新着商品を取得する
         //public List<SecondStreetListItem> getNewItems(int count = 30, string max_id = "")
         //{
