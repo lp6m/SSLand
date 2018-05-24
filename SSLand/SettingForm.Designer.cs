@@ -35,6 +35,7 @@
             this.useBrandCheckBox = new System.Windows.Forms.CheckBox();
             this.brandComboBox = new System.Windows.Forms.ComboBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.brandAddButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.photosizeNumericDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,10 +98,10 @@
             // brandComboBox
             // 
             this.brandComboBox.FormattingEnabled = true;
-            this.brandComboBox.Location = new System.Drawing.Point(297, 47);
+            this.brandComboBox.Location = new System.Drawing.Point(102, 82);
             this.brandComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.brandComboBox.Name = "brandComboBox";
-            this.brandComboBox.Size = new System.Drawing.Size(481, 23);
+            this.brandComboBox.Size = new System.Drawing.Size(557, 23);
             this.brandComboBox.TabIndex = 26;
             this.brandComboBox.Text = "未指定";
             this.brandComboBox.Visible = false;
@@ -109,16 +110,28 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(102, 81);
+            this.listBox1.Location = new System.Drawing.Point(102, 171);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(676, 259);
+            this.listBox1.Size = new System.Drawing.Size(676, 169);
             this.listBox1.TabIndex = 27;
+            // 
+            // brandAddButton
+            // 
+            this.brandAddButton.Location = new System.Drawing.Point(666, 81);
+            this.brandAddButton.Name = "brandAddButton";
+            this.brandAddButton.Size = new System.Drawing.Size(112, 24);
+            this.brandAddButton.TabIndex = 28;
+            this.brandAddButton.Text = "指定する";
+            this.brandAddButton.UseVisualStyleBackColor = true;
+            this.brandAddButton.Visible = false;
+            this.brandAddButton.Click += new System.EventHandler(this.brandAddButton_Click);
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.brandAddButton);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.brandComboBox);
             this.Controls.Add(this.useBrandCheckBox);
@@ -144,5 +157,6 @@
         private System.Windows.Forms.CheckBox useBrandCheckBox;
         private System.Windows.Forms.ComboBox brandComboBox;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button brandAddButton;
     }
 }
