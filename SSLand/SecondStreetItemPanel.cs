@@ -56,30 +56,14 @@ namespace SSLand
 
         private void SecondStreetItemPanel_Load(object sender, EventArgs e)
         {
-
         }
         private void ChangeComponentSize()
         {
             int plussize = photosize - 160;
             this.pictureBox1.Height += plussize;
             this.pictureBox1.Width += plussize;
-            //this.pictureBox2.Height += plussize;
-            //this.pictureBox2.Width += plussize;
-            //this.pictureBox3.Height += plussize;
-            //this.pictureBox3.Width += plussize;
-            //this.pictureBox4.Height += plussize;
-            //this.pictureBox4.Width += plussize;
 
-            //this.pictureBox2.Location = new Point(this.pictureBox2.Location.X + plussize, this.pictureBox2.Location.Y);
-            //this.pictureBox3.Location = new Point(this.pictureBox3.Location.X + 2 * plussize, this.pictureBox3.Location.Y);
-            //this.pictureBox4.Location = new Point(this.pictureBox4.Location.X + 3 * plussize, this.pictureBox4.Location.Y);
-            this.panel1.Location = new Point(this.panel1.Location.X + 4 * plussize, this.panel1.Location.Y);
-            //this.panel2.Location = new Point(this.panel2.Location.X, this.panel2.Location.Y + plussize);
-            //this.panel2.Width = this.panel1.Location.X - this.panel2.Location.X;
-            //this.descriptionRichBox.Width = this.panel1.Location.X - this.descriptionRichBox.Location.X;
-
-
-            this.Width += 4 * plussize;
+            this.Width += plussize;
             this.Height += plussize;
         }
 
@@ -90,25 +74,25 @@ namespace SSLand
             Process.Start(pc_url);
         }
 
-        //public void SetFocusBuyButton()
-        //{
-        //    this.BuyButton.Focus();
-        //}
+        public void SetFocusBuyButton()
+        {
+            this.BuyButton.Focus();
+        }
 
-        //private void BuyButton_Enter(object sender, EventArgs e)
-        //{
-        //    this.BuyButton.BackColor = Color.Purple;
-        //}
+        private void BuyButton_Enter(object sender, EventArgs e)
+        {
+            this.BuyButton.BackColor = Color.Purple;
+        }
 
-        //private void BuyButton_Leave(object sender, EventArgs e)
-        //{
-        //    this.BuyButton.BackColor = Color.Red;
-        //}
+        private void BuyButton_Leave(object sender, EventArgs e)
+        {
+            this.BuyButton.BackColor = Color.Red;
+        }
 
-        //private void BuyButton_Click(object sender, EventArgs e)
-        //{
-        //    MainForm.ExecuteBuyItem(item, false);
-        //}
+        private void BuyButton_Click(object sender, EventArgs e)
+        {
+            //MainForm.ExecuteBuyItem(item, false);
+        }
 
         //private void OpenSellerButton_Click(object sender, EventArgs e)
         //{
