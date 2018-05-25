@@ -28,8 +28,8 @@ namespace SSLand
         bool soundOn = false;//新着商品時に音をならすか
         static BackgroundWorker bgWorker;
         static int dummy_report_progress = 0;
-        //public const string Key_LicenseKey = "LicenseKey";
-        //public const string Registry_Path = @"HKEY_CURRENT_USER\Software\FriWatcher";
+        public const string Key_LicenseKey = "LicenseKey";
+        public const string Registry_Path = @"HKEY_CURRENT_USER\Software\SecondStreetWatcher";
 
         //SSLandのエージェント
         string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
@@ -56,6 +56,11 @@ namespace SSLand
         private async void MainWindow_Load(object sender, EventArgs e)
         {   
             new SettingsDBHelper().onCreate();
+            string stringValue = (string)Microsoft.Win32.Registry.GetValue(MainForm.Registry_Path, "Expire", "");
+            string datestr = DateTime.Now.AddDays(7).ToString();
+            if (string.IsNullOrEmpty(stringValue)) Microsoft.Win32.Registry.SetValue(Registry_Path, "Expire", datestr);
+            string licensekey = (string)Microsoft.Win32.Registry.GetValue(MainForm.Registry_Path, "LicenseKey", "");
+            if (string.IsNullOrEmpty(licensekey)) new LicenseForm().Show();
             if (await Task.Run(() => SecondStreetMaster.init()) == false)
             {
                 MessageBox.Show("フリルからデータの読み込みに失敗しました.プログラムを終了します.\nインターネット環境を確認してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -355,6 +360,9 @@ namespace SSLand
             var rst = SecondStreetAPI.postNewItem();
             foreach (var item in rst) AddSecondStreetItemPanel(item);
         }
-        
+
+        private void ライセンスToolStripMenuItem_Click(object sender, EventArgs e) {
+            new LicenseForm().Show();
+        }
     }
 }

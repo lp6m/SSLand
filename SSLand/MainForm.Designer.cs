@@ -39,6 +39,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button5 = new System.Windows.Forms.Button();
+            this.ライセンスToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +58,8 @@
             // 
             this.メニューToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.購入者管理ToolStripMenuItem,
-            this.設定ToolStripMenuItem});
+            this.設定ToolStripMenuItem,
+            this.ライセンスToolStripMenuItem});
             this.メニューToolStripMenuItem.Name = "メニューToolStripMenuItem";
             this.メニューToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
             this.メニューToolStripMenuItem.Text = "メニュー";
@@ -125,6 +127,13 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // ライセンスToolStripMenuItem
+            // 
+            this.ライセンスToolStripMenuItem.Name = "ライセンスToolStripMenuItem";
+            this.ライセンスToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.ライセンスToolStripMenuItem.Text = "ライセンス";
+            this.ライセンスToolStripMenuItem.Click += new System.EventHandler(this.ライセンスToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -160,6 +169,7 @@
         private System.Windows.Forms.ToolStripMenuItem 設定ToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ToolStripMenuItem ライセンスToolStripMenuItem;
     }
 }
 
