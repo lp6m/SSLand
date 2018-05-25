@@ -76,6 +76,12 @@
     <Compile Include="Common.cs" />
     <Compile Include="DynamicJson.cs" />
     <Compile Include="GetItemProcess.cs" />
+    <Compile Include="LicenseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LicenseForm.Designer.cs">
+      <DependentUpon>LicenseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Log.cs" />
     <Compile Include="SecondStreetAPI.cs" />
     <Compile Include="Account.cs">
@@ -110,6 +116,9 @@
     <Compile Include="SettingsDBHelper.cs" />
     <EmbeddedResource Include="Account.resx">
       <DependentUpon>Account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LicenseForm.resx">
+      <DependentUpon>LicenseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

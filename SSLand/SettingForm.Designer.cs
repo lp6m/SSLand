@@ -44,9 +44,24 @@
             this.photosizeNumericDown.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.photosizeNumericDown.Location = new System.Drawing.Point(202, 353);
             this.photosizeNumericDown.Margin = new System.Windows.Forms.Padding(4);
+            this.photosizeNumericDown.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.photosizeNumericDown.Minimum = new decimal(new int[] {
+            160,
+            0,
+            0,
+            0});
             this.photosizeNumericDown.Name = "photosizeNumericDown";
             this.photosizeNumericDown.Size = new System.Drawing.Size(105, 30);
             this.photosizeNumericDown.TabIndex = 16;
+            this.photosizeNumericDown.Value = new decimal(new int[] {
+            160,
+            0,
+            0,
+            0});
             // 
             // autoscrollCheckBox
             // 
