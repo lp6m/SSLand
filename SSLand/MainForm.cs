@@ -134,6 +134,19 @@ namespace SSLand
         private void startProcessButton_Click(object sender, EventArgs e)
         {
             ToggleMonitoring();
+            var conditions = SettingForm.LoadSearchConditions();
+            string brand_sc = "";
+            foreach (var sc in conditions) brand_sc += sc.brand_name + "/";
+            if (brand_sc == "")
+            {
+                brandSCLabel.Text = "なし";
+            }
+            else
+            {
+                brandSCLabel.Text = brand_sc;
+            }
+
+
         }
         private void ToggleMonitoring()
         {

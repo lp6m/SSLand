@@ -33,13 +33,15 @@
             this.メニューToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.購入者管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ライセンスToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.startProcessButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button5 = new System.Windows.Forms.Button();
-            this.ライセンスToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.brandSCLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +80,13 @@
             this.設定ToolStripMenuItem.Text = "設定";
             this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
             // 
+            // ライセンスToolStripMenuItem
+            // 
+            this.ライセンスToolStripMenuItem.Name = "ライセンスToolStripMenuItem";
+            this.ライセンスToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.ライセンスToolStripMenuItem.Text = "ライセンス";
+            this.ライセンスToolStripMenuItem.Click += new System.EventHandler(this.ライセンスToolStripMenuItem_Click);
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -96,7 +105,7 @@
             this.startProcessButton.Location = new System.Drawing.Point(15, 32);
             this.startProcessButton.Margin = new System.Windows.Forms.Padding(4);
             this.startProcessButton.Name = "startProcessButton";
-            this.startProcessButton.Size = new System.Drawing.Size(116, 63);
+            this.startProcessButton.Size = new System.Drawing.Size(112, 39);
             this.startProcessButton.TabIndex = 16;
             this.startProcessButton.Text = "監視開始(z)";
             this.startProcessButton.UseVisualStyleBackColor = true;
@@ -110,15 +119,15 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 95);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 103);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1244, 368);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1244, 360);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(209, 32);
+            this.button5.Location = new System.Drawing.Point(750, 32);
             this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(116, 63);
@@ -127,18 +136,31 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // ライセンスToolStripMenuItem
+            // label1
             // 
-            this.ライセンスToolStripMenuItem.Name = "ライセンスToolStripMenuItem";
-            this.ライセンスToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.ライセンスToolStripMenuItem.Text = "ライセンス";
-            this.ライセンスToolStripMenuItem.Click += new System.EventHandler(this.ライセンスToolStripMenuItem_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(247, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 15);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "絞り込みブランド";
+            // 
+            // brandSCLabel
+            // 
+            this.brandSCLabel.AutoSize = true;
+            this.brandSCLabel.Location = new System.Drawing.Point(247, 56);
+            this.brandSCLabel.Name = "brandSCLabel";
+            this.brandSCLabel.Size = new System.Drawing.Size(31, 15);
+            this.brandSCLabel.TabIndex = 21;
+            this.brandSCLabel.Text = "なし";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1434, 658);
+            this.Controls.Add(this.brandSCLabel);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.startProcessButton);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -170,6 +192,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ToolStripMenuItem ライセンスToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label brandSCLabel;
     }
 }
 
