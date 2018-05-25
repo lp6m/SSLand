@@ -114,8 +114,8 @@ namespace SSLand
             this.flowLayoutPanel1.AutoScrollPosition = new Point(0, 0);
             if (SettingForm.getAutoScroll()) 
             {
-                //panel.SetFocusBuyButton();
-                //this.flowLayoutPanel1.AutoScrollPosition = new Point(0, 0);
+                panel.SetFocusBuyButton();
+                this.flowLayoutPanel1.AutoScrollPosition = new Point(0, 0);
                 nowfocus = 0;
             }
             else
@@ -161,7 +161,6 @@ namespace SSLand
                 oldlist.Clear();
                 //boughtItemIDList.Clear();
                 SecondStreetItemPanel.ReloadPhotoSize();
-                //GetItemProcess.resetMaxID();
             }
             else
             {
@@ -315,11 +314,7 @@ namespace SSLand
                 addlist.Clear();
                 List<SecondStreetListItem> rst = new List<SecondStreetListItem>();
                 //新着商品を取得
-                //rst = GetItemProcess.getNewMatchingItems();
-                rst = SecondStreetAPI.postNewItem();
-                //rst.Add(rst2[0]);
-                //出品者指定の新着商品を取得
-                //rst.AddRange(GetItemProcess.getNewSpecificSellerItems());
+                rst = GetItemProcess.getNewMatchingItems();
                 foreach (var newitem in rst)
                 {
                     bool isnew = true;
