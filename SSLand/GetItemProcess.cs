@@ -26,7 +26,7 @@ namespace SSLand
                foreach (var item in searchrst)
                {
                    foreach (var con in conditions) {
-                        Console.WriteLine(con.brand_name+" "+item.brand_name);
+
                         if (con.brand_name == item.brand_name)
                         {
                             rst.Add(item);

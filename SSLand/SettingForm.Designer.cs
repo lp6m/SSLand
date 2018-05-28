@@ -36,6 +36,7 @@
             this.brandComboBox = new System.Windows.Forms.ComboBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.brandAddButton = new System.Windows.Forms.Button();
+            this.brandDelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.photosizeNumericDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,9 +126,9 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(102, 171);
+            this.listBox1.Location = new System.Drawing.Point(102, 111);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(676, 169);
+            this.listBox1.Size = new System.Drawing.Size(557, 169);
             this.listBox1.TabIndex = 27;
             // 
             // brandAddButton
@@ -141,11 +142,22 @@
             this.brandAddButton.Visible = false;
             this.brandAddButton.Click += new System.EventHandler(this.brandAddButton_Click);
             // 
+            // brandDelButton
+            // 
+            this.brandDelButton.Location = new System.Drawing.Point(666, 225);
+            this.brandDelButton.Name = "brandDelButton";
+            this.brandDelButton.Size = new System.Drawing.Size(112, 55);
+            this.brandDelButton.TabIndex = 29;
+            this.brandDelButton.Text = "選択ブランドを削除する";
+            this.brandDelButton.UseVisualStyleBackColor = true;
+            this.brandDelButton.Click += new System.EventHandler(this.brandDelButton_Click);
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.brandDelButton);
             this.Controls.Add(this.brandAddButton);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.brandComboBox);
@@ -173,5 +185,6 @@
         private System.Windows.Forms.ComboBox brandComboBox;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button brandAddButton;
+        private System.Windows.Forms.Button brandDelButton;
     }
 }

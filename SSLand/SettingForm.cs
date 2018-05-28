@@ -314,6 +314,32 @@ namespace SSLand
 
             }
         }
+
+        private void brandDelButton_Click(object sender, EventArgs e)
+        {
+
+            string selected_brand = listBox1.Text;
+            var nowsclist = LoadSearchConditions();
+            foreach(var check_list in nowsclist)
+            {
+               
+                Console.WriteLine(check_list.brand_name.Trim()+" "+selected_brand);
+                if(check_list.brand_name.Trim() == selected_brand.Trim())
+                {
+                    nowsclist.Remove(check_list);
+                    Console.WriteLine("リムった");
+                    break;
+                }
+            }
+            
+
+            SaveSearchConditions(nowsclist);
+            RefreshListBox();
+
+        }
+
+
+
         private SearchConditionClass getSearchConditionFromGUI()
         {
             var rst = new SearchConditionClass();
