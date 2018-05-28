@@ -268,6 +268,10 @@ namespace SSLand
             else this.brandComboBox.Visible = false;
             if (this.useBrandCheckBox.Checked) this.brandAddButton.Visible = true;
             else this.brandAddButton.Visible = false;
+            if (this.useBrandCheckBox.Checked) this.brandDelButton.Visible = true;
+            else this.brandDelButton.Visible = false;
+            if (this.useBrandCheckBox.Checked) this.listBox1.Visible = true;
+            else this.listBox1.Visible = false;
         }
 
 

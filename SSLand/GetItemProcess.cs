@@ -26,7 +26,7 @@ namespace SSLand
                 {
                     rst = searchrst;
                 }
-                else {
+                else {//絞りあり
 
 
                     //ふるいにかけました
