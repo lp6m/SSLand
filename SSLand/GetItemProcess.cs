@@ -19,17 +19,25 @@ namespace SSLand
                var searchrst = SecondStreetAPI.postNewItem();
                if (searchrst == null || searchrst.Count == 0) return rst;
                 //とりあえず全部返す
-                rst = searchrst;
+                //rst = searchrst;
                 //本当は以下でふるいにかける
+
+                //ふるいにかけました
                foreach (var item in searchrst)
                {
                    foreach (var con in conditions) {
+                        Console.WriteLine(con.brand_name+" "+item.brand_name);
+                        if (con.brand_name == item.brand_name)
+                        {
+                            rst.Add(item);
+                        }        
                    }
                }
 
            }
            catch (Exception ex)
            {
+
                Log.Logger.Error("getNewMatchingItemsでエラー" + ex.Message);
            }
            TimeSpan ts = sw.Elapsed;

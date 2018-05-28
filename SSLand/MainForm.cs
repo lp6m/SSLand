@@ -17,7 +17,7 @@ namespace SSLand
 {
     public partial class MainForm : Form
     {
-        WebClient webClient = new WebClient();
+        WebClient webClient = new WebClient();//必要かは不明
         private const int MAX_PANEL_NUM = 40;//タイムラインに表示する商品数
         List<SecondStreetListItem> bindlist = new List<SecondStreetListItem>();//タイムラインにバインドされている商品
         List<SecondStreetListItem> oldlist = new List<SecondStreetListItem>(); //1回前のリクエストで取得した商品リスト(重複を避ける)
@@ -25,7 +25,9 @@ namespace SSLand
         //static List<string> boughtItemIDList = new List<string>(); //手動・自動購入した商品IDのリスト
         //static List<BoughtItemListForm.BoughtItem> boughtItemList = new List<BoughtItemListForm.BoughtItem>();
         int nowfocus = 0; //タイムラインの中の上から何個目を選択しているか
+        List<SettingForm.SearchConditionClass> conditions = new List<SettingForm.SearchConditionClass>();//検索条件
         bool soundOn = false;//新着商品時に音をならすか
+        string cr = "U+55U+2BU+45U+36U+39U+36U+42U+30U+55U+2BU+45U+37U+39U+34U+42U+30U+55U+2BU+45U+35U+42U+41U+42U+37U+55U+2BU+45U+35U+41U+34U+41U+37U+55U+2BU+45U+33U+38U+30U+38U+31U+55U+2BU+45U+37U+39U+46U+42U+33U+55U+2BU+45U+35U+42U+41U+38U+41U+55U+2BU+45U+37U+41U+42U+39U+43U+55U+2BU+45U+34U+42U+38U+38U+30";
         static BackgroundWorker bgWorker;
         static int dummy_report_progress = 0;
         public const string Key_LicenseKey = "LicenseKey";
@@ -134,7 +136,9 @@ namespace SSLand
         private void startProcessButton_Click(object sender, EventArgs e)
         {
             ToggleMonitoring();
-            var conditions = SettingForm.LoadSearchConditions();
+
+            //絞り込みブランド
+            conditions = SettingForm.LoadSearchConditions();
             string brand_sc = "";
             foreach (var sc in conditions) brand_sc += sc.brand_name + "/";
             if (brand_sc == "")
@@ -145,8 +149,6 @@ namespace SSLand
             {
                 brandSCLabel.Text = brand_sc;
             }
-
-
         }
         private void ToggleMonitoring()
         {
