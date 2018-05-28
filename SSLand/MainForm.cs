@@ -175,7 +175,7 @@ namespace SSLand
                 ClearSecondStreetItemPanel();
                 oldlist.Clear();
                 //boughtItemIDList.Clear();
-                SecondStreetItemPanel.ReloadPhotoSize();
+                //SecondStreetItemPanel.ReloadPhotoSize();
             }
             else
             {

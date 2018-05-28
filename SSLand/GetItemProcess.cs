@@ -21,20 +21,30 @@ namespace SSLand
                 //とりあえず全部返す
                 //rst = searchrst;
                 //本当は以下でふるいにかける
+                
+                if (conditions.Count == 0)//ブランド絞りなし
+                {
+                    rst = searchrst;
+                }
+                else {
 
-                //ふるいにかけました
-               foreach (var item in searchrst)
-               {
-                   foreach (var con in conditions) {
 
-                        if (con.brand_name == item.brand_name)
+                    //ふるいにかけました
+                    foreach (var item in searchrst)
+                    {
+                        Console.WriteLine(item.brand_name);
+                        foreach (var con in conditions)
                         {
-                            rst.Add(item);
-                        }        
-                   }
-               }
+                            if (con.brand_name == item.brand_name)
+                            {
+                                rst.Add(item);
+                                Console.WriteLine("追加したもの:" + item.brand_name);
+                            }
+                        }
+                    }
+                }
 
-           }
+            }
            catch (Exception ex)
            {
 

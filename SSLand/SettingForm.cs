@@ -138,7 +138,7 @@ namespace SSLand
         private void SettingForm_Load(object sender, EventArgs e)
         {
             this.autoscrollCheckBox.Checked = getAutoScroll();
-            //this.photosizeNumericDown.Value = getPhotoSize();
+            this.photosizeNumericDown.Value = getPhotoSize();
             this.useBrandCheckBox.Checked = getBrandEnable();
 
 

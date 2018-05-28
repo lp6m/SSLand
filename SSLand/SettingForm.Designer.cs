@@ -40,7 +40,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.photosizeNumericDown)).BeginInit();
             this.SuspendLayout();
             // 
-            // photosizeNumericDown
+            // photosizeNumericDown;
             // 
             this.photosizeNumericDown.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.photosizeNumericDown.Location = new System.Drawing.Point(202, 353);
