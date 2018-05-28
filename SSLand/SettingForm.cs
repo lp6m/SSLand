@@ -275,6 +275,18 @@ namespace SSLand
         private void brandAddButton_Click(object sender, EventArgs e)
         {
             string selected_brand = brandComboBox.Text;
+
+            var sclist = LoadSearchConditions();
+            foreach(var item in sclist)
+            {
+                if (item.brand_name == selected_brand)
+                {
+                    MessageBox.Show("すでに追加されているブランドです", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+            }
+
             if (selected_brand != "未指定")
             {
                 //一応これでidはとれる
@@ -308,9 +320,6 @@ namespace SSLand
                     //ResetGUIComponent();
                     //this.addSearchConditionButton.Text = "追加";
                 }
-
-
-
 
             }
         }
