@@ -12,6 +12,9 @@ using System.IO;
 using System.Net;
 using Codeplex.Data;
 using System.Media;
+using OpenQA.Selenium.Chrome;
+using System.Reflection;
+using System.Collections;
 
 namespace SSLand
 {
@@ -367,8 +370,56 @@ namespace SSLand
         }
 
         private void button5_Click(object sender, EventArgs e) {
-            var rst = SecondStreetAPI.postNewItem();
-            foreach (var item in rst) AddSecondStreetItemPanel(item);
+            var api = new SecondStreetAPI();
+            api.trySecondStreetLogin("username", "password");
+            string goodsId = "2326380275844";
+            string shopsId = "30857";
+            api.getGoodsDetail(goodsId, shopsId);
+            Console.WriteLine(api.cc);
+            string rst = "";
+            foreach (System.Net.Cookie cookie in api.cc.GetCookies(new Uri("https://www.2ndstreet.jp"))) {
+                if (cookie.Name == "new_akitid") rst = cookie.Value;
+            }
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--user-agent="+SecondStreetAPI.USER_AGENT);
+            var chromeDriver = new ChromeDriver(options);
+            chromeDriver.Url = "https://www.2ndstreet.jp/goods/detail/goodsId/2326380275844/shopsId/30857";
+            chromeDriver.Manage().Cookies.AddCookie(new OpenQA.Selenium.Cookie("new_akitid", rst, ".2ndstreet.jp", "/", DateTime.Now.AddDays(30)));
+            chromeDriver.Manage().Cookies.AddCookie(new OpenQA.Selenium.Cookie("2st_logined_app", "on", "www.2ndstreet.jp", "/", DateTime.Now.AddDays(30)));
+            chromeDriver.Url = "https://www.2ndstreet.jp/cart/updateForApp?releaseurl=1&num=1&sp=on&goodsId=" + goodsId + "&shopsID=" + shopsId + "&ver=3.0.5";
+            try {
+                var element = chromeDriver.FindElementByXPath("/html/body/article/ul/form");
+                element.Submit();
+            }catch{
+
+            }
+            try {
+                var element2 = chromeDriver.FindElementByXPath("//*[@id=\"reduceForm\"]");
+                element2.Submit();
+            } catch {
+
+            }
+            try {
+                var element3 = chromeDriver.FindElementByXPath("/html/body/article/article/form");
+                element3.Submit();
+            } catch {
+
+            }
+            try {
+                var element4 = chromeDriver.FindElementByXPath("/html/body/article/article/form");
+                element4.Submit();
+            } catch {
+
+            }
+            try {
+                var element5 = chromeDriver.FindElementByXPath("//input[@name=\"Password\"]");
+                element5.Click();
+                element5.SendKeys("vpassword");
+            } catch {
+
+            }
+
+            
         }
 
         private void ライセンスToolStripMenuItem_Click(object sender, EventArgs e) {
