@@ -11,7 +11,7 @@ namespace SSLand {
 
     public class SecondStreetAPI{
 
-        private const string USER_AGENT = "Mozilla/5.0 (iPad; COU OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Mobile/14F89 Fril/6.7.1";
+        public const string USER_AGENT = "Mozilla/5.0 (iPad; COU OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Mobile/14F89 Fril/6.7.1";
         private const string LOGIN_USER_AGENT = "reuse_store_release/3.0.5 CFNetwork/897.15 Darwin/17.5.0";
         public const string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
         private string proxy;
@@ -81,6 +81,14 @@ namespace SSLand {
             }
         }
 
+        public void getGoodsDetail(string goods_id, string shops_id) {
+            string url = "https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getGoodsDetail";
+            Dictionary<string, string> param = new Dictionary<string, string>();
+            param.Add("goods_id", goods_id);
+            param.Add("shops_id", shops_id);
+            var rawres = postSecondStreetAPI(url, param, SecondStreetAPI.LOGIN_USER_AGENT);
+            Console.WriteLine(rawres.response);
+        }
         //FIXIT:新着アイテムの取得
         static public List<SecondStreetListItem> postNewItem()
         {
@@ -251,7 +259,7 @@ namespace SSLand {
                 return "";
             }
         }
-        private CookieContainer cc = new CookieContainer();
+        public CookieContainer cc = new CookieContainer();
 
         }
     }
