@@ -84,14 +84,25 @@ namespace SSLand {
                 return false;
             }
         }
-
+        public void addItemToCartWeb(string shops_id, string goods_id) {
+            string url2 = "https://www.2ndstreet.jp/cart/updateForApp";
+            Dictionary<string, string> param2 = new Dictionary<string, string>();
+            param2.Add("releaseurl", "1");
+            param2.Add("shopsId", shops_id);
+            param2.Add("goodsId", goods_id);
+            param2.Add("num", "1");
+            param2.Add("sp", "on");
+            param2.Add("ver", "3.0.5");
+            var rawres2 = getSecondStreetAPI(url2, param2, SecondStreetAPI.USER_AGENT);
+            Console.WriteLine(rawres2.response);
+        }
         public void getGoodsDetail(string goods_id, string shops_id) {
-            string url = "https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getGoodsDetail";
+            /*string url = "https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getGoodsDetail";
             Dictionary<string, string> param = new Dictionary<string, string>();
             param.Add("goods_id", goods_id);
             param.Add("shops_id", shops_id);
             var rawres = postSecondStreetAPI(url, param, SecondStreetAPI.LOGIN_USER_AGENT);
-            Console.WriteLine(rawres.response);
+            Console.WriteLine(rawres.response);*/
         }
         //FIXIT:新着アイテムの取得
         public List<SecondStreetListItem> postNewItem()
@@ -145,9 +156,7 @@ namespace SSLand {
                 req.Method = "POST";
                 //リクエストヘッダを付加
                 req.ContentType = "application/x-www-form-urlencoded; charset=utf-8";
-                req.Accept = "gzip, deflate";//"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-                //if (!string.IsNullOrEmpty(this.access_token)) req.Headers.Add("authorization", "OAuth2 " + this.access_token);
-                //req.Accept = "application/json";
+                req.Accept = "gzip, deflate";
                 req.ContentLength = (long)bytes.Length;
                 //クッキーコンテナの追加
                 req.CookieContainer = this.cc;
