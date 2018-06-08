@@ -150,6 +150,14 @@ namespace SSLand
             var settingsDBHelper = new SettingsDBHelper();
             return settingsDBHelper.getSettingValue("securitycode");
         }
+        static public string getCardFirstName() {
+            var settingsDBHelper = new SettingsDBHelper();
+            return settingsDBHelper.getSettingValue("cardfirstname");
+        }
+        static public string getCardLastName() {
+            var settingsDBHelper = new SettingsDBHelper();
+            return settingsDBHelper.getSettingValue("cardlastname");
+        }
         private void SettingForm_Load(object sender, EventArgs e)
         {
             this.autoscrollCheckBox.Checked = getAutoScroll();
@@ -159,6 +167,8 @@ namespace SSLand
             this.expireMonthTextBox.Text = getCardMonth();
             this.expireYearTextBox.Text = getCardYear();
             this.securityCodeTextBox.Text = getCardSecurityCode();
+            this.cardFirstNameTextBox.Text = getCardFirstName();
+            this.cardLastNameTextBox.Text = getCardLastName();
             this.radioButton1.Checked = getUseCard();
             this.radioButton2.Checked = !getUseCard();
 
@@ -268,6 +278,8 @@ namespace SSLand
             settingsDBHelper.updateSettings("cardmonth", expireMonthTextBox.Text.Trim());
             settingsDBHelper.updateSettings("cardyear", expireYearTextBox.Text.Trim());
             settingsDBHelper.updateSettings("securitycode", securityCodeTextBox.Text.Trim());
+            settingsDBHelper.updateSettings("cardfirstname", cardFirstNameTextBox.Text.Trim());
+            settingsDBHelper.updateSettings("cardlastname", cardLastNameTextBox.Text.Trim());
             settingsDBHelper.updateSettings("usecard", radioButton1.Checked.ToString());
         }
         private void SettingForm_FormClosing(object sender, FormClosingEventArgs e)
