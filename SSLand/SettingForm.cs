@@ -158,6 +158,10 @@ namespace SSLand
             var settingsDBHelper = new SettingsDBHelper();
             return settingsDBHelper.getSettingValue("cardlastname");
         }
+        static public string getVpassPassword() {
+            var settingsDBHelper = new SettingsDBHelper();
+            return settingsDBHelper.getSettingValue("vpasspassword");
+        }
         private void SettingForm_Load(object sender, EventArgs e)
         {
             this.autoscrollCheckBox.Checked = getAutoScroll();
@@ -169,6 +173,7 @@ namespace SSLand
             this.securityCodeTextBox.Text = getCardSecurityCode();
             this.cardFirstNameTextBox.Text = getCardFirstName();
             this.cardLastNameTextBox.Text = getCardLastName();
+            this.vpassPasswordTextbox.Text = getVpassPassword();
             this.radioButton1.Checked = getUseCard();
             this.radioButton2.Checked = !getUseCard();
 
@@ -280,6 +285,7 @@ namespace SSLand
             settingsDBHelper.updateSettings("securitycode", securityCodeTextBox.Text.Trim());
             settingsDBHelper.updateSettings("cardfirstname", cardFirstNameTextBox.Text.Trim());
             settingsDBHelper.updateSettings("cardlastname", cardLastNameTextBox.Text.Trim());
+            settingsDBHelper.updateSettings("vpasspassword", vpassPasswordTextbox.Text.Trim());
             settingsDBHelper.updateSettings("usecard", radioButton1.Checked.ToString());
         }
         private void SettingForm_FormClosing(object sender, FormClosingEventArgs e)

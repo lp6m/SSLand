@@ -38,6 +38,7 @@
             this.brandAddButton = new System.Windows.Forms.Button();
             this.brandDelButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cardLastNameTextBox = new System.Windows.Forms.TextBox();
@@ -53,7 +54,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label10 = new System.Windows.Forms.Label();
+            this.vpassPasswordTextbox = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.photosizeNumericDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -106,7 +108,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(8, 536);
+            this.label3.Location = new System.Drawing.Point(8, 568);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(217, 20);
             this.label3.TabIndex = 19;
@@ -169,6 +171,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.vpassPasswordTextbox);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
@@ -188,16 +192,26 @@
             this.groupBox1.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(12, 274);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(508, 259);
+            this.groupBox1.Size = new System.Drawing.Size(508, 291);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "支払い方法";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label10.Location = new System.Drawing.Point(344, 55);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(92, 20);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "VISAのみ対応";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(32, 193);
+            this.label9.Location = new System.Drawing.Point(67, 198);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(100, 20);
             this.label9.TabIndex = 35;
@@ -207,7 +221,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(32, 169);
+            this.label8.Location = new System.Drawing.Point(71, 172);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(100, 20);
             this.label8.TabIndex = 34;
@@ -216,7 +230,7 @@
             // cardLastNameTextBox
             // 
             this.cardLastNameTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cardLastNameTextBox.Location = new System.Drawing.Point(157, 170);
+            this.cardLastNameTextBox.Location = new System.Drawing.Point(183, 169);
             this.cardLastNameTextBox.Name = "cardLastNameTextBox";
             this.cardLastNameTextBox.Size = new System.Drawing.Size(155, 19);
             this.cardLastNameTextBox.TabIndex = 33;
@@ -224,7 +238,7 @@
             // cardFirstNameTextBox
             // 
             this.cardFirstNameTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cardFirstNameTextBox.Location = new System.Drawing.Point(157, 195);
+            this.cardFirstNameTextBox.Location = new System.Drawing.Point(183, 193);
             this.cardFirstNameTextBox.Name = "cardFirstNameTextBox";
             this.cardFirstNameTextBox.Size = new System.Drawing.Size(155, 19);
             this.cardFirstNameTextBox.TabIndex = 32;
@@ -233,7 +247,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(-1, 216);
+            this.label7.Location = new System.Drawing.Point(-1, 248);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(503, 40);
             this.label7.TabIndex = 31;
@@ -242,7 +256,7 @@
             // securityCodeTextBox
             // 
             this.securityCodeTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.securityCodeTextBox.Location = new System.Drawing.Point(157, 144);
+            this.securityCodeTextBox.Location = new System.Drawing.Point(183, 145);
             this.securityCodeTextBox.Name = "securityCodeTextBox";
             this.securityCodeTextBox.Size = new System.Drawing.Size(155, 19);
             this.securityCodeTextBox.TabIndex = 20;
@@ -250,7 +264,7 @@
             // expireYearTextBox
             // 
             this.expireYearTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.expireYearTextBox.Location = new System.Drawing.Point(157, 116);
+            this.expireYearTextBox.Location = new System.Drawing.Point(183, 116);
             this.expireYearTextBox.Name = "expireYearTextBox";
             this.expireYearTextBox.Size = new System.Drawing.Size(155, 19);
             this.expireYearTextBox.TabIndex = 19;
@@ -258,7 +272,7 @@
             // expireMonthTextBox
             // 
             this.expireMonthTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.expireMonthTextBox.Location = new System.Drawing.Point(157, 86);
+            this.expireMonthTextBox.Location = new System.Drawing.Point(183, 86);
             this.expireMonthTextBox.Name = "expireMonthTextBox";
             this.expireMonthTextBox.Size = new System.Drawing.Size(155, 19);
             this.expireMonthTextBox.TabIndex = 18;
@@ -266,7 +280,7 @@
             // cardNumberTextBox
             // 
             this.cardNumberTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cardNumberTextBox.Location = new System.Drawing.Point(157, 53);
+            this.cardNumberTextBox.Location = new System.Drawing.Point(183, 56);
             this.cardNumberTextBox.Name = "cardNumberTextBox";
             this.cardNumberTextBox.Size = new System.Drawing.Size(155, 19);
             this.cardNumberTextBox.TabIndex = 17;
@@ -275,7 +289,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(6, 144);
+            this.label6.Location = new System.Drawing.Point(41, 144);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(126, 20);
             this.label6.TabIndex = 16;
@@ -285,7 +299,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(46, 115);
+            this.label5.Location = new System.Drawing.Point(81, 115);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 20);
             this.label5.TabIndex = 15;
@@ -295,7 +309,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(46, 85);
+            this.label4.Location = new System.Drawing.Point(81, 86);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 20);
             this.label4.TabIndex = 14;
@@ -305,7 +319,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(58, 55);
+            this.label2.Location = new System.Drawing.Point(93, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 20);
             this.label2.TabIndex = 13;
@@ -335,21 +349,29 @@
             this.radioButton1.Text = "クレジットカード";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // label10
+            // vpassPasswordTextbox
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label10.Location = new System.Drawing.Point(318, 52);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(92, 20);
-            this.label10.TabIndex = 31;
-            this.label10.Text = "VISAのみ対応";
+            this.vpassPasswordTextbox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.vpassPasswordTextbox.Location = new System.Drawing.Point(183, 218);
+            this.vpassPasswordTextbox.Name = "vpassPasswordTextbox";
+            this.vpassPasswordTextbox.Size = new System.Drawing.Size(155, 19);
+            this.vpassPasswordTextbox.TabIndex = 36;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label11.Location = new System.Drawing.Point(3, 220);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(176, 20);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "VPassパーソナルメッセージ";
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 565);
+            this.ClientSize = new System.Drawing.Size(532, 597);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.brandDelButton);
             this.Controls.Add(this.brandAddButton);
@@ -400,5 +422,7 @@
         private System.Windows.Forms.TextBox cardFirstNameTextBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox vpassPasswordTextbox;
     }
 }
