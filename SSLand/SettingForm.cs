@@ -118,14 +118,6 @@ namespace SSLand
                 return 160;
             }
         }
-        //static public bool getf1f4Enable()
-        //{
-        //    var settingsDBHelper = new SettingsDBHelper();
-        //    string rst = settingsDBHelper.getSettingValue(f1f4enable);
-        //    if (String.IsNullOrEmpty(rst)) return false;//default
-        //    if (rst == "False") return false;
-        //    else return true;
-        //}
         static public bool getBrandEnable()
         {
             var settingsDBHelper = new SettingsDBHelper();
@@ -135,12 +127,40 @@ namespace SSLand
             else return true;
         }
 
+        static public bool getUseCard() {
+            var settingsDBHelper = new SettingsDBHelper();
+            string rst = settingsDBHelper.getSettingValue("usecard");
+            if (String.IsNullOrEmpty(rst)) return false;//default
+            if (rst == "False") return false;
+            else return true;
+        }
+        static public string getCardNumber() {
+            var settingsDBHelper = new SettingsDBHelper();
+            return settingsDBHelper.getSettingValue("cardnumber");
+        }
+        static public string getCardMonth() {
+            var settingsDBHelper = new SettingsDBHelper();
+            return settingsDBHelper.getSettingValue("cardmonth");
+        }
+        static public string getCardYear() {
+            var settingsDBHelper = new SettingsDBHelper();
+            return settingsDBHelper.getSettingValue("cardyear");
+        }
+        static public string getCardSecurityCode() {
+            var settingsDBHelper = new SettingsDBHelper();
+            return settingsDBHelper.getSettingValue("securitycode");
+        }
         private void SettingForm_Load(object sender, EventArgs e)
         {
             this.autoscrollCheckBox.Checked = getAutoScroll();
             this.photosizeNumericDown.Value = getPhotoSize();
             this.useBrandCheckBox.Checked = getBrandEnable();
-
+            this.cardNumberTextBox.Text = getCardNumber();
+            this.expireMonthTextBox.Text = getCardMonth();
+            this.expireYearTextBox.Text = getCardYear();
+            this.securityCodeTextBox.Text = getCardSecurityCode();
+            this.radioButton1.Checked = getUseCard();
+            this.radioButton2.Checked = !getUseCard();
 
             //ブランドデータ
             foreach (var pair in SecondStreetMaster.brandDictionary)
@@ -243,19 +263,12 @@ namespace SSLand
             settingsDBHelper.updateSettings(autoscroll, this.autoscrollCheckBox.Checked.ToString());
             settingsDBHelper.updateSettings(photosize, ((int)this.photosizeNumericDown.Value).ToString());
             settingsDBHelper.updateSettings(brandenable, this.useBrandCheckBox.Checked.ToString());
-            //settingsDBHelper.updateSettings(f1f4enable, f1f4EnableCheckBox.Checked.ToString());
-            //if (this.radioButton1.Checked)
-            //{
-            //    settingsDBHelper.updateSettings(paycreditcard, "True");
-            //}
-            //else
-            //{
-            //    settingsDBHelper.updateSettings(paycreditcard, "False");
-            //}
-            //settingsDBHelper.updateSettings(cardnumber, cardNumberTextBox.Text.Trim());
-            //settingsDBHelper.updateSettings(expireMonth, expireMonthTextBox.Text.Trim());
-            //settingsDBHelper.updateSettings(expireYear, expireYearTextBox.Text.Trim());
-            //settingsDBHelper.updateSettings(securitycode, securityCodeTextBox.Text.Trim());
+
+            settingsDBHelper.updateSettings("cardnumber", cardNumberTextBox.Text.Trim());
+            settingsDBHelper.updateSettings("cardmonth", expireMonthTextBox.Text.Trim());
+            settingsDBHelper.updateSettings("cardyear", expireYearTextBox.Text.Trim());
+            settingsDBHelper.updateSettings("securitycode", securityCodeTextBox.Text.Trim());
+            settingsDBHelper.updateSettings("usecard", radioButton1.Checked.ToString());
         }
         private void SettingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
