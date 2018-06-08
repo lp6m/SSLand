@@ -38,6 +38,10 @@ namespace SSLand {
             this.account = account;
         }
 
+        //ログイン処理
+        //ログインしても実はaccess_tokenとかは使用しない
+        //ログイン後のクッキーだけが必要になる
+        //購入前にログインを行う
         public bool trySecondStreetLogin(string email, string password) {
             string url = "https://auth.geonet.jp/authorize";
             string client_id = "f92a4aeb4d2d07e4b8471177246e7eac3f7bf287ff984c2f3219c18c71b9c302";
@@ -90,7 +94,7 @@ namespace SSLand {
             Console.WriteLine(rawres.response);
         }
         //FIXIT:新着アイテムの取得
-        static public List<SecondStreetListItem> postNewItem()
+        public List<SecondStreetListItem> postNewItem()
         {
             //リクエスト部
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getNewGoods");
