@@ -38,6 +38,11 @@
             this.brandAddButton = new System.Windows.Forms.Button();
             this.brandDelButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cardLastNameTextBox = new System.Windows.Forms.TextBox();
+            this.cardFirstNameTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.securityCodeTextBox = new System.Windows.Forms.TextBox();
             this.expireYearTextBox = new System.Windows.Forms.TextBox();
             this.expireMonthTextBox = new System.Windows.Forms.TextBox();
@@ -48,11 +53,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cardFirstNameTextBox = new System.Windows.Forms.TextBox();
-            this.cardLastNameTextBox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.photosizeNumericDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -138,7 +139,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(12, 95);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(419, 136);
             this.listBox1.TabIndex = 27;
@@ -146,7 +147,7 @@
             // brandAddButton
             // 
             this.brandAddButton.Location = new System.Drawing.Point(436, 71);
-            this.brandAddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.brandAddButton.Margin = new System.Windows.Forms.Padding(2);
             this.brandAddButton.Name = "brandAddButton";
             this.brandAddButton.Size = new System.Drawing.Size(84, 19);
             this.brandAddButton.TabIndex = 28;
@@ -158,7 +159,7 @@
             // brandDelButton
             // 
             this.brandDelButton.Location = new System.Drawing.Point(436, 186);
-            this.brandDelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.brandDelButton.Margin = new System.Windows.Forms.Padding(2);
             this.brandDelButton.Name = "brandDelButton";
             this.brandDelButton.Size = new System.Drawing.Size(84, 44);
             this.brandDelButton.TabIndex = 29;
@@ -168,6 +169,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cardLastNameTextBox);
@@ -190,6 +192,52 @@
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "支払い方法";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label9.Location = new System.Drawing.Point(32, 193);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(100, 20);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "英字名義（名）";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label8.Location = new System.Drawing.Point(32, 169);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 20);
+            this.label8.TabIndex = 34;
+            this.label8.Text = "英字名義（性）";
+            // 
+            // cardLastNameTextBox
+            // 
+            this.cardLastNameTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cardLastNameTextBox.Location = new System.Drawing.Point(157, 170);
+            this.cardLastNameTextBox.Name = "cardLastNameTextBox";
+            this.cardLastNameTextBox.Size = new System.Drawing.Size(155, 19);
+            this.cardLastNameTextBox.TabIndex = 33;
+            // 
+            // cardFirstNameTextBox
+            // 
+            this.cardFirstNameTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cardFirstNameTextBox.Location = new System.Drawing.Point(157, 195);
+            this.cardFirstNameTextBox.Name = "cardFirstNameTextBox";
+            this.cardFirstNameTextBox.Size = new System.Drawing.Size(155, 19);
+            this.cardFirstNameTextBox.TabIndex = 32;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(-1, 216);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(503, 40);
+            this.label7.TabIndex = 31;
+            this.label7.Text = "現在の仕様ではアカウントに既に住所が登録されている必要があります。\r\n複数の住所がアカウントに登録されている場合、デフォルトのものが使用されます。";
             // 
             // securityCodeTextBox
             // 
@@ -287,51 +335,15 @@
             this.radioButton1.Text = "クレジットカード";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // label10
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(-1, 216);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(503, 40);
-            this.label7.TabIndex = 31;
-            this.label7.Text = "現在の仕様ではアカウントに既に住所が登録されている必要があります。\r\n複数の住所がアカウントに登録されている場合、デフォルトのものが使用されます。";
-            // 
-            // cardFirstNameTextBox
-            // 
-            this.cardFirstNameTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cardFirstNameTextBox.Location = new System.Drawing.Point(157, 195);
-            this.cardFirstNameTextBox.Name = "cardFirstNameTextBox";
-            this.cardFirstNameTextBox.Size = new System.Drawing.Size(155, 19);
-            this.cardFirstNameTextBox.TabIndex = 32;
-            // 
-            // cardLastNameTextBox
-            // 
-            this.cardLastNameTextBox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cardLastNameTextBox.Location = new System.Drawing.Point(157, 170);
-            this.cardLastNameTextBox.Name = "cardLastNameTextBox";
-            this.cardLastNameTextBox.Size = new System.Drawing.Size(155, 19);
-            this.cardLastNameTextBox.TabIndex = 33;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(32, 169);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 20);
-            this.label8.TabIndex = 34;
-            this.label8.Text = "英字名義（性）";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(32, 193);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(100, 20);
-            this.label9.TabIndex = 35;
-            this.label9.Text = "英字名義（名）";
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label10.Location = new System.Drawing.Point(318, 52);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(92, 20);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "VISAのみ対応";
             // 
             // SettingForm
             // 
@@ -348,7 +360,7 @@
             this.Controls.Add(this.autoscrollCheckBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SettingForm";
             this.Text = "設定画面";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingForm_FormClosing);
@@ -387,5 +399,6 @@
         private System.Windows.Forms.TextBox cardLastNameTextBox;
         private System.Windows.Forms.TextBox cardFirstNameTextBox;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
