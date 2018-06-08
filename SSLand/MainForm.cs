@@ -13,8 +13,12 @@ using System.Net;
 using Codeplex.Data;
 using System.Media;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium;
 using System.Reflection;
 using System.Collections;
+using OpenQA.Selenium.Remote;
 
 namespace SSLand
 {
@@ -139,29 +143,10 @@ namespace SSLand
         private void startProcessButton_Click(object sender, EventArgs e)
         {
             ToggleMonitoring();
-
-            //絞り込みブランド
-            conditions = SettingForm.LoadSearchConditions();
-            string brand_sc = "";
-            foreach (var sc in conditions) brand_sc += sc.brand_name + "/";
-            if (brand_sc == "")
-            {
-                brandSCLabel.Text = "なし";
-            }
-            else
-            {
-                brandSCLabel.Text = brand_sc;
-            }
         }
+        
         private void ToggleMonitoring()
         {
-            //監視の開始・停止を行う
-            //api = Common.getFrilAPIFromDB();
-            //if (api == null)
-            //{
-            //    MessageBox.Show("アカウントを確認してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
             if (this.startProcessButton.BackColor != Color.Red)
             {
                 if (this.backgroundWorker1.IsBusy)
@@ -170,6 +155,12 @@ namespace SSLand
                     return;
                 }
                 //OFF -> ON
+                //監視の開始・停止を行う
+                MainForm.api = Common.getSecondStreetAPIWithLogin();
+                if (api == null) {
+                    MessageBox.Show("アカウントを確認して下さい");
+                    return;
+                }
                 this.startProcessButton.BackColor = Color.Red;
                 this.startProcessButton.Text = "監視停止(z)";
                 this.timer1.Enabled = true;
@@ -370,60 +361,120 @@ namespace SSLand
         }
 
         private void button5_Click(object sender, EventArgs e) {
-            var api = new SecondStreetAPI();
-            api.trySecondStreetLogin("username", "password");
-            string goodsId = "2326380275844";
-            string shopsId = "30857";
-            api.getGoodsDetail(goodsId, shopsId);
-            Console.WriteLine(api.cc);
-            string rst = "";
-            foreach (System.Net.Cookie cookie in api.cc.GetCookies(new Uri("https://www.2ndstreet.jp"))) {
-                if (cookie.Name == "new_akitid") rst = cookie.Value;
-            }
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("--user-agent="+SecondStreetAPI.USER_AGENT);
-            var chromeDriver = new ChromeDriver(options);
-            chromeDriver.Url = "https://www.2ndstreet.jp/goods/detail/goodsId/2326380275844/shopsId/30857";
-            chromeDriver.Manage().Cookies.AddCookie(new OpenQA.Selenium.Cookie("new_akitid", rst, ".2ndstreet.jp", "/", DateTime.Now.AddDays(30)));
-            chromeDriver.Manage().Cookies.AddCookie(new OpenQA.Selenium.Cookie("2st_logined_app", "on", "www.2ndstreet.jp", "/", DateTime.Now.AddDays(30)));
-            chromeDriver.Url = "https://www.2ndstreet.jp/cart/updateForApp?releaseurl=1&num=1&sp=on&goodsId=" + goodsId + "&shopsID=" + shopsId + "&ver=3.0.5";
-            try {
-                var element = chromeDriver.FindElementByXPath("/html/body/article/ul/form");
-                element.Submit();
-            }catch{
-
-            }
-            try {
-                var element2 = chromeDriver.FindElementByXPath("//*[@id=\"reduceForm\"]");
-                element2.Submit();
-            } catch {
-
-            }
-            try {
-                var element3 = chromeDriver.FindElementByXPath("/html/body/article/article/form");
-                element3.Submit();
-            } catch {
-
-            }
-            try {
-                var element4 = chromeDriver.FindElementByXPath("/html/body/article/article/form");
-                element4.Submit();
-            } catch {
-
-            }
-            try {
-                var element5 = chromeDriver.FindElementByXPath("//input[@name=\"Password\"]");
-                element5.Click();
-                element5.SendKeys("vpassword");
-            } catch {
-
-            }
-
+            
+            //ご注文ありがとうございます
             
         }
 
         private void ライセンスToolStripMenuItem_Click(object sender, EventArgs e) {
             new LicenseForm().Show();
+        }
+
+        public static async void BuyItem(SecondStreetListItem item) {
+            bool res = await Task.Run(() => ExecuteItem(item.shops_id.ToString(), item.goods_id.ToString()));
+            
+        }  
+        public static bool ExecuteItem(string shopsId, string goodsId) {
+            bool useCard = SettingForm.getUseCard();
+            string cardnumber = SettingForm.getCardNumber();
+            string cardmonth = SettingForm.getCardMonth();
+            string cardyear = SettingForm.getCardYear();
+            string securitycode = SettingForm.getCardSecurityCode();
+            string cardlastname = SettingForm.getCardLastName();
+            string cardfirstname = SettingForm.getCardFirstName();
+            string vpasspassword = SettingForm.getVpassPassword();
+            if (useCard) {
+                //クレジットカードによる購入を行う
+                //SeleniumWebDriverを使用する
+                ChromeOptions options = new ChromeOptions();
+                options.AddArgument("--user-agent=" + SecondStreetAPI.USER_AGENT);
+                options.AddArgument("window-size=1920,1920");
+                var chromeDriver = new ChromeDriver(options);
+                var wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(10));
+                //まず2ndstreetのページに飛ばないとCookie追加できない
+                chromeDriver.Url = "https://www.2ndstreet.jp/";
+                //APIからログインCookie取り出してWebDrierにセット
+                foreach (System.Net.Cookie cookie in api.cc.GetCookies(new Uri("https://www.2ndstreet.jp"))) {
+                    chromeDriver.Manage().Cookies.AddCookie(new OpenQA.Selenium.Cookie(cookie.Name, cookie.Value, ".2ndstreet.jp", "/", DateTime.Now.AddDays(30)));
+                }
+                //ここからWebDriver操作
+                //カートに追加
+                chromeDriver.Url = string.Format("https://www.2ndstreet.jp/cart/updateForApp?releaseurl=1&num=1&sp=on&ver=3.0.5&goodsId={0}&shopsID={1}", goodsId, shopsId);
+                //決済へ進む
+                try {
+                    var element = chromeDriver.FindElementByXPath("/html/body/article/ul/form");
+                    element.Submit();
+                } catch {
+                    //submit成功後elementが消えてエラーになる: TODO:真面目に処理
+                }
+                //ポイントを使用するか
+                try {
+                    var element2 = chromeDriver.FindElementByXPath("//*[@id=\"reduceForm\"]");
+                    element2.Submit();
+                } catch {
+
+                }
+                //カード情報および住所の入力:住所はデフォルトで選択されているものを使用する
+                bool input_new_card = true;
+                if (input_new_card) {
+                    //新しいカード番号を入力するを選択
+                    var radio_input = chromeDriver.FindElementByXPath("//input[@id=\"card_choose_other\"]");
+                    radio_input.Click();
+                    //情報の記入
+                    var cardTypeSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditCardType\"]");
+                    new SelectElement(cardTypeSelct).SelectByText("VISA");
+                    var cardnumber_input = chromeDriver.FindElementByXPath("//input[@id=\"card_number\"]");
+                    cardnumber_input.Click();
+                    cardnumber_input.SendKeys(cardnumber);
+                    var cccsc_input = chromeDriver.FindElementByXPath("//input[@id=\"cc-csc\"]");
+                    System.Threading.Thread.Sleep(3000);
+                    cccsc_input.Click();
+                    cccsc_input.SendKeys(securitycode);
+                    var monthSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditAvailableMonth\"]");
+                    new SelectElement(monthSelct).SelectByText(cardmonth);
+                    var yearSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditAvailableYear\"]");
+                    new SelectElement(yearSelct).SelectByText(cardyear);
+                    var lastname_input = chromeDriver.FindElementByXPath("//input[@id=\"creditLastName\"]");
+                    lastname_input.Click();
+                    lastname_input.SendKeys(cardlastname);
+                    var firstname_input = chromeDriver.FindElementByXPath("//input[@id=\"creditFirstName\"]");
+                    firstname_input.Click();
+                    firstname_input.SendKeys(cardfirstname);
+                    System.Threading.Thread.Sleep(4000);
+                }
+                //支払い方法・住所確定
+                try {
+                    var element3 = chromeDriver.FindElementByXPath("//button[@id=\"submit-btn\"]");
+                    var remote = element3 as RemoteWebElement;
+                    var hack = remote.LocationOnScreenOnceScrolledIntoView;
+                    element3.Click();
+                } catch {
+
+                }
+                //最終確認へ
+                System.Threading.Thread.Sleep(2000);
+                try {
+                    var element4 = chromeDriver.FindElementByXPath("//*[@id=\"flownext_btn\"]/button");
+                    var remote = element4 as RemoteWebElement;
+                    var hack = remote.LocationOnScreenOnceScrolledIntoView;
+                    element4.Click();
+                } catch {
+
+                }
+                //VPASSのみ使用可能
+                System.Threading.Thread.Sleep(2000);
+                try {
+                    var element5 = chromeDriver.FindElementByXPath("//input[@name=\"Password\"]");
+                    element5.Click();
+                    element5.SendKeys(vpasspassword);
+                } catch {
+
+                }
+                chromeDriver.Quit();
+            } else {
+                //代引きによる購入を行う
+            }
+            return true;
         }
     }
 }

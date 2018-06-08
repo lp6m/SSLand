@@ -40,8 +40,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button5 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.brandSCLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +50,8 @@
             this.メニューToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1434, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1076, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -63,27 +62,27 @@
             this.設定ToolStripMenuItem,
             this.ライセンスToolStripMenuItem});
             this.メニューToolStripMenuItem.Name = "メニューToolStripMenuItem";
-            this.メニューToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
+            this.メニューToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.メニューToolStripMenuItem.Text = "メニュー";
             // 
             // 購入者管理ToolStripMenuItem
             // 
             this.購入者管理ToolStripMenuItem.Name = "購入者管理ToolStripMenuItem";
-            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.購入者管理ToolStripMenuItem.Text = "アカウント管理";
             this.購入者管理ToolStripMenuItem.Click += new System.EventHandler(this.アカウント管理ToolStripMenuItem_Click);
             // 
             // 設定ToolStripMenuItem
             // 
             this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
-            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.設定ToolStripMenuItem.Text = "設定";
             this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
             // 
             // ライセンスToolStripMenuItem
             // 
             this.ライセンスToolStripMenuItem.Name = "ライセンスToolStripMenuItem";
-            this.ライセンスToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.ライセンスToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.ライセンスToolStripMenuItem.Text = "ライセンス";
             this.ライセンスToolStripMenuItem.Click += new System.EventHandler(this.ライセンスToolStripMenuItem_Click);
             // 
@@ -102,10 +101,9 @@
             // 
             // startProcessButton
             // 
-            this.startProcessButton.Location = new System.Drawing.Point(15, 32);
-            this.startProcessButton.Margin = new System.Windows.Forms.Padding(4);
+            this.startProcessButton.Location = new System.Drawing.Point(11, 26);
             this.startProcessButton.Name = "startProcessButton";
-            this.startProcessButton.Size = new System.Drawing.Size(112, 39);
+            this.startProcessButton.Size = new System.Drawing.Size(84, 31);
             this.startProcessButton.TabIndex = 16;
             this.startProcessButton.Text = "監視開始(z)";
             this.startProcessButton.UseVisualStyleBackColor = true;
@@ -119,53 +117,32 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 103);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(11, 82);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1244, 360);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(933, 288);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(750, 32);
-            this.button5.Margin = new System.Windows.Forms.Padding(4);
+            this.button5.Location = new System.Drawing.Point(562, 26);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(116, 63);
+            this.button5.Size = new System.Drawing.Size(87, 50);
             this.button5.TabIndex = 19;
             this.button5.Text = "監視開始(z)";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(247, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 15);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "絞り込みブランド";
-            // 
-            // brandSCLabel
-            // 
-            this.brandSCLabel.AutoSize = true;
-            this.brandSCLabel.Location = new System.Drawing.Point(247, 56);
-            this.brandSCLabel.Name = "brandSCLabel";
-            this.brandSCLabel.Size = new System.Drawing.Size(31, 15);
-            this.brandSCLabel.TabIndex = 21;
-            this.brandSCLabel.Text = "なし";
-            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1434, 658);
-            this.Controls.Add(this.brandSCLabel);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1076, 526);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.startProcessButton);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainForm";
             this.Text = "SSLand";
             this.Load += new System.EventHandler(this.MainWindow_Load);
@@ -192,8 +169,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ToolStripMenuItem ライセンスToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label brandSCLabel;
     }
 }
 
