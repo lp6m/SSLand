@@ -91,7 +91,7 @@ namespace SSLand
 
         private void BuyButton_Click(object sender, EventArgs e)
         {
-            //MainForm.ExecuteBuyItem(item, false);
+            MainForm.BuyItem(item);
         }
 
         //private void OpenSellerButton_Click(object sender, EventArgs e)
