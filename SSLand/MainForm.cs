@@ -384,8 +384,13 @@ namespace SSLand
             }
             this.toolStripStatusLabel1.Text = string.Format("購入処理開始:{0}", item.goods_name);
             bool res = await Task.Run(() => ExecuteItem(item.shops_id.ToString(), item.goods_id.ToString()));
-            if (res) this.toolStripStatusLabel1.Text = string.Format("購入成功: {0}", item.goods_name);
-            else this.toolStripStatusLabel1.Text = string.Format("購入失敗: {0}", item.goods_name);
+            if (res) {
+                this.toolStripStatusLabel1.Text = string.Format("購入成功: {0}", item.goods_name);
+                MessageBox.Show(string.Format("{0}を購入しました", item.goods_name), "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } else {
+                this.toolStripStatusLabel1.Text = string.Format("購入失敗: {0}", item.goods_name);
+                MessageBox.Show(string.Format("{0}の購入に失敗しました", item.goods_name), "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public bool ExecuteItem(string shopsId, string goodsId) {
             ChromeDriver chromeDriver = null;
