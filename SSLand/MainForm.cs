@@ -74,7 +74,7 @@ namespace SSLand
             if (string.IsNullOrEmpty(licensekey)) new LicenseForm().Show();
             if (await Task.Run(() => SecondStreetMaster.init()) == false)
             {
-                MessageBox.Show("フリルからデータの読み込みに失敗しました.プログラムを終了します.\nインターネット環境を確認してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("セカンドストリートからデータの読み込みに失敗しました.プログラムを終了します.\nインターネット環境を確認してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
 
