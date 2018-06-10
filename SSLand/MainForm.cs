@@ -362,7 +362,7 @@ namespace SSLand
 
         private void button5_Click(object sender, EventArgs e) {
             MainForm.api = Common.getSecondStreetAPIWithLogin();
-            ExecuteItem("31050", "2334430062979");
+            ExecuteItem("30686", "2320220208450");
       
             //ご注文ありがとうございます
             
@@ -375,106 +375,129 @@ namespace SSLand
         public static async void BuyItem(SecondStreetListItem item) {
             bool res = await Task.Run(() => ExecuteItem(item.shops_id.ToString(), item.goods_id.ToString()));
             
-        }  
+        }
         public static bool ExecuteItem(string shopsId, string goodsId) {
-            bool useCard = SettingForm.getUseCard();
-            string cardnumber = SettingForm.getCardNumber();
-            string cardmonth = SettingForm.getCardMonth();
-            string cardyear = SettingForm.getCardYear();
-            string securitycode = SettingForm.getCardSecurityCode();
-            string cardlastname = SettingForm.getCardLastName();
-            string cardfirstname = SettingForm.getCardFirstName();
-            string vpasspassword = SettingForm.getVpassPassword();
-            //SeleniumWebDriverを使用する
-            ChromeOptions options = new ChromeOptions();
-            //options.AddArgument("--user-agent=" + SecondStreetAPI.USER_AGENT);
-            options.AddArgument("window-size=1920,1920");
-            var chromeDriver = new ChromeDriver(options);
-            var wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(10));
-            //まず2ndstreetのページに飛ばないとCookie追加できない
-            chromeDriver.Url = "https://www.2ndstreet.jp/";
-            //APIからログインCookie取り出してWebDrierにセット
-            foreach (System.Net.Cookie cookie in api.cc.GetCookies(new Uri("https://www.2ndstreet.jp"))) {
-                Console.WriteLine(cookie.Name);
-                chromeDriver.Manage().Cookies.AddCookie(new OpenQA.Selenium.Cookie(cookie.Name, cookie.Value, ".2ndstreet.jp", "/", DateTime.Now.AddDays(30)));
-            }
-            //カートに追加
-            api.addItemToCartWeb(shopsId, goodsId);
-            //ここからWebDriver操作
-            //カートの商品一覧を開く
-            chromeDriver.Url = "https://www.2ndstreet.jp/cart/updateForApp";//?releaseurl=1&num=1&sp=on&ver=3.0.5&goodsId={0}&shopsID={1}", goodsId, shopsId);
-            //決済へ進む
+            ChromeDriver chromeDriver = null;
             try {
-                var element = chromeDriver.FindElementByXPath("/html/body/article/ul/form");
-                element.Submit();
-            } catch {
-                //submit成功後elementが消えてエラーになる: TODO:真面目に処理
-            }
-            //ポイントを使用するか
-            try {
-                var element2 = chromeDriver.FindElementByXPath("//*[@id=\"reduceForm\"]");
-                element2.Submit();
-            } catch {
+                bool useCard = SettingForm.getUseCard();
+                string cardnumber = SettingForm.getCardNumber();
+                string cardmonth = SettingForm.getCardMonth();
+                string cardyear = SettingForm.getCardYear();
+                string securitycode = SettingForm.getCardSecurityCode();
+                string cardlastname = SettingForm.getCardLastName();
+                string cardfirstname = SettingForm.getCardFirstName();
+                string vpasspassword = SettingForm.getVpassPassword();
+                //SeleniumWebDriverを使用する
+                ChromeOptions options = new ChromeOptions();
+                options.AddArgument("--headless");
+                options.AddArgument("window-size=1920,1920");
+                chromeDriver = new ChromeDriver(options);
+                var wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(10));
+                //まず2ndstreetのページに飛ばないとCookie追加できない
+                chromeDriver.Url = "https://www.2ndstreet.jp/";
+                //APIからログインCookie取り出してWebDrierにセット
+                foreach (System.Net.Cookie cookie in api.cc.GetCookies(new Uri("https://www.2ndstreet.jp"))) {
+                    Console.WriteLine(cookie.Name);
+                    chromeDriver.Manage().Cookies.AddCookie(new OpenQA.Selenium.Cookie(cookie.Name, cookie.Value, ".2ndstreet.jp", "/", DateTime.Now.AddDays(30)));
+                }
+                //カートに追加
+                api.addItemToCartWeb(shopsId, goodsId);
+                //ここからWebDriver操作
+                //カートの商品一覧を開く
+                chromeDriver.Url = "https://www.2ndstreet.jp/cart/updateForApp";//?releaseurl=1&num=1&sp=on&ver=3.0.5&goodsId={0}&shopsID={1}", goodsId, shopsId);
+                //決済へ進む
+                try {
+                    var element = chromeDriver.FindElementByXPath("/html/body/article/ul/form");
+                    element.Submit();
+                } catch {
+                    //submit成功後elementが消えてエラーになる: TODO:真面目に処理
+                }
+                //ポイントを使用するか
+                try {
+                    var element2 = chromeDriver.FindElementByXPath("//*[@id=\"reduceForm\"]");
+                    element2.Submit();
+                } catch {
 
-            }
-            //カード情報および住所の入力:住所はデフォルトで選択されているものを使用する
-            bool input_new_card = true;
-            if (input_new_card) {
-                //新しいカード番号を入力するを選択
-                var radio_input = chromeDriver.FindElementByXPath("//input[@id=\"card_choose_other\"]");
-                radio_input.Click();
-                //情報の記入
-                var cardTypeSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditCardType\"]");
-                new SelectElement(cardTypeSelct).SelectByText("VISA");
-                var cardnumber_input = chromeDriver.FindElementByXPath("//input[@id=\"card_number\"]");
-                cardnumber_input.Click();
-                cardnumber_input.SendKeys(cardnumber);
-                var cccsc_input = chromeDriver.FindElementByXPath("//input[@id=\"cc-csc\"]");
-                System.Threading.Thread.Sleep(3000);
-                cccsc_input.Click();
-                cccsc_input.SendKeys(securitycode);
-                var monthSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditAvailableMonth\"]");
-                new SelectElement(monthSelct).SelectByText(cardmonth);
-                var yearSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditAvailableYear\"]");
-                new SelectElement(yearSelct).SelectByText(cardyear);
-                var lastname_input = chromeDriver.FindElementByXPath("//input[@id=\"creditLastName\"]");
-                lastname_input.Click();
-                lastname_input.SendKeys(cardlastname);
-                var firstname_input = chromeDriver.FindElementByXPath("//input[@id=\"creditFirstName\"]");
-                firstname_input.Click();
-                firstname_input.SendKeys(cardfirstname);
-                System.Threading.Thread.Sleep(4000);
-            }
-            //支払い方法・住所確定
-            try {
-                var element3 = chromeDriver.FindElementByXPath("//button[@id=\"submit-btn\"]");
-                var remote = element3 as RemoteWebElement;
-                var hack = remote.LocationOnScreenOnceScrolledIntoView;
-                element3.Click();
-            } catch {
+                }
+                if (useCard) {
+                    //クレジットカード払いを選択
+                    var credit_radio_input = chromeDriver.FindElementByXPath("//*[@id=\"payment_choose_member2\"]");
+                    credit_radio_input.Click();
+                    //カード情報および住所の入力:住所はデフォルトで選択されているものを使用する
+                    bool input_new_card = true;
+                    if (input_new_card) {
+                        //新しいカード番号を入力するを選択
+                        var radio_input = chromeDriver.FindElementByXPath("//input[@id=\"card_choose_other\"]");
+                        radio_input.Click();
+                        //情報の記入
+                        var cardTypeSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditCardType\"]");
+                        new SelectElement(cardTypeSelct).SelectByText("VISA");
+                        var cardnumber_input = chromeDriver.FindElementByXPath("//input[@id=\"card_number\"]");
+                        cardnumber_input.Click();
+                        cardnumber_input.SendKeys(cardnumber);
+                        var cccsc_input = chromeDriver.FindElementByXPath("//input[@id=\"cc-csc\"]");
+                        System.Threading.Thread.Sleep(3000);
+                        cccsc_input.Click();
+                        cccsc_input.SendKeys(securitycode);
+                        var monthSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditAvailableMonth\"]");
+                        new SelectElement(monthSelct).SelectByText(cardmonth);
+                        var yearSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditAvailableYear\"]");
+                        new SelectElement(yearSelct).SelectByText(cardyear);
+                        var lastname_input = chromeDriver.FindElementByXPath("//input[@id=\"creditLastName\"]");
+                        lastname_input.Click();
+                        lastname_input.SendKeys(cardlastname);
+                        var firstname_input = chromeDriver.FindElementByXPath("//input[@id=\"creditFirstName\"]");
+                        firstname_input.Click();
+                        firstname_input.SendKeys(cardfirstname);
+                        System.Threading.Thread.Sleep(4000);
+                    } else {
+                        //既に登録されているクレカ選択
+                        var registered_card = chromeDriver.FindElementByXPath("//*[@id=\"card_choose_0\"]");
+                        registered_card.Click();
+                    }
+                } else {
+                    //代引き払い
+                    var radio_input = chromeDriver.FindElementByXPath("//*[@id=\"payment_choose_member1\"]");
+                    radio_input.Click();
+                }
+                //支払い方法・住所確定
+                try {
+                    var element3 = chromeDriver.FindElementByXPath("//button[@id=\"submit-btn\"]");
+                    var remote = element3 as RemoteWebElement;
+                    var hack = remote.LocationOnScreenOnceScrolledIntoView;
+                    element3.Click();
+                } catch {
 
-            }
-            //最終確認へ
-            System.Threading.Thread.Sleep(2000);
-            try {
-                var element4 = chromeDriver.FindElementByXPath("//*[@id=\"flownext_btn\"]/button");
-                var remote = element4 as RemoteWebElement;
-                var hack = remote.LocationOnScreenOnceScrolledIntoView;
-                element4.Click();
-            } catch {
+                }
+                //最終確認へ
+                System.Threading.Thread.Sleep(2000);
+                try {
+                    var element4 = chromeDriver.FindElementByXPath("//*[@id=\"flownext_btn\"]/button");
+                    var remote = element4 as RemoteWebElement;
+                    var hack = remote.LocationOnScreenOnceScrolledIntoView;
+                    element4.Click();
+                } catch {
 
-            }
-            //VPASSのみ使用可能
-            System.Threading.Thread.Sleep(2000);
-            try {
-                var element5 = chromeDriver.FindElementByXPath("//input[@name=\"Password\"]");
-                element5.Click();
-                element5.SendKeys(vpasspassword);
-            } catch {
+                }
+                if (useCard) {
+                    //VPASSのみ使用可能
+                    System.Threading.Thread.Sleep(2000);
+                    try {
+                        var element5 = chromeDriver.FindElementByXPath("//input[@name=\"Password\"]");
+                        element5.Click();
+                        element5.SendKeys(vpasspassword);
+                    } catch {
 
+                    }
+                }
+                chromeDriver.Quit();
+                Log.Logger.Info(string.Format("購入成功: ショップID:{0} 商品ID:{1}", shopsId, goodsId));
+                return true;
+            } catch (Exception) {
+                if (chromeDriver != null) chromeDriver.Quit();
+                Log.Logger.Error(string.Format("購入失敗: ショップID:{0} 商品ID:{1}", shopsId, goodsId));
+                return false;
             }
-            chromeDriver.Quit();
-            return true;
         }
     }
 }
