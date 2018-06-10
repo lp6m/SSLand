@@ -94,6 +94,10 @@ namespace SSLand
                 {
                     bindlist.Add(item);
                     AddSecondStreetItemPanel(item);
+                    if (soundOn) {
+                        SoundPlayer simpleSound = new SoundPlayer(@".\notification.wav");
+                        simpleSound.Play();
+                    }
                 }
                 this.flowLayoutPanel1.ResumeLayout();
             }
@@ -373,6 +377,11 @@ namespace SSLand
         }
 
         public async void BuyItem(SecondStreetListItem item) {
+            if (SettingForm.getShowPrompt()) {
+                if (DialogResult.OK != MessageBox.Show(string.Format("{0}を購入しますか？", item.goods_name), "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)) {
+                    return;
+                }
+            }
             this.toolStripStatusLabel1.Text = string.Format("購入処理開始:{0}", item.goods_name);
             bool res = await Task.Run(() => ExecuteItem(item.shops_id.ToString(), item.goods_id.ToString()));
             if (res) this.toolStripStatusLabel1.Text = string.Format("購入成功: {0}", item.goods_name);
@@ -501,6 +510,16 @@ namespace SSLand
                 if (chromeDriver != null) chromeDriver.Quit();
                 Log.Logger.Error(string.Format("購入失敗: ショップID:{0} 商品ID:{1}", shopsId, goodsId));
                 return false;
+            }
+        }
+       
+        private void soundToggleButton_Click(object sender, EventArgs e) {
+            if (soundOn) {
+                this.soundToggleButton.BackColor = Color.Transparent;
+                soundOn = false;
+            } else {
+                this.soundToggleButton.BackColor = Color.GreenYellow;
+                soundOn = true;
             }
         }
     }

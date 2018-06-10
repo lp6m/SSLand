@@ -42,6 +42,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.soundToggleButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -106,7 +107,7 @@
             // 
             this.startProcessButton.Location = new System.Drawing.Point(11, 26);
             this.startProcessButton.Name = "startProcessButton";
-            this.startProcessButton.Size = new System.Drawing.Size(84, 31);
+            this.startProcessButton.Size = new System.Drawing.Size(84, 34);
             this.startProcessButton.TabIndex = 16;
             this.startProcessButton.Text = "監視開始(z)";
             this.startProcessButton.UseVisualStyleBackColor = true;
@@ -151,11 +152,24 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
+            // soundToggleButton
+            // 
+            this.soundToggleButton.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.soundToggleButton.Location = new System.Drawing.Point(101, 27);
+            this.soundToggleButton.Name = "soundToggleButton";
+            this.soundToggleButton.Size = new System.Drawing.Size(62, 33);
+            this.soundToggleButton.TabIndex = 21;
+            this.soundToggleButton.TabStop = false;
+            this.soundToggleButton.Text = "📢";
+            this.soundToggleButton.UseVisualStyleBackColor = true;
+            this.soundToggleButton.Click += new System.EventHandler(this.soundToggleButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1076, 526);
+            this.Controls.Add(this.soundToggleButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.startProcessButton);
@@ -193,6 +207,7 @@
         private System.Windows.Forms.ToolStripMenuItem ライセンスToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button soundToggleButton;
     }
 }
 
