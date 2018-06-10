@@ -64,6 +64,7 @@ namespace SSLand
 
         private async void MainWindow_Load(object sender, EventArgs e)
         {
+            AdjustGUISize();
             SecondStreetItemPanel.setMainFormInstance(this);
             new SettingsDBHelper().onCreate();
             string stringValue = (string)Microsoft.Win32.Registry.GetValue(MainForm.Registry_Path, "Expire", "");
@@ -357,16 +358,14 @@ namespace SSLand
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e) {
+            AdjustGUISize();
+        }
+        private void AdjustGUISize() {
             this.flowLayoutPanel1.Width = this.Width - this.flowLayoutPanel1.Left - 60;
             this.flowLayoutPanel1.Height = this.Height - this.flowLayoutPanel1.Top - 60;
         }
-
         private void button5_Click(object sender, EventArgs e) {
-            MainForm.api = Common.getSecondStreetAPIWithLogin();
-            ExecuteItem("30686", "2320220208450");
-      
-            //ご注文ありがとうございます
-            
+           //test button
         }
 
         private void ライセンスToolStripMenuItem_Click(object sender, EventArgs e) {
