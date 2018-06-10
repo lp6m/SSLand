@@ -63,7 +63,8 @@ namespace SSLand
 
 
         private async void MainWindow_Load(object sender, EventArgs e)
-        {   
+        {
+            SecondStreetItemPanel.setMainFormInstance(this);
             new SettingsDBHelper().onCreate();
             string stringValue = (string)Microsoft.Win32.Registry.GetValue(MainForm.Registry_Path, "Expire", "");
             string datestr = DateTime.Now.AddDays(7).ToString();
@@ -372,11 +373,13 @@ namespace SSLand
             new LicenseForm().Show();
         }
 
-        public static async void BuyItem(SecondStreetListItem item) {
+        public async void BuyItem(SecondStreetListItem item) {
+            this.toolStripStatusLabel1.Text = string.Format("購入処理開始:{0}", item.goods_name);
             bool res = await Task.Run(() => ExecuteItem(item.shops_id.ToString(), item.goods_id.ToString()));
-            
+            if (res) this.toolStripStatusLabel1.Text = string.Format("購入成功: {0}", item.goods_name);
+            else this.toolStripStatusLabel1.Text = string.Format("購入失敗: {0}", item.goods_name);
         }
-        public static bool ExecuteItem(string shopsId, string goodsId) {
+        public bool ExecuteItem(string shopsId, string goodsId) {
             ChromeDriver chromeDriver = null;
             try {
                 bool useCard = SettingForm.getUseCard();
