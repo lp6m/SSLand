@@ -126,7 +126,13 @@ namespace SSLand
             if (rst == "False") return false;
             else return true;
         }
-
+        static public bool getShowPrompt() {
+            var settingsDBHelper = new SettingsDBHelper();
+            string rst = settingsDBHelper.getSettingValue("showprompt");
+            if (String.IsNullOrEmpty(rst)) return true;//default
+            if (rst == "False") return false;
+            else return true;
+        }
         static public bool getUseCard() {
             var settingsDBHelper = new SettingsDBHelper();
             string rst = settingsDBHelper.getSettingValue("usecard");
@@ -164,6 +170,7 @@ namespace SSLand
         }
         private void SettingForm_Load(object sender, EventArgs e)
         {
+            this.showPromptBeforeBuyCheckbox.Checked = getShowPrompt();
             this.autoscrollCheckBox.Checked = getAutoScroll();
             this.photosizeNumericDown.Value = getPhotoSize();
             this.useBrandCheckBox.Checked = getBrandEnable();
@@ -278,6 +285,8 @@ namespace SSLand
             settingsDBHelper.updateSettings(autoscroll, this.autoscrollCheckBox.Checked.ToString());
             settingsDBHelper.updateSettings(photosize, ((int)this.photosizeNumericDown.Value).ToString());
             settingsDBHelper.updateSettings(brandenable, this.useBrandCheckBox.Checked.ToString());
+
+            settingsDBHelper.updateSettings("showprompt", showPromptBeforeBuyCheckbox.Checked.ToString());
 
             settingsDBHelper.updateSettings("cardnumber", cardNumberTextBox.Text.Trim());
             settingsDBHelper.updateSettings("cardmonth", expireMonthTextBox.Text.Trim());

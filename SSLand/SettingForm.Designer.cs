@@ -38,6 +38,8 @@
             this.brandAddButton = new System.Windows.Forms.Button();
             this.brandDelButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.vpassPasswordTextbox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -54,8 +56,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.vpassPasswordTextbox = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.showPromptBeforeBuyCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.photosizeNumericDown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -118,7 +119,7 @@
             // 
             this.useBrandCheckBox.AutoSize = true;
             this.useBrandCheckBox.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.useBrandCheckBox.Location = new System.Drawing.Point(12, 42);
+            this.useBrandCheckBox.Location = new System.Drawing.Point(12, 64);
             this.useBrandCheckBox.Name = "useBrandCheckBox";
             this.useBrandCheckBox.Size = new System.Drawing.Size(145, 24);
             this.useBrandCheckBox.TabIndex = 25;
@@ -129,7 +130,7 @@
             // brandComboBox
             // 
             this.brandComboBox.FormattingEnabled = true;
-            this.brandComboBox.Location = new System.Drawing.Point(12, 72);
+            this.brandComboBox.Location = new System.Drawing.Point(12, 94);
             this.brandComboBox.Name = "brandComboBox";
             this.brandComboBox.Size = new System.Drawing.Size(419, 20);
             this.brandComboBox.TabIndex = 26;
@@ -140,15 +141,15 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(12, 95);
+            this.listBox1.Location = new System.Drawing.Point(12, 119);
             this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(419, 136);
+            this.listBox1.Size = new System.Drawing.Size(419, 112);
             this.listBox1.TabIndex = 27;
             // 
             // brandAddButton
             // 
-            this.brandAddButton.Location = new System.Drawing.Point(436, 71);
+            this.brandAddButton.Location = new System.Drawing.Point(437, 94);
             this.brandAddButton.Margin = new System.Windows.Forms.Padding(2);
             this.brandAddButton.Name = "brandAddButton";
             this.brandAddButton.Size = new System.Drawing.Size(84, 19);
@@ -196,6 +197,24 @@
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "支払い方法";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label11.Location = new System.Drawing.Point(3, 220);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(176, 20);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "VPassパーソナルメッセージ";
+            // 
+            // vpassPasswordTextbox
+            // 
+            this.vpassPasswordTextbox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.vpassPasswordTextbox.Location = new System.Drawing.Point(183, 218);
+            this.vpassPasswordTextbox.Name = "vpassPasswordTextbox";
+            this.vpassPasswordTextbox.Size = new System.Drawing.Size(155, 19);
+            this.vpassPasswordTextbox.TabIndex = 36;
             // 
             // label10
             // 
@@ -349,29 +368,23 @@
             this.radioButton1.Text = "クレジットカード";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // vpassPasswordTextbox
+            // showPromptBeforeBuyCheckbox
             // 
-            this.vpassPasswordTextbox.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.vpassPasswordTextbox.Location = new System.Drawing.Point(183, 218);
-            this.vpassPasswordTextbox.Name = "vpassPasswordTextbox";
-            this.vpassPasswordTextbox.Size = new System.Drawing.Size(155, 19);
-            this.vpassPasswordTextbox.TabIndex = 36;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label11.Location = new System.Drawing.Point(3, 220);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(176, 20);
-            this.label11.TabIndex = 37;
-            this.label11.Text = "VPassパーソナルメッセージ";
+            this.showPromptBeforeBuyCheckbox.AutoSize = true;
+            this.showPromptBeforeBuyCheckbox.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.showPromptBeforeBuyCheckbox.Location = new System.Drawing.Point(12, 36);
+            this.showPromptBeforeBuyCheckbox.Name = "showPromptBeforeBuyCheckbox";
+            this.showPromptBeforeBuyCheckbox.Size = new System.Drawing.Size(236, 24);
+            this.showPromptBeforeBuyCheckbox.TabIndex = 31;
+            this.showPromptBeforeBuyCheckbox.Text = "購入前に確認ウインドウを表示する";
+            this.showPromptBeforeBuyCheckbox.UseVisualStyleBackColor = true;
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(532, 597);
+            this.Controls.Add(this.showPromptBeforeBuyCheckbox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.brandDelButton);
             this.Controls.Add(this.brandAddButton);
@@ -424,5 +437,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox vpassPasswordTextbox;
+        private System.Windows.Forms.CheckBox showPromptBeforeBuyCheckbox;
     }
 }
