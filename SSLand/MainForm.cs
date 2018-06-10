@@ -389,9 +389,11 @@ namespace SSLand
                 string vpasspassword = SettingForm.getVpassPassword();
                 //SeleniumWebDriverを使用する
                 ChromeOptions options = new ChromeOptions();
-                options.AddArgument("--headless");
+                options.AddArgument("--headless"); //Webページを表示しない
                 options.AddArgument("window-size=1920,1920");
-                chromeDriver = new ChromeDriver(options);
+                ChromeDriverService service = ChromeDriverService.CreateDefaultService();
+                service.HideCommandPromptWindow = true; //コンソールを表示しない
+                chromeDriver = new ChromeDriver(service, options);
                 var wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(10));
                 //まず2ndstreetのページに飛ばないとCookie追加できない
                 chromeDriver.Url = "https://www.2ndstreet.jp/";
