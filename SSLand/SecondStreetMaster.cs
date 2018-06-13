@@ -201,7 +201,7 @@ namespace SSLand
             //リクエスト部
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.2ndstreet.jp/index.php/api_2_0/AppMaster/getBrands");
             req.Method = "POST";
-            req.UserAgent = SecondStreetAPI.agent;
+            req.UserAgent = SecondStreetAPI.LOGIN_USER_AGENT;
             HttpWebResponse rawres = (HttpWebResponse)req.GetResponse();
             Stream s = rawres.GetResponseStream();
             StreamReader sr = new StreamReader(s);

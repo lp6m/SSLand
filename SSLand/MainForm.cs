@@ -40,9 +40,6 @@ namespace SSLand
         public const string Key_LicenseKey = "LicenseKey";
         public const string Registry_Path = @"HKEY_CURRENT_USER\Software\SecondStreetWatcher";
 
-        //SSLandのエージェント
-        string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
-
         public MainForm()
         {
             InitializeComponent();

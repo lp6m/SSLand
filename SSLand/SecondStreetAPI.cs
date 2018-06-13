@@ -12,9 +12,7 @@ namespace SSLand {
     public class SecondStreetAPI{
 
         public const string USER_AGENT = "Mozilla/5.0 (iPad; COU OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Mobile/14F89 Fril/6.7.1";
-        private const string LOGIN_USER_AGENT = "reuse_store_release/3.0.5 CFNetwork/897.15 Darwin/17.5.0";
-        public const string agent = "reuse_store_release/3.0.2 CFNetwork/811.5.4 Darwin/16.7.0";
-        private string proxy;
+        public const string LOGIN_USER_AGENT = "reuse_store_release/3.0.5 CFNetwork/897.15 Darwin/17.5.0";
 
         public SecondStreetAPI()
         {
@@ -195,12 +193,6 @@ namespace SSLand {
                 req.CookieContainer = this.cc;
                 req.UserAgent = UserAgent;
                 req.Method = "GET";
-                //プロキシの設定
-                if (string.IsNullOrEmpty(this.proxy) == false)
-                {
-                    System.Net.WebProxy proxy = new System.Net.WebProxy(this.proxy);
-                    req.Proxy = proxy;
-                }
                 //結果取得
                 string content = "";
                 var task = Task.Factory.StartNew(() => executeGetRequest(req));
