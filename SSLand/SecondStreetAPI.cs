@@ -104,35 +104,26 @@ namespace SSLand {
             var rawres = postSecondStreetAPI(url, param, SecondStreetAPI.LOGIN_USER_AGENT);
             Console.WriteLine(rawres.response);*/
         }
-        //FIXIT:新着アイテムの取得
-        public List<SecondStreetListItem> postNewItem()
-        {
-            //リクエスト部
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getNewGoods");
-            req.Method = "POST";
-            req.UserAgent = agent;
-            HttpWebResponse rawres = (HttpWebResponse)req.GetResponse();
-            Stream s = rawres.GetResponseStream();
-            StreamReader sr = new StreamReader(s);
-            string content = sr.ReadToEnd();
-            //パース部
-            dynamic resjson = DynamicJson.Parse(content);
+        //新着アイテムの取得
+        //リクエストになげるbrand_idは0埋めの6桁でなければならないので注意
+        public List<SecondStreetListItem> postNewItem(List<int> brand_id_list){
             List<SecondStreetListItem> rst = new List<SecondStreetListItem>();
-            try
-            {
-                foreach (var itemjson in resjson.value)
-                {
+            string url = "https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getGoodsByParams";
+            Dictionary<string, string> param = new Dictionary<string, string>();
+            param.Add("brand_id", string.Join(",", brand_id_list.ToArray().Select(id => id.ToString("000000"))));
+            param.Add("count", "30");
+            param.Add("offset", "0");
+            param.Add("is_small_result", "0");//1だと詳細情報得られない
+            param.Add("order", "1");//新着順
+            var rawres = postSecondStreetAPI(url, param, SecondStreetAPI.LOGIN_USER_AGENT);
+            try {
+                dynamic resjson = DynamicJson.Parse(rawres.response);
+                foreach (var itemjson in resjson.value){
                     rst.Add(new SecondStreetListItem(itemjson));
-                    //Console.WriteLine(itemjson);
-                    //MainForm.label1.Text = "待機状態";
                 }
-                
                 return rst;
-            }
-            catch (Exception ex)
-            {
+            }catch (Exception ex){
                 Log.Logger.Error("セカンドストリートタイムラインjsonパース失敗");
-                //MainForm.label1.Text = "新着アイテム取得エラー";
                 return rst;
             }
         }

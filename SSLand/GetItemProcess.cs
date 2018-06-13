@@ -14,40 +14,12 @@ namespace SSLand
            sw.Start();
            var conditions = SettingForm.LoadSearchConditions();
            var rst = new List<SecondStreetListItem>();
-           try
-           {
-               var searchrst = MainForm.api.postNewItem();
-               if (searchrst == null || searchrst.Count == 0) return rst;
-                //とりあえず全部返す
-                //rst = searchrst;
-                //本当は以下でふるいにかける
-                
-                if (conditions.Count == 0)//ブランド絞りなし
-                {
-                    rst = searchrst;
-                }
-                else {//絞りあり
-
-
-                    //ふるいにかけました
-                    foreach (var item in searchrst)
-                    {
-                        Console.WriteLine(item.brand_name);
-                        foreach (var con in conditions)
-                        {
-                            if (con.brand_name == item.brand_name)
-                            {
-                                rst.Add(item);
-                                Console.WriteLine("追加したもの:" + item.brand_name);
-                            }
-                        }
-                    }
-                }
-
+           try{
+               List<int> brand_id_list = conditions.Select(con => con.brand_id).ToList();
+               var searchres = MainForm.api.postNewItem(brand_id_list);
+               rst.AddRange(searchres);
             }
-           catch (Exception ex)
-           {
-
+           catch (Exception ex){
                Log.Logger.Error("getNewMatchingItemsでエラー" + ex.Message);
            }
            TimeSpan ts = sw.Elapsed;
