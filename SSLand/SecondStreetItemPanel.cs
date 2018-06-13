@@ -17,7 +17,7 @@ namespace SSLand
         {
             InitializeComponent();
         }
-
+        const int default_photo_size = 160;
         static int photosize = 160;
         static private MainForm mainform;
         static public void setMainFormInstance(MainForm mainForm) {
@@ -36,39 +36,28 @@ namespace SSLand
                 this.brandNameLabel.Text = item.brand_name;
                 this.sizeLabel.Text = item.size_detail;
                 if (!string.IsNullOrEmpty(item.image_url)) this.pictureBox1.ImageLocation = item.image_url;
-                //if (!string.IsNullOrEmpty(item.imageurls[1])) this.pictureBox2.ImageLocation = item.imageurls[1];
-                //if (!string.IsNullOrEmpty(item.imageurls[2])) this.pictureBox3.ImageLocation = item.imageurls[2];
-                //if (!string.IsNullOrEmpty(item.imageurls[3])) this.pictureBox4.ImageLocation = item.imageurls[3];
-                //this.descriptionRichBox.Text = item.detail;
                 this.PriceLabel.Text = String.Format("{0:#,0} 円", item.price);
-                //this.item_status_label.Text = FrilMaster.conditionTypeFrilDic[item.status];
-                //this.created_label.Text = item.created_at.ToString();
-                //this.shipping_label.Text = FrilMaster.shippingPayersFrilDic[item.carriage];
-                //if (item.request_required) this.BuyButton.Text = "購入申請";
-                //else this.BuyButton.Text = "購入";
+                ChangeComponentSize();
             }
             catch (Exception ex)
             {
                 Log.Logger.Error("FrilItemPanel error");
             }
         }
-        public static void ReloadPhotoSize()
-        {
-            SecondStreetItemPanel.photosize = SettingForm.getPhotoSize();
-        }
-
 
         private void SecondStreetItemPanel_Load(object sender, EventArgs e)
         {
         }
         private void ChangeComponentSize()
         {
-            int plussize = photosize - 160;
+            SecondStreetItemPanel.photosize = SettingForm.getPhotoSize();
+            int plussize = photosize - default_photo_size;
             this.pictureBox1.Height += plussize;
             this.pictureBox1.Width += plussize;
-
             this.Width += plussize;
             this.Height += plussize;
+            this.pictureBox1.Location = new Point((this.Width - this.pictureBox1.Width) / 2, this.pictureBox1.Location.Y);
+            this.panel1.Location = new Point((this.Width - this.pictureBox1.Width) / 2, this.panel1.Location.Y + plussize);
         }
 
         private void OpenBrowserButton_Click(object sender, EventArgs e)
