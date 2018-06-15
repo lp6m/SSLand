@@ -20,12 +20,13 @@ namespace SSLand {
         public class SearchConditionClass {
             public bool usecategory;
             public bool usebrand;
-            public int category_level1;
-            public int category_level2;
-            public int category_level3;
+            public int category_level1 = -1;
+            public int category_level2 = -1;
+            public int category_level3 = -1;
             public string category_level1_name;
             public string category_level2_name;
             public string category_level3_name;
+            public string category_type;//リクエストに必要
             public int brand_id;
             public string brand_name;
             public string condition_name;
@@ -53,8 +54,9 @@ namespace SSLand {
         public const string brandenable = "brandenable";
 
         private void SearchConditionSettingsForm_Load(object sender, EventArgs e) {
+            RefreshListBox();
             foreach (var pair in SecondStreetMaster.brandDictionary) {
-                this.brandComboBox.Items.Add(pair);
+                this.brandComboBox.Items.Add(pair.Value);
             }
             foreach (var c in SecondStreetMaster.categoryChildDictionary["1"]) {
                 this.categoryComboBox1.Items.Add(c);
@@ -127,22 +129,26 @@ namespace SSLand {
                 rst.usecategory = this.useCategoryCheckBox.Checked;
                 rst.usebrand = this.useBrandCheckBox.Checked;
                 if (rst.usecategory) {
+                    //カテゴリタイプは設定されているもので一番深いカテゴリのカテゴリタイプを取得
                     if (this.categoryComboBox1.SelectedItem != null) {
                         rst.category_level1 = int.Parse(((SecondStreetMaster.Category)this.categoryComboBox1.SelectedItem).id);
                         rst.category_level1_name = ((SecondStreetMaster.Category)this.categoryComboBox1.SelectedItem).name;
+                        rst.category_type = ((SecondStreetMaster.Category)this.categoryComboBox1.SelectedItem).category_type;
                     }
                     if (this.categoryComboBox2.SelectedItem != null) {
                         rst.category_level2 = int.Parse(((SecondStreetMaster.Category)this.categoryComboBox2.SelectedItem).id);
                         rst.category_level2_name = ((SecondStreetMaster.Category)this.categoryComboBox2.SelectedItem).name;
+                        rst.category_type = ((SecondStreetMaster.Category)this.categoryComboBox1.SelectedItem).category_type;
                     }
                     if (this.categoryComboBox3.SelectedItem != null) {
                         rst.category_level3 = int.Parse(((SecondStreetMaster.Category)this.categoryComboBox3.SelectedItem).id);
                         rst.category_level3_name = ((SecondStreetMaster.Category)this.categoryComboBox3.SelectedItem).name;
+                        rst.category_type = ((SecondStreetMaster.Category)this.categoryComboBox1.SelectedItem).category_type;
                     }
                 }
                 if (rst.usebrand) {
-                    rst.brand_id = int.Parse(((KeyValuePair<string, string>)this.brandComboBox.SelectedItem).Key);
-                    rst.brand_name = ((KeyValuePair<string, string>)this.brandComboBox.SelectedItem).Value;
+                    rst.brand_id = ((SecondStreetMaster.Brand)this.brandComboBox.SelectedItem).id;
+                    rst.brand_name = ((SecondStreetMaster.Brand)this.brandComboBox.SelectedItem).name;
                 }
                 return rst;
             } catch (Exception) {
@@ -172,10 +178,12 @@ namespace SSLand {
             }
         }
         private void ResetGUIComponent() {
+            selected_category = new SecondStreetMaster.Category();
             this.conditionNameTextBox.Text = "";
             this.useBrandCheckBox.Checked = false;
             this.useCategoryCheckBox.Checked = false;
             this.categoryComboBox1.SelectedIndex = this.categoryComboBox2.SelectedIndex = this.categoryComboBox3.SelectedIndex = -1;
+            this.categoryComboBox1.Visible = this.categoryComboBox2.Visible = this.categoryComboBox3.Visible = false;
             this.brandComboBox.SelectedIndex = -1;
         }
         private void RefreshListBox(string keyword = "") {
@@ -231,7 +239,94 @@ namespace SSLand {
         }
 
         private void brandComboBox_Format(object sender, ListControlConvertEventArgs e) {
-            e.Value = ((KeyValuePair<string, string>)e.ListItem).Value;
+            e.Value = ((SecondStreetMaster.Brand)e.ListItem).name;
+        }
+
+        private void deleteSearchConditionButton_Click(object sender, EventArgs e) {
+            if (isEditMode) {
+                MessageBox.Show("先に編集中の検索条件を保存してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (this.listBox1.SelectedIndex < 0) {
+                MessageBox.Show("削除する条件を選択してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (MessageBox.Show("選択した検索条件を削除しますか?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+            List<SearchConditionClass> cons = LoadSearchConditions();
+            int deleteconindex = this.listBox1.SelectedIndex;
+            cons.RemoveAt(deleteconindex);
+            SaveSearchConditions(cons);
+            RefreshListBox();
+        }
+
+        private void editButton_Click(object sender, EventArgs e) {
+            SearchConditionClass selectsc = (SearchConditionClass)listBox1.SelectedItem;
+            int selectconDBindex = this.listBox1.SelectedIndex;
+            if (isEditMode) {
+                MessageBox.Show("現在編集中の設定を保存してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (listBox1.SelectedIndex < 0 || selectsc == null || selectconDBindex < 0) {
+                MessageBox.Show("編集する設定を選択してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            SetGUIFromSearchCondition(selectsc);
+            nowedit_index = selectconDBindex;
+            isEditMode = true;
+            this.addSearchConditionButton.Text = "変更を保存";
+        }
+        private void SetGUIFromSearchCondition(SearchConditionClass con) {
+            ResetGUIComponent();
+            this.conditionNameTextBox.Text = con.condition_name;
+            this.useCategoryCheckBox.Checked = con.usecategory;
+            this.useBrandCheckBox.Checked = con.usebrand;
+            if (con.usecategory) {
+                if(con.category_level1 > 0) {
+                    int category_level1_selected_index = 0;
+                    foreach (var c in SecondStreetMaster.categoryChildDictionary["1"]){
+                        if (c.id == con.category_level1.ToString()) {
+                            selected_category = c;
+                            break;
+                        }
+                        category_level1_selected_index++;
+                    }
+                    this.categoryComboBox1.SelectedIndex = category_level1_selected_index;
+                    this.categoryComboBox1.Visible = true;
+                }
+                if (con.category_level2 > 0) {
+                    int category_level2_selected_index = 0;
+                    foreach (var c in SecondStreetMaster.categoryChildDictionary[con.category_level1.ToString()]) {
+                        if (c.id == con.category_level2.ToString()) {
+                            selected_category = c;
+                            break;
+                        }
+                        category_level2_selected_index++;
+                    }
+                    this.categoryComboBox2.SelectedIndex = category_level2_selected_index;
+                    this.categoryComboBox2.Visible = true;
+                }
+                if (con.category_level3 > 0) {
+                    int category_level3_selected_index = 0;
+                    foreach (var c in SecondStreetMaster.categoryChildDictionary[con.category_level2.ToString()]) {
+                        if (c.id == con.category_level3.ToString()) {
+                            selected_category = c;
+                            break;
+                        }
+                        category_level3_selected_index++;
+                    }
+                    this.categoryComboBox3.SelectedIndex = category_level3_selected_index;
+                    this.categoryComboBox3.Visible = true;
+                }
+            }
+            if (con.usebrand) {
+                int brandcombo_index = 0;
+                foreach (var pair in SecondStreetMaster.brandDictionary) {
+                    if (pair.Value.id == con.brand_id) break;
+                    brandcombo_index++;
+                }
+                this.brandComboBox.SelectedIndex = brandcombo_index;
+                this.brandComboBox.Visible = true;
+            }
         }
     }
 }

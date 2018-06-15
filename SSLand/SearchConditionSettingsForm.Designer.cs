@@ -45,45 +45,50 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(7, 24);
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(9, 30);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(556, 184);
+            this.listBox1.Size = new System.Drawing.Size(740, 229);
             this.listBox1.TabIndex = 2;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 6);
+            this.label5.Location = new System.Drawing.Point(15, 8);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 12);
+            this.label5.Size = new System.Drawing.Size(97, 15);
             this.label5.TabIndex = 3;
             this.label5.Text = "検索条件一覧";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(5, 223);
+            this.label6.Location = new System.Drawing.Point(7, 279);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 12);
+            this.label6.Size = new System.Drawing.Size(109, 15);
             this.label6.TabIndex = 4;
             this.label6.Text = "検索条件の追加";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 268);
+            this.label4.Location = new System.Drawing.Point(32, 335);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 12);
+            this.label4.Size = new System.Drawing.Size(50, 15);
             this.label4.TabIndex = 41;
             this.label4.Text = "カテゴリ";
             // 
             // categoryComboBox3
             // 
             this.categoryComboBox3.FormattingEnabled = true;
-            this.categoryComboBox3.Location = new System.Drawing.Point(26, 341);
+            this.categoryComboBox3.Location = new System.Drawing.Point(35, 426);
+            this.categoryComboBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.categoryComboBox3.Name = "categoryComboBox3";
-            this.categoryComboBox3.Size = new System.Drawing.Size(154, 20);
+            this.categoryComboBox3.Size = new System.Drawing.Size(204, 23);
             this.categoryComboBox3.TabIndex = 37;
             this.categoryComboBox3.Text = "未指定";
             this.categoryComboBox3.Visible = false;
@@ -92,9 +97,10 @@
             // categoryComboBox2
             // 
             this.categoryComboBox2.FormattingEnabled = true;
-            this.categoryComboBox2.Location = new System.Drawing.Point(26, 315);
+            this.categoryComboBox2.Location = new System.Drawing.Point(35, 394);
+            this.categoryComboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.categoryComboBox2.Name = "categoryComboBox2";
-            this.categoryComboBox2.Size = new System.Drawing.Size(154, 20);
+            this.categoryComboBox2.Size = new System.Drawing.Size(204, 23);
             this.categoryComboBox2.TabIndex = 36;
             this.categoryComboBox2.Text = "未指定";
             this.categoryComboBox2.Visible = false;
@@ -104,9 +110,10 @@
             // brandComboBox
             // 
             this.brandComboBox.FormattingEnabled = true;
-            this.brandComboBox.Location = new System.Drawing.Point(199, 289);
+            this.brandComboBox.Location = new System.Drawing.Point(265, 361);
+            this.brandComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.brandComboBox.Name = "brandComboBox";
-            this.brandComboBox.Size = new System.Drawing.Size(154, 20);
+            this.brandComboBox.Size = new System.Drawing.Size(204, 23);
             this.brandComboBox.TabIndex = 40;
             this.brandComboBox.Text = "未指定";
             this.brandComboBox.Visible = false;
@@ -115,9 +122,10 @@
             // useBrandCheckBox
             // 
             this.useBrandCheckBox.AutoSize = true;
-            this.useBrandCheckBox.Location = new System.Drawing.Point(242, 267);
+            this.useBrandCheckBox.Location = new System.Drawing.Point(323, 334);
+            this.useBrandCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.useBrandCheckBox.Name = "useBrandCheckBox";
-            this.useBrandCheckBox.Size = new System.Drawing.Size(111, 16);
+            this.useBrandCheckBox.Size = new System.Drawing.Size(137, 19);
             this.useBrandCheckBox.TabIndex = 39;
             this.useBrandCheckBox.Text = "ブランドを指定する";
             this.useBrandCheckBox.UseVisualStyleBackColor = true;
@@ -126,18 +134,20 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(197, 267);
+            this.label10.Location = new System.Drawing.Point(263, 334);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 12);
+            this.label10.Size = new System.Drawing.Size(50, 15);
             this.label10.TabIndex = 38;
             this.label10.Text = "ブランド";
             // 
             // categoryComboBox1
             // 
             this.categoryComboBox1.FormattingEnabled = true;
-            this.categoryComboBox1.Location = new System.Drawing.Point(26, 289);
+            this.categoryComboBox1.Location = new System.Drawing.Point(35, 361);
+            this.categoryComboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.categoryComboBox1.Name = "categoryComboBox1";
-            this.categoryComboBox1.Size = new System.Drawing.Size(154, 20);
+            this.categoryComboBox1.Size = new System.Drawing.Size(204, 23);
             this.categoryComboBox1.TabIndex = 35;
             this.categoryComboBox1.Text = "未指定";
             this.categoryComboBox1.Visible = false;
@@ -147,9 +157,10 @@
             // useCategoryCheckBox
             // 
             this.useCategoryCheckBox.AutoSize = true;
-            this.useCategoryCheckBox.Location = new System.Drawing.Point(70, 267);
+            this.useCategoryCheckBox.Location = new System.Drawing.Point(93, 334);
+            this.useCategoryCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.useCategoryCheckBox.Name = "useCategoryCheckBox";
-            this.useCategoryCheckBox.Size = new System.Drawing.Size(110, 16);
+            this.useCategoryCheckBox.Size = new System.Drawing.Size(137, 19);
             this.useCategoryCheckBox.TabIndex = 34;
             this.useCategoryCheckBox.Text = "カテゴリを指定する";
             this.useCategoryCheckBox.UseVisualStyleBackColor = true;
@@ -157,35 +168,39 @@
             // 
             // conditionNameTextBox
             // 
-            this.conditionNameTextBox.Location = new System.Drawing.Point(86, 242);
+            this.conditionNameTextBox.Location = new System.Drawing.Point(115, 302);
+            this.conditionNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.conditionNameTextBox.Name = "conditionNameTextBox";
-            this.conditionNameTextBox.Size = new System.Drawing.Size(245, 19);
+            this.conditionNameTextBox.Size = new System.Drawing.Size(325, 22);
             this.conditionNameTextBox.TabIndex = 42;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 245);
+            this.label14.Location = new System.Drawing.Point(20, 306);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(65, 12);
+            this.label14.Size = new System.Drawing.Size(82, 15);
             this.label14.TabIndex = 43;
             this.label14.Text = "検索条件名";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(413, 373);
+            this.label1.Location = new System.Drawing.Point(551, 466);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(253, 12);
+            this.label1.Size = new System.Drawing.Size(316, 15);
             this.label1.TabIndex = 44;
             this.label1.Text = "※変更は設定画面を閉じると自動的に保存されます";
             // 
             // addSearchConditionButton
             // 
             this.addSearchConditionButton.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.addSearchConditionButton.Location = new System.Drawing.Point(548, 324);
+            this.addSearchConditionButton.Location = new System.Drawing.Point(731, 405);
+            this.addSearchConditionButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.addSearchConditionButton.Name = "addSearchConditionButton";
-            this.addSearchConditionButton.Size = new System.Drawing.Size(118, 43);
+            this.addSearchConditionButton.Size = new System.Drawing.Size(157, 54);
             this.addSearchConditionButton.TabIndex = 45;
             this.addSearchConditionButton.Text = "追加";
             this.addSearchConditionButton.UseVisualStyleBackColor = true;
@@ -194,28 +209,32 @@
             // editButton
             // 
             this.editButton.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.editButton.Location = new System.Drawing.Point(569, 122);
+            this.editButton.Location = new System.Drawing.Point(759, 152);
+            this.editButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(97, 39);
+            this.editButton.Size = new System.Drawing.Size(129, 49);
             this.editButton.TabIndex = 47;
             this.editButton.Text = "編集";
             this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // deleteSearchConditionButton
             // 
             this.deleteSearchConditionButton.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.deleteSearchConditionButton.Location = new System.Drawing.Point(569, 167);
+            this.deleteSearchConditionButton.Location = new System.Drawing.Point(759, 209);
+            this.deleteSearchConditionButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.deleteSearchConditionButton.Name = "deleteSearchConditionButton";
-            this.deleteSearchConditionButton.Size = new System.Drawing.Size(97, 39);
+            this.deleteSearchConditionButton.Size = new System.Drawing.Size(129, 49);
             this.deleteSearchConditionButton.TabIndex = 48;
             this.deleteSearchConditionButton.Text = "削除";
             this.deleteSearchConditionButton.UseVisualStyleBackColor = true;
+            this.deleteSearchConditionButton.Click += new System.EventHandler(this.deleteSearchConditionButton_Click);
             // 
             // SearchConditionSettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 394);
+            this.ClientSize = new System.Drawing.Size(904, 492);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.deleteSearchConditionButton);
             this.Controls.Add(this.label1);
@@ -233,6 +252,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "SearchConditionSettingsForm";
             this.Text = "検索条件の設定";
             this.Load += new System.EventHandler(this.SearchConditionSettingsForm_Load);
