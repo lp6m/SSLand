@@ -173,11 +173,13 @@ namespace SSLand {
         }
         //新着アイテムの取得
         //リクエストになげるbrand_idは0埋めの6桁でなければならないので注意
-        public List<SecondStreetListItem> postNewItem(List<int> brand_id_list){
+        public List<SecondStreetListItem> postNewItem(int brand_id, int category_id = -1, string category_type = "") {
             List<SecondStreetListItem> rst = new List<SecondStreetListItem>();
             string url = "https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getGoodsByParams";
             Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("brand_id", string.Join(",", brand_id_list.ToArray().Select(id => id.ToString("000000"))));
+            if (category_id > 0) param.Add("category_id", category_id.ToString("000000"));
+            if (!string.IsNullOrEmpty(category_type)) param.Add("category_type", category_type.ToString());
+            param.Add("brand_id", string.Join(",", brand_id.ToString("000000")));
             param.Add("count", "30");
             param.Add("offset", "0");
             param.Add("is_small_result", "0");//1だと詳細情報得られない

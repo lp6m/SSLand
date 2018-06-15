@@ -14,12 +14,14 @@ namespace SSLand{
             try{
                 makeBrandDictionary();
                 makeCategoryDictionary();
+                SecondStreetMaster.loaded = true;
                 return true;
             }catch (Exception ex){
                 Log.Logger.Error("マスタデータ読み込み失敗:" + ex.Message);
                 return false;
             }
         }
+        public static bool loaded = false;
         public static List<Brand> brands = new List<Brand>();
         public static Dictionary<int, Brand> brandDictionary = new Dictionary<int, Brand>();
         public static Dictionary<string, List<Category>> categoryChildDictionary = new Dictionary<string, List<Category>>();//Key:親のカテゴリID Value:それに属してる子のカテゴリリスト, ルートは"1"
