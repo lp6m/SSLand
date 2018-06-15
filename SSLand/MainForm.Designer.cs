@@ -33,6 +33,7 @@
             this.メニューToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.購入者管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.検索条件の設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ライセンスToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -43,7 +44,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.soundToggleButton = new System.Windows.Forms.Button();
-            this.検索条件の設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,8 +55,8 @@
             this.メニューToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1076, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1435, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,27 +68,34 @@
             this.検索条件の設定ToolStripMenuItem,
             this.ライセンスToolStripMenuItem});
             this.メニューToolStripMenuItem.Name = "メニューToolStripMenuItem";
-            this.メニューToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.メニューToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
             this.メニューToolStripMenuItem.Text = "メニュー";
             // 
             // 購入者管理ToolStripMenuItem
             // 
             this.購入者管理ToolStripMenuItem.Name = "購入者管理ToolStripMenuItem";
-            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.購入者管理ToolStripMenuItem.Text = "アカウント管理";
             this.購入者管理ToolStripMenuItem.Click += new System.EventHandler(this.アカウント管理ToolStripMenuItem_Click);
             // 
             // 設定ToolStripMenuItem
             // 
             this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
-            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.設定ToolStripMenuItem.Text = "設定";
             this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
+            // 
+            // 検索条件の設定ToolStripMenuItem
+            // 
+            this.検索条件の設定ToolStripMenuItem.Name = "検索条件の設定ToolStripMenuItem";
+            this.検索条件の設定ToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.検索条件の設定ToolStripMenuItem.Text = "検索条件の設定";
+            this.検索条件の設定ToolStripMenuItem.Click += new System.EventHandler(this.検索条件の設定ToolStripMenuItem_Click);
             // 
             // ライセンスToolStripMenuItem
             // 
             this.ライセンスToolStripMenuItem.Name = "ライセンスToolStripMenuItem";
-            this.ライセンスToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.ライセンスToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.ライセンスToolStripMenuItem.Text = "ライセンス";
             this.ライセンスToolStripMenuItem.Click += new System.EventHandler(this.ライセンスToolStripMenuItem_Click);
             // 
@@ -107,9 +114,10 @@
             // 
             // startProcessButton
             // 
-            this.startProcessButton.Location = new System.Drawing.Point(11, 26);
+            this.startProcessButton.Location = new System.Drawing.Point(15, 32);
+            this.startProcessButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.startProcessButton.Name = "startProcessButton";
-            this.startProcessButton.Size = new System.Drawing.Size(84, 34);
+            this.startProcessButton.Size = new System.Drawing.Size(112, 42);
             this.startProcessButton.TabIndex = 16;
             this.startProcessButton.Text = "監視開始(z)";
             this.startProcessButton.UseVisualStyleBackColor = true;
@@ -123,16 +131,18 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(11, 82);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 102);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(933, 288);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1244, 360);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(562, 26);
+            this.button5.Location = new System.Drawing.Point(749, 32);
+            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(87, 50);
+            this.button5.Size = new System.Drawing.Size(116, 62);
             this.button5.TabIndex = 19;
             this.button5.Text = "監視開始(z)";
             this.button5.UseVisualStyleBackColor = true;
@@ -141,11 +151,13 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 504);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 636);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1076, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1435, 22);
             this.statusStrip1.TabIndex = 20;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -157,27 +169,21 @@
             // soundToggleButton
             // 
             this.soundToggleButton.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.soundToggleButton.Location = new System.Drawing.Point(101, 27);
+            this.soundToggleButton.Location = new System.Drawing.Point(135, 34);
+            this.soundToggleButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.soundToggleButton.Name = "soundToggleButton";
-            this.soundToggleButton.Size = new System.Drawing.Size(62, 33);
+            this.soundToggleButton.Size = new System.Drawing.Size(83, 41);
             this.soundToggleButton.TabIndex = 21;
             this.soundToggleButton.TabStop = false;
             this.soundToggleButton.Text = "📢";
             this.soundToggleButton.UseVisualStyleBackColor = true;
             this.soundToggleButton.Click += new System.EventHandler(this.soundToggleButton_Click);
             // 
-            // 検索条件の設定ToolStripMenuItem
-            // 
-            this.検索条件の設定ToolStripMenuItem.Name = "検索条件の設定ToolStripMenuItem";
-            this.検索条件の設定ToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.検索条件の設定ToolStripMenuItem.Text = "検索条件の設定";
-            this.検索条件の設定ToolStripMenuItem.Click += new System.EventHandler(this.検索条件の設定ToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1076, 526);
+            this.ClientSize = new System.Drawing.Size(1435, 658);
             this.Controls.Add(this.soundToggleButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button5);
@@ -185,7 +191,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "SSLand";
             this.Load += new System.EventHandler(this.MainWindow_Load);

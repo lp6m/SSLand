@@ -531,6 +531,10 @@ namespace SSLand
         }
 
         private void 検索条件の設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if(SecondStreetMaster.loaded == false) {
+                MessageBox.Show("カテゴリ・ブランド情報を取得中です。もうしばらく待ってから試してください", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             new SearchConditionSettingsForm().Show();
         }
     }
