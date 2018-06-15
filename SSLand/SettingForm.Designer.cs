@@ -32,11 +32,6 @@
             this.autoscrollCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.useBrandCheckBox = new System.Windows.Forms.CheckBox();
-            this.brandComboBox = new System.Windows.Forms.ComboBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.brandAddButton = new System.Windows.Forms.Button();
-            this.brandDelButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.vpassPasswordTextbox = new System.Windows.Forms.TextBox();
@@ -64,7 +59,7 @@
             // photosizeNumericDown
             // 
             this.photosizeNumericDown.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.photosizeNumericDown.Location = new System.Drawing.Point(87, 243);
+            this.photosizeNumericDown.Location = new System.Drawing.Point(87, 62);
             this.photosizeNumericDown.Maximum = new decimal(new int[] {
             500,
             0,
@@ -99,7 +94,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(8, 244);
+            this.label1.Location = new System.Drawing.Point(8, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 20);
             this.label1.TabIndex = 14;
@@ -109,66 +104,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(8, 568);
+            this.label3.Location = new System.Drawing.Point(8, 387);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(217, 20);
             this.label3.TabIndex = 19;
             this.label3.Text = "※設定は閉じると自動保存されます";
-            // 
-            // useBrandCheckBox
-            // 
-            this.useBrandCheckBox.AutoSize = true;
-            this.useBrandCheckBox.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.useBrandCheckBox.Location = new System.Drawing.Point(12, 64);
-            this.useBrandCheckBox.Name = "useBrandCheckBox";
-            this.useBrandCheckBox.Size = new System.Drawing.Size(145, 24);
-            this.useBrandCheckBox.TabIndex = 25;
-            this.useBrandCheckBox.Text = "ブランドを指定する";
-            this.useBrandCheckBox.UseVisualStyleBackColor = true;
-            this.useBrandCheckBox.CheckedChanged += new System.EventHandler(this.useBrandCheckBox_CheckedChanged);
-            // 
-            // brandComboBox
-            // 
-            this.brandComboBox.FormattingEnabled = true;
-            this.brandComboBox.Location = new System.Drawing.Point(12, 94);
-            this.brandComboBox.Name = "brandComboBox";
-            this.brandComboBox.Size = new System.Drawing.Size(419, 20);
-            this.brandComboBox.TabIndex = 26;
-            this.brandComboBox.Text = "未指定";
-            this.brandComboBox.Visible = false;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(12, 119);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(419, 112);
-            this.listBox1.TabIndex = 27;
-            // 
-            // brandAddButton
-            // 
-            this.brandAddButton.Location = new System.Drawing.Point(437, 94);
-            this.brandAddButton.Margin = new System.Windows.Forms.Padding(2);
-            this.brandAddButton.Name = "brandAddButton";
-            this.brandAddButton.Size = new System.Drawing.Size(84, 19);
-            this.brandAddButton.TabIndex = 28;
-            this.brandAddButton.Text = "指定する";
-            this.brandAddButton.UseVisualStyleBackColor = true;
-            this.brandAddButton.Visible = false;
-            this.brandAddButton.Click += new System.EventHandler(this.brandAddButton_Click);
-            // 
-            // brandDelButton
-            // 
-            this.brandDelButton.Location = new System.Drawing.Point(436, 186);
-            this.brandDelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.brandDelButton.Name = "brandDelButton";
-            this.brandDelButton.Size = new System.Drawing.Size(84, 44);
-            this.brandDelButton.TabIndex = 29;
-            this.brandDelButton.Text = "選択ブランドを削除する";
-            this.brandDelButton.UseVisualStyleBackColor = true;
-            this.brandDelButton.Click += new System.EventHandler(this.brandDelButton_Click);
             // 
             // groupBox1
             // 
@@ -191,7 +131,7 @@
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 274);
+            this.groupBox1.Location = new System.Drawing.Point(12, 93);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(508, 291);
             this.groupBox1.TabIndex = 30;
@@ -383,14 +323,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 597);
+            this.ClientSize = new System.Drawing.Size(532, 409);
             this.Controls.Add(this.showPromptBeforeBuyCheckbox);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.brandDelButton);
-            this.Controls.Add(this.brandAddButton);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.brandComboBox);
-            this.Controls.Add(this.useBrandCheckBox);
             this.Controls.Add(this.photosizeNumericDown);
             this.Controls.Add(this.autoscrollCheckBox);
             this.Controls.Add(this.label1);
@@ -413,11 +348,6 @@
         private System.Windows.Forms.CheckBox autoscrollCheckBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox useBrandCheckBox;
-        private System.Windows.Forms.ComboBox brandComboBox;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button brandAddButton;
-        private System.Windows.Forms.Button brandDelButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox securityCodeTextBox;
         private System.Windows.Forms.TextBox expireYearTextBox;
