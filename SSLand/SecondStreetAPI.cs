@@ -92,7 +92,76 @@ namespace SSLand {
             param2.Add("sp", "on");
             param2.Add("ver", "3.0.5");
             var rawres2 = getSecondStreetAPI(url2, param2, SecondStreetAPI.USER_AGENT);
-            Console.WriteLine(rawres2.response);
+        }
+
+        public bool buyItemByDaibiki(string shops_id, string goods_id) {
+            try {
+                //カートに追加
+                addItemToCartWeb(shops_id, goods_id);
+                //ポイント消費確認ページへ
+                string url = "https://www.2ndstreet.jp/reduce";
+                var rawres = getSecondStreetAPI(url, new Dictionary<string, string>(), SecondStreetAPI.USER_AGENT);
+                //ポイント消費確定・支払い方法ページへ
+                string url2 = "https://www.2ndstreet.jp/reduce/next";
+                var param2 = new Dictionary<string, string>();
+                param2.Add("point", "");
+                param2.Add("pointUsageType", "0");
+                param2.Add("couponsId", "");
+                param2.Add("isAgree", "1");
+                var rawres2 = postSecondStreetAPI(url2, param2, SecondStreetAPI.USER_AGENT);
+                //支払い方法確定・最終確認ページへ
+                //HTMLから住所情報およびトークンを取り出す
+                string html = System.Web.HttpUtility.HtmlDecode(rawres2.response);//HTML特殊文字列をデコード
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(html);
+                string url3 = "https://www.2ndstreet.jp/delivery/check";
+                var param3 = new Dictionary<string, string>();
+                param3.Add("token_api_key", doc.DocumentNode.SelectSingleNode("//input[@name=\"token_api_key\"]").GetAttributeValue("value", ""));
+                param3.Add("token_url", "https://api.veritrans.co.jp/4gtoken");
+                param3.Add("paymentType", "2"); //代引き
+                param3.Add("myCard", "0");
+                param3.Add("cardKind", "1");
+                param3.Add("luecaSelect", "on");
+                param3.Add("luecaNewNo", "");
+                param3.Add("luecaPinCode", "");
+                param3.Add("myAddress", "0");
+                var node = doc.DocumentNode.SelectSingleNode("//div[@class=\"flow_input my_ad_input my_ad_form1\"]");
+                param3.Add("delvLastName", node.SelectSingleNode("//input[@name=\"delvLastName\"]").GetAttributeValue("value", ""));
+                param3.Add("delvFirstName", node.SelectSingleNode("//input[@name=\"delvFirstName\"]").GetAttributeValue("value", ""));
+                param3.Add("delvFirstKana", node.SelectSingleNode("//input[@name=\"delvFirstKana\"]").GetAttributeValue("value", ""));
+                param3.Add("delvLastKana", node.SelectSingleNode("//input[@name=\"delvLastKana\"]").GetAttributeValue("value", ""));
+                param3.Add("delvZipCode", node.SelectSingleNode("//input[@name=\"delvZipCode\"]").GetAttributeValue("value", ""));
+                param3.Add("delvPrefectural", node.SelectSingleNode("//option[@selected]").GetAttributeValue("value", ""));
+                param3.Add("delvAddress1", node.SelectSingleNode("//input[@name=\"delvAddress1\"]").GetAttributeValue("value", ""));
+                param3.Add("delvTelNo1", node.SelectSingleNode("//input[@name=\"delvTelNo1\"]").GetAttributeValue("value", ""));
+                param3.Add("delvTelNo2", node.SelectSingleNode("//input[@name=\"delvTelNo2\"]").GetAttributeValue("value", ""));
+                param3.Add("delvTelNo3", node.SelectSingleNode("//input[@name=\"delvTelNo3\"]").GetAttributeValue("value", ""));
+                var node2 = doc.DocumentNode.SelectSingleNode("//div[@class=\"ordermail_input\"]");
+                param3.Add("delvMail", node2.SelectSingleNode("//input[@name=\"delvMail\"]").GetAttributeValue("value", ""));
+                param3.Add("delvMailConf", node2.SelectSingleNode("//input[@name=\"delvMailConf\"]").GetAttributeValue("value", ""));
+                param3.Add("delvMgznReceiveType", "1");
+                param3.Add("delvMgznOnline", "0");
+                param3.Add("delvMgznShop", "0");
+                param3.Add("deliveryType", "1");
+                param3.Add("deliveryDate", "0");
+                param3.Add("deliveryTimeZone", "0");
+                param3.Add("isAgree", "1");
+                var rawres3 = postSecondStreetAPI(url3, param3, SecondStreetAPI.USER_AGENT);
+                //注文確定へ
+                //HTMLからトークン取り出す
+                HtmlAgilityPack.HtmlDocument doc2 = new HtmlAgilityPack.HtmlDocument();
+                doc2.LoadHtml(rawres3.response);
+                var param4 = new Dictionary<string, string>();
+                param4.Add("token", doc2.DocumentNode.SelectSingleNode("//input[@name=\"token\"]").GetAttributeValue("value", ""));
+                string url4 = "https://www.2ndstreet.jp/finish/index/ios_app";
+                postSecondStreetAPI(url4, param4, SecondStreetAPI.USER_AGENT);
+                Log.Logger.Info("代引き購入成功");
+                return true;
+            } catch (Exception ex) {
+                Log.Logger.Error("代引き購入失敗");
+                return false;
+            }
+
         }
         public void getGoodsDetail(string goods_id, string shops_id) {
             /*string url = "https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getGoodsDetail";
@@ -144,7 +213,7 @@ namespace SSLand {
                 req.UserAgent = UserAgent;
                 req.Method = "POST";
                 //リクエストヘッダを付加
-                req.ContentType = "application/x-www-form-urlencoded; charset=utf-8";
+                req.ContentType = "application/x-www-form-urlencoded;";
                 req.Accept = "gzip, deflate";
                 req.ContentLength = (long)bytes.Length;
                 //クッキーコンテナの追加
