@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SSLand
-{
-    class GetItemProcess
-    {
-        static public List<SecondStreetListItem> getNewMatchingItems()
-        {
+namespace SSLand{
+    class GetItemProcess{
+        static public List<SecondStreetListItem> getNewMatchingItems(){
            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
            sw.Start();
            var conditions = SearchConditionSettingsForm.LoadSearchConditions();
            var rst = new List<SecondStreetListItem>();
            try{
-               List<int> brand_id_list = conditions.Select(con => con.brand_id).ToList();
-               var searchres = MainForm.api.postNewItem(brand_id_list);
-               rst.AddRange(searchres);
+                foreach (var con in conditions) {
+                    int category_id = -1;
+                    if (con.category_level1 > 0) category_id = con.category_level1;
+                    if (con.category_level2 > 0) category_id = con.category_level2;
+                    if (con.category_level3 > 0) category_id = con.category_level3;
+                    var searchres = MainForm.api.postNewItem(con.brand_id, category_id, con.category_type);
+                    rst.AddRange(searchres);
+                }
             }
            catch (Exception ex){
                Log.Logger.Error("getNewMatchingItemsでエラー" + ex.Message);
