@@ -66,7 +66,7 @@
             this.設定ToolStripMenuItem,
             this.ライセンスToolStripMenuItem});
             this.メニューToolStripMenuItem.Name = "メニューToolStripMenuItem";
-            this.メニューToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.メニューToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.メニューToolStripMenuItem.Text = "メニュー";
             // 
             // 購入者管理ToolStripMenuItem
