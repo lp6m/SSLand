@@ -12,7 +12,7 @@ namespace SSLand
         {
            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
            sw.Start();
-           var conditions = SettingForm.LoadSearchConditions();
+           var conditions = SearchConditionSettingsForm.LoadSearchConditions();
            var rst = new List<SecondStreetListItem>();
            try{
                List<int> brand_id_list = conditions.Select(con => con.brand_id).ToList();

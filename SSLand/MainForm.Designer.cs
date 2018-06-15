@@ -43,6 +43,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.soundToggleButton = new System.Windows.Forms.Button();
+            this.検索条件の設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +65,7 @@
             this.メニューToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.購入者管理ToolStripMenuItem,
             this.設定ToolStripMenuItem,
+            this.検索条件の設定ToolStripMenuItem,
             this.ライセンスToolStripMenuItem});
             this.メニューToolStripMenuItem.Name = "メニューToolStripMenuItem";
             this.メニューToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
@@ -164,6 +166,13 @@
             this.soundToggleButton.UseVisualStyleBackColor = true;
             this.soundToggleButton.Click += new System.EventHandler(this.soundToggleButton_Click);
             // 
+            // 検索条件の設定ToolStripMenuItem
+            // 
+            this.検索条件の設定ToolStripMenuItem.Name = "検索条件の設定ToolStripMenuItem";
+            this.検索条件の設定ToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.検索条件の設定ToolStripMenuItem.Text = "検索条件の設定";
+            this.検索条件の設定ToolStripMenuItem.Click += new System.EventHandler(this.検索条件の設定ToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -208,6 +217,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Button soundToggleButton;
+        private System.Windows.Forms.ToolStripMenuItem 検索条件の設定ToolStripMenuItem;
     }
 }
 
