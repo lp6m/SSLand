@@ -193,3 +193,4 @@ ModelManifest.xml
 *.key
 *.zip
 *.rar
+.vs/
