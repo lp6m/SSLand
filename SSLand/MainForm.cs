@@ -25,7 +25,7 @@ namespace SSLand
     public partial class MainForm : Form
     {
         WebClient webClient = new WebClient();//必要かは不明
-        private const int MAX_PANEL_NUM = 40;//タイムラインに表示する商品数
+        private int MAX_PANEL_NUM = 40;//タイムラインに表示する商品数
         List<SecondStreetListItem> bindlist = new List<SecondStreetListItem>();//タイムラインにバインドされている商品
         List<SecondStreetListItem> oldlist = new List<SecondStreetListItem>(); //1回前のリクエストで取得した商品リスト(重複を避ける)
         List<SecondStreetListItem> addlist = new List<SecondStreetListItem>(); //GUI更新時にタイムラインに追加すべき商品リスト
@@ -171,6 +171,9 @@ namespace SSLand
                 this.startProcessButton.BackColor = Color.Red;
                 this.startProcessButton.Text = "監視停止(z)";
                 this.timer1.Enabled = true;
+                //MAX_PANEL_NUMの値を変更
+                int yoko_panel_num = this.flowLayoutPanel1.Width / (new SecondStreetItemPanel()).Width;
+                MAX_PANEL_NUM = (MAX_PANEL_NUM % yoko_panel_num == 0) ? MAX_PANEL_NUM : yoko_panel_num * (MAX_PANEL_NUM / yoko_panel_num + 1);
                 addlist.Clear();
                 addedlist.Clear();
                 bindlist.Clear();
@@ -344,7 +347,7 @@ namespace SSLand
                             break;
                         }*/
                     }
-                    //まだ表示したことないものだけ表示する
+                    //まだ表示したことないものだけ表示する　
                     string itemhashid = newitem.shops_id.ToString() + newitem.goods_id.ToString();
                     if (!addedlist.Contains(itemhashid)) {
                         addedlist.Add(itemhashid);
