@@ -29,6 +29,12 @@ namespace SSLand
         List<SecondStreetListItem> bindlist = new List<SecondStreetListItem>();//タイムラインにバインドされている商品
         List<SecondStreetListItem> oldlist = new List<SecondStreetListItem>(); //1回前のリクエストで取得した商品リスト(重複を避ける)
         List<SecondStreetListItem> addlist = new List<SecondStreetListItem>(); //GUI更新時にタイムラインに追加すべき商品リスト
+        List<string> addedlist = new List<string>();//タイムラインに表示したこのある商品のリスト
+        /*SSLandでは検索条件を指定して検索をかけ、ヒットしたものを結果としているので例えば4つの検索条件をツールに設定していると30*4=120件の結果がふててくる
+         * 120 > MAX_PANEL_NUMなので毎回タイムラインで溢れたやつが新着として認識される
+         * これを防ぐために表示したこのある商品IDと店IDを連結したものを全部リストとしてもっておく
+         */
+         
         //static List<string> boughtItemIDList = new List<string>(); //手動・自動購入した商品IDのリスト
         //static List<BoughtItemListForm.BoughtItem> boughtItemList = new List<BoughtItemListForm.BoughtItem>();
         int nowfocus = 0; //タイムラインの中の上から何個目を選択しているか
@@ -166,6 +172,7 @@ namespace SSLand
                 this.startProcessButton.Text = "監視停止(z)";
                 this.timer1.Enabled = true;
                 addlist.Clear();
+                addedlist.Clear();
                 bindlist.Clear();
                 ClearSecondStreetItemPanel();
                 oldlist.Clear();
@@ -327,19 +334,23 @@ namespace SSLand
                 rst = GetItemProcess.getNewMatchingItems();
                 foreach (var newitem in rst)
                 {
-                    bool isnew = true;
+                    //bool isnew = true;
                     foreach (var olditem in oldlist)
                     {
-                        if (newitem.goods_id == olditem.goods_id)
+                        //addedlistをつくったのでこの判定がいらない
+                        /*if (newitem.goods_id == olditem.goods_id)
                         {
                             isnew = false;
                             break;
-                        }
+                        }*/
                     }
-                    if (isnew)
-                    {
+                    //まだ表示したことないものだけ表示する
+                    string itemhashid = newitem.shops_id.ToString() + newitem.goods_id.ToString();
+                    if (!addedlist.Contains(itemhashid)) {
+                        addedlist.Add(itemhashid);
                         addlist.Add(newitem);
                     }
+                    
                 }
                 oldlist = new List<SecondStreetListItem>(rst);
                 if (addlist.Count != 0)
