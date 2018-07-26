@@ -124,18 +124,22 @@ namespace SSLand {
                 param3.Add("luecaSelect", "on");
                 param3.Add("luecaNewNo", "");
                 param3.Add("luecaPinCode", "");
+                param3.Add("luecaNewNo01", "");
+                param3.Add("luecaNewNo02", "");
+                param3.Add("luecaNewNo03", "");
+                param3.Add("luecaNewNo04", "");
                 param3.Add("myAddress", "0");
                 var node = doc.DocumentNode.SelectSingleNode("//div[@class=\"flow_input my_ad_input my_ad_form1\"]");
-                param3.Add("delvLastName", node.SelectSingleNode("//input[@name=\"delvLastName\"]").GetAttributeValue("value", ""));
-                param3.Add("delvFirstName", node.SelectSingleNode("//input[@name=\"delvFirstName\"]").GetAttributeValue("value", ""));
-                param3.Add("delvFirstKana", node.SelectSingleNode("//input[@name=\"delvFirstKana\"]").GetAttributeValue("value", ""));
-                param3.Add("delvLastKana", node.SelectSingleNode("//input[@name=\"delvLastKana\"]").GetAttributeValue("value", ""));
-                param3.Add("delvZipCode", node.SelectSingleNode("//input[@name=\"delvZipCode\"]").GetAttributeValue("value", ""));
-                param3.Add("delvPrefectural", node.SelectSingleNode("//option[@selected]").GetAttributeValue("value", ""));
-                param3.Add("delvAddress1", node.SelectSingleNode("//input[@name=\"delvAddress1\"]").GetAttributeValue("value", ""));
-                param3.Add("delvTelNo1", node.SelectSingleNode("//input[@name=\"delvTelNo1\"]").GetAttributeValue("value", ""));
-                param3.Add("delvTelNo2", node.SelectSingleNode("//input[@name=\"delvTelNo2\"]").GetAttributeValue("value", ""));
-                param3.Add("delvTelNo3", node.SelectSingleNode("//input[@name=\"delvTelNo3\"]").GetAttributeValue("value", ""));
+                param3.Add("delvLastName_0", node.SelectSingleNode("//input[@name=\"delvLastName_0\"]").GetAttributeValue("value", ""));
+                param3.Add("delvFirstName_0", node.SelectSingleNode("//input[@name=\"delvFirstName_0\"]").GetAttributeValue("value", ""));
+                param3.Add("delvFirstKana_0", node.SelectSingleNode("//input[@name=\"delvFirstKana_0\"]").GetAttributeValue("value", ""));
+                param3.Add("delvLastKana_0", node.SelectSingleNode("//input[@name=\"delvLastKana_0\"]").GetAttributeValue("value", ""));
+                param3.Add("delvZipCode_0", node.SelectSingleNode("//input[@name=\"delvZipCode_0\"]").GetAttributeValue("value", ""));
+                param3.Add("delvPrefectural_0", node.SelectSingleNode("//option[@selected]").GetAttributeValue("value", ""));
+                param3.Add("delvAddress1_0", node.SelectSingleNode("//input[@name=\"delvAddress1_0\"]").GetAttributeValue("value", ""));
+                param3.Add("delvTelNo1_0", node.SelectSingleNode("//input[@name=\"delvTelNo1_0\"]").GetAttributeValue("value", ""));
+                param3.Add("delvTelNo2_0", node.SelectSingleNode("//input[@name=\"delvTelNo2_0\"]").GetAttributeValue("value", ""));
+                param3.Add("delvTelNo3_0", node.SelectSingleNode("//input[@name=\"delvTelNo3_0\"]").GetAttributeValue("value", ""));
                 var node2 = doc.DocumentNode.SelectSingleNode("//div[@class=\"ordermail_input\"]");
                 param3.Add("delvMail", node2.SelectSingleNode("//input[@name=\"delvMail\"]").GetAttributeValue("value", ""));
                 param3.Add("delvMailConf", node2.SelectSingleNode("//input[@name=\"delvMailConf\"]").GetAttributeValue("value", ""));
@@ -154,14 +158,14 @@ namespace SSLand {
                 var param4 = new Dictionary<string, string>();
                 param4.Add("token", doc2.DocumentNode.SelectSingleNode("//input[@name=\"token\"]").GetAttributeValue("value", ""));
                 string url4 = "https://www.2ndstreet.jp/finish/index/ios_app";
-                postSecondStreetAPI(url4, param4, SecondStreetAPI.USER_AGENT);
+                var rawres4 = postSecondStreetAPI(url4, param4, SecondStreetAPI.USER_AGENT);
+                Console.WriteLine(rawres4.response);
                 Log.Logger.Info("代引き購入成功");
                 return true;
             } catch (Exception ex) {
                 Log.Logger.Error("代引き購入失敗");
                 return false;
             }
-
         }
         public void getGoodsDetail(string goods_id, string shops_id) {
             /*string url = "https://www.2ndstreet.jp/index.php/api_2_0/AppMain/getGoodsDetail";
