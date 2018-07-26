@@ -8,6 +8,7 @@ MerlandRelease/
 *.user
 *.sln.docstates
 
+.vs/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -193,4 +194,3 @@ ModelManifest.xml
 *.key
 *.zip
 *.rar
-.vs/
