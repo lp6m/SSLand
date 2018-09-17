@@ -98,9 +98,11 @@ namespace SSLand {
             try {
                 //カートに追加
                 addItemToCartWeb(shops_id, goods_id);
+                Log.Logger.Info("カート追加終了");
                 //ポイント消費確認ページへ
                 string url = "https://www.2ndstreet.jp/reduce";
                 var rawres = getSecondStreetAPI(url, new Dictionary<string, string>(), SecondStreetAPI.USER_AGENT);
+                Log.Logger.Info("ポイント消費確認ページ取得完了");
                 //ポイント消費確定・支払い方法ページへ
                 string url2 = "https://www.2ndstreet.jp/reduce/next";
                 var param2 = new Dictionary<string, string>();
@@ -109,6 +111,7 @@ namespace SSLand {
                 param2.Add("couponsId", "");
                 param2.Add("isAgree", "1");
                 var rawres2 = postSecondStreetAPI(url2, param2, SecondStreetAPI.USER_AGENT);
+                Log.Logger.Info("支払い確定・最終確認ページへ");
                 //支払い方法確定・最終確認ページへ
                 //HTMLから住所情報およびトークンを取り出す
                 string html = System.Web.HttpUtility.HtmlDecode(rawres2.response);//HTML特殊文字列をデコード
@@ -151,6 +154,7 @@ namespace SSLand {
                 param3.Add("deliveryTimeZone", "0");
                 param3.Add("isAgree", "1");
                 var rawres3 = postSecondStreetAPI(url3, param3, SecondStreetAPI.USER_AGENT);
+                if (rawres3.error == false) Log.Logger.Info("注文確定へ");
                 //注文確定へ
                 //HTMLからトークン取り出す
                 HtmlAgilityPack.HtmlDocument doc2 = new HtmlAgilityPack.HtmlDocument();

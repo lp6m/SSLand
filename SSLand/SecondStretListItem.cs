@@ -33,7 +33,7 @@ namespace SSLand
         {
             try
             {
-                this.goods_id = Int64.Parse(json.goods_id);
+                this.goods_id = long.Parse(json.goods_id);
                 this.shops_id = int.Parse(json.shops_id);
                 this.goods_name = json.goods_name;
                 this.brand_name = json.brand_name;

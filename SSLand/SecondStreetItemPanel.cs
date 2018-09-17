@@ -62,7 +62,7 @@ namespace SSLand
 
         private void OpenBrowserButton_Click(object sender, EventArgs e)
         {
-            string pc_url = "https://www.2ndstreet.jp/goods/detail/goodsId/" + item.goods_id + "/shopsId/"+item.shops_id;
+            string pc_url = "https://www.2ndstreet.jp/goods/detail/goodsId/" + item.goods_id.ToString() + "/shopsId/"+item.shops_id.ToString();
             //商品ページをブラウザで開く
             Process.Start(pc_url);
         }

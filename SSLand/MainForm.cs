@@ -378,6 +378,13 @@ namespace SSLand
             this.flowLayoutPanel1.Height = this.Height - this.flowLayoutPanel1.Top - 60;
         }
         private void button5_Click(object sender, EventArgs e) {
+            var api = Common.getSecondStreetAPIWithLogin();
+            bool res = api.buyItemByDaibiki(this.shopIDTextBox.Text.Trim(), this.goodsIDTextBox.Text.Trim());
+            if (res) {
+                MessageBox.Show("購入成功");
+            } else {
+                MessageBox.Show("購入失敗");
+            }
         }
 
         private void ライセンスToolStripMenuItem_Click(object sender, EventArgs e) {
