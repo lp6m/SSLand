@@ -45,10 +45,10 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.soundToggleButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.shopIDTextBox = new System.Windows.Forms.TextBox();
-            this.goodsIDTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.goodsIDTextBox = new System.Windows.Forms.TextBox();
+            this.shopIDTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -61,7 +61,8 @@
             this.メニューToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1794, 33);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(1076, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -73,34 +74,34 @@
             this.検索条件の設定ToolStripMenuItem,
             this.ライセンスToolStripMenuItem});
             this.メニューToolStripMenuItem.Name = "メニューToolStripMenuItem";
-            this.メニューToolStripMenuItem.Size = new System.Drawing.Size(74, 29);
+            this.メニューToolStripMenuItem.Size = new System.Drawing.Size(54, 22);
             this.メニューToolStripMenuItem.Text = "メニュー";
             // 
             // 購入者管理ToolStripMenuItem
             // 
             this.購入者管理ToolStripMenuItem.Name = "購入者管理ToolStripMenuItem";
-            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(219, 30);
+            this.購入者管理ToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.購入者管理ToolStripMenuItem.Text = "アカウント管理";
             this.購入者管理ToolStripMenuItem.Click += new System.EventHandler(this.アカウント管理ToolStripMenuItem_Click);
             // 
             // 設定ToolStripMenuItem
             // 
             this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
-            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(219, 30);
+            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.設定ToolStripMenuItem.Text = "設定";
             this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
             // 
             // 検索条件の設定ToolStripMenuItem
             // 
             this.検索条件の設定ToolStripMenuItem.Name = "検索条件の設定ToolStripMenuItem";
-            this.検索条件の設定ToolStripMenuItem.Size = new System.Drawing.Size(219, 30);
+            this.検索条件の設定ToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.検索条件の設定ToolStripMenuItem.Text = "検索条件の設定";
             this.検索条件の設定ToolStripMenuItem.Click += new System.EventHandler(this.検索条件の設定ToolStripMenuItem_Click);
             // 
             // ライセンスToolStripMenuItem
             // 
             this.ライセンスToolStripMenuItem.Name = "ライセンスToolStripMenuItem";
-            this.ライセンスToolStripMenuItem.Size = new System.Drawing.Size(219, 30);
+            this.ライセンスToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.ライセンスToolStripMenuItem.Text = "ライセンス";
             this.ライセンスToolStripMenuItem.Click += new System.EventHandler(this.ライセンスToolStripMenuItem_Click);
             // 
@@ -119,10 +120,9 @@
             // 
             // startProcessButton
             // 
-            this.startProcessButton.Location = new System.Drawing.Point(19, 38);
-            this.startProcessButton.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.startProcessButton.Location = new System.Drawing.Point(11, 25);
             this.startProcessButton.Name = "startProcessButton";
-            this.startProcessButton.Size = new System.Drawing.Size(140, 50);
+            this.startProcessButton.Size = new System.Drawing.Size(84, 33);
             this.startProcessButton.TabIndex = 16;
             this.startProcessButton.Text = "監視開始(z)";
             this.startProcessButton.UseVisualStyleBackColor = true;
@@ -136,18 +136,16 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(19, 122);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(11, 81);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1555, 432);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(933, 288);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(413, 42);
-            this.button5.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.button5.Location = new System.Drawing.Point(248, 28);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(165, 31);
+            this.button5.Size = new System.Drawing.Size(99, 21);
             this.button5.TabIndex = 19;
             this.button5.Text = "代引き購入テスト";
             this.button5.UseVisualStyleBackColor = true;
@@ -158,10 +156,9 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 768);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 505);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 24, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1794, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1076, 22);
             this.statusStrip1.TabIndex = 20;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -173,10 +170,9 @@
             // soundToggleButton
             // 
             this.soundToggleButton.Font = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.soundToggleButton.Location = new System.Drawing.Point(169, 41);
-            this.soundToggleButton.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.soundToggleButton.Location = new System.Drawing.Point(101, 27);
             this.soundToggleButton.Name = "soundToggleButton";
-            this.soundToggleButton.Size = new System.Drawing.Size(104, 49);
+            this.soundToggleButton.Size = new System.Drawing.Size(62, 33);
             this.soundToggleButton.TabIndex = 21;
             this.soundToggleButton.TabStop = false;
             this.soundToggleButton.Text = "📢";
@@ -190,50 +186,56 @@
             this.groupBox1.Controls.Add(this.goodsIDTextBox);
             this.groupBox1.Controls.Add(this.shopIDTextBox);
             this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Location = new System.Drawing.Point(662, 41);
+            this.groupBox1.Location = new System.Drawing.Point(397, 27);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(609, 73);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(365, 49);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "購入テスト";
             // 
-            // shopIDTextBox
+            // label2
             // 
-            this.shopIDTextBox.Location = new System.Drawing.Point(162, 13);
-            this.shopIDTextBox.Name = "shopIDTextBox";
-            this.shopIDTextBox.Size = new System.Drawing.Size(243, 25);
-            this.shopIDTextBox.TabIndex = 23;
-            // 
-            // goodsIDTextBox
-            // 
-            this.goodsIDTextBox.Location = new System.Drawing.Point(162, 44);
-            this.goodsIDTextBox.Name = "goodsIDTextBox";
-            this.goodsIDTextBox.Size = new System.Drawing.Size(243, 25);
-            this.goodsIDTextBox.TabIndex = 24;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(38, 31);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 12);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "goodsID";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(72, 16);
+            this.label1.Location = new System.Drawing.Point(43, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 18);
+            this.label1.Size = new System.Drawing.Size(40, 12);
             this.label1.TabIndex = 25;
             this.label1.Text = "shopID";
             // 
-            // label2
+            // goodsIDTextBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 18);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "goodsID";
+            this.goodsIDTextBox.Location = new System.Drawing.Point(97, 29);
+            this.goodsIDTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.goodsIDTextBox.Name = "goodsIDTextBox";
+            this.goodsIDTextBox.Size = new System.Drawing.Size(147, 19);
+            this.goodsIDTextBox.TabIndex = 24;
+            // 
+            // shopIDTextBox
+            // 
+            this.shopIDTextBox.Location = new System.Drawing.Point(97, 9);
+            this.shopIDTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.shopIDTextBox.Name = "shopIDTextBox";
+            this.shopIDTextBox.Size = new System.Drawing.Size(147, 19);
+            this.shopIDTextBox.TabIndex = 23;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1794, 790);
+            this.ClientSize = new System.Drawing.Size(1076, 527);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.soundToggleButton);
             this.Controls.Add(this.statusStrip1);
@@ -241,7 +243,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "MainForm";
             this.Text = "SSLand";
             this.Load += new System.EventHandler(this.MainWindow_Load);

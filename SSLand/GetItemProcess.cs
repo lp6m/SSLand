@@ -25,7 +25,7 @@ namespace SSLand{
                Log.Logger.Error("getNewMatchingItemsでエラー" + ex.Message);
            }
            TimeSpan ts = sw.Elapsed;
-           Console.WriteLine("　{ts}");
+           Console.Write(".");
            return rst;
         }
     }

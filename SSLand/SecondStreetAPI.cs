@@ -13,6 +13,7 @@ namespace SSLand {
 
         public const string USER_AGENT = "Mozilla/5.0 (iPad; COU OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Mobile/14F89 Fril/6.7.1";
         public const string LOGIN_USER_AGENT = "reuse_store_release/3.0.5 CFNetwork/897.15 Darwin/17.5.0";
+        public const string ADD_CART_USER_AGENT = "Android API Client/UNAVAILABLE";
 
         public SecondStreetAPI()
         {
@@ -41,32 +42,32 @@ namespace SSLand {
         //ログイン後のクッキーだけが必要になる
         //購入前にログインを行う
         public bool trySecondStreetLogin(string email, string password) {
-            string url = "https://auth.geonet.jp/authorize";
-            string client_id = "f92a4aeb4d2d07e4b8471177246e7eac3f7bf287ff984c2f3219c18c71b9c302";
-            Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("response_type", "code");
-            param.Add("redirect_uri", "https://www.2ndstreet.jp/index.php/api_2_0/appuserauth/login");
-            param.Add("state", "state");
-            param.Add("scope", "openid profile delivery geoinfo geomasterid");
-            param.Add("client_id", client_id);
-            //csrf取り出し
-            var rawres = getSecondStreetAPI(url, param, SecondStreetAPI.LOGIN_USER_AGENT);
-            var resjson = DynamicJson.Parse(rawres.response);
-            string csrf_token = resjson.csrf_token;
-
-            Dictionary<string, string> param2 = new Dictionary<string, string>();
-            param2.Add("response_type", "code");
-            param2.Add("redirect_uri", "https://www.2ndstreet.jp/index.php/api_2_0/appuserauth/login");
-            param2.Add("client_id", client_id);
-            param2.Add("csrf_token", csrf_token);
-            param2.Add("user_action", "accept");
-            param2.Add("state", "state");
-            param2.Add("scope", "openid profile delivery geoinfo geomasterid");
-            param2.Add("login_id", email);
-            param2.Add("password", password);
-            //302で自動的にリダイレクトする
-            var rawres2 = postSecondStreetAPI(url, param2, SecondStreetAPI.LOGIN_USER_AGENT);
             try {
+                string url = "https://auth.geonet.jp/authorize";
+                string client_id = "f92a4aeb4d2d07e4b8471177246e7eac3f7bf287ff984c2f3219c18c71b9c302";
+                Dictionary<string, string> param = new Dictionary<string, string>();
+                param.Add("response_type", "code");
+                param.Add("redirect_uri", "https://www.2ndstreet.jp/index.php/api_2_0/appuserauth/login");
+                param.Add("state", "state");
+                param.Add("scope", "openid profile delivery geoinfo geomasterid");
+                param.Add("client_id", client_id);
+                //csrf取り出し
+                var rawres = getSecondStreetAPI(url, param, SecondStreetAPI.LOGIN_USER_AGENT);
+                var resjson = DynamicJson.Parse(rawres.response);
+                string csrf_token = resjson.csrf_token;
+
+                Dictionary<string, string> param2 = new Dictionary<string, string>();
+                param2.Add("response_type", "code");
+                param2.Add("redirect_uri", "https://www.2ndstreet.jp/index.php/api_2_0/appuserauth/login");
+                param2.Add("client_id", client_id);
+                param2.Add("csrf_token", csrf_token);
+                param2.Add("user_action", "accept");
+                param2.Add("state", "state");
+                param2.Add("scope", "openid profile delivery geoinfo geomasterid");
+                param2.Add("login_id", email);
+                param2.Add("password", password);
+                //302で自動的にリダイレクトする
+                var rawres2 = postSecondStreetAPI(url, param2, SecondStreetAPI.LOGIN_USER_AGENT);
                 var resjson2 = DynamicJson.Parse(rawres2.response);
                 string access_token = resjson2.access_token;
                 string refresh_token = resjson2.refresh_token;
@@ -75,6 +76,10 @@ namespace SSLand {
                 string geo_id = resjson.geo_id;
                 string nickname = resjson.nickname;
                 string geo_master_id = resjson.geo_master_id;*/
+
+                //cookieに2st_logined_app=onを追加
+                this.cc.Add(new Uri("https://www.2ndstreet.jp"), new Cookie("2st_logined_app", "on", "/", ".2ndstreet.jp"));
+                
                 Log.Logger.Info("セカンドストリートログイン成功");
                 return true;
             } catch (Exception ex) {
@@ -83,15 +88,19 @@ namespace SSLand {
             }
         }
         public void addItemToCartWeb(string shops_id, string goods_id) {
-            string url2 = "https://www.2ndstreet.jp/cart/updateForApp";
+            string url2 = "https://www.2ndstreet.jp/index.php/api_2_0/AppUser/addCart";
             Dictionary<string, string> param2 = new Dictionary<string, string>();
             param2.Add("releaseurl", "1");
-            param2.Add("shopsId", shops_id);
-            param2.Add("goodsId", goods_id);
+            param2.Add("shops_id", shops_id);
+            param2.Add("goods_id", goods_id);
             param2.Add("num", "1");
             param2.Add("sp", "on");
-            param2.Add("ver", "3.0.5");
-            var rawres2 = getSecondStreetAPI(url2, param2, SecondStreetAPI.USER_AGENT);
+            param2.Add("ver", "4.0.8");
+            param2.Add("backorder", "0");
+            param2.Add("os_ver", "6.0.1");
+            param2.Add("device", "qcom");
+            var rawres = postSecondStreetAPI(url2, param2, SecondStreetAPI.ADD_CART_USER_AGENT);
+            Console.WriteLine(rawres.response);
         }
 
         public bool buyItemByDaibiki(string shops_id, string goods_id) {
@@ -101,8 +110,13 @@ namespace SSLand {
                 Log.Logger.Info("カート追加終了");
                 //ポイント消費確認ページへ
                 string url = "https://www.2ndstreet.jp/reduce";
-                var rawres = getSecondStreetAPI(url, new Dictionary<string, string>(), SecondStreetAPI.USER_AGENT);
+                Dictionary<string, string> param = new Dictionary<string, string>();
+                param.Add("sp", "on");
+                param.Add("releaseurl", "1");
+                param.Add("ver", "4.0.8");
+                var rawres1 = getSecondStreetAPI(url, param, SecondStreetAPI.USER_AGENT);
                 Log.Logger.Info("ポイント消費確認ページ取得完了");
+                Console.WriteLine("ポイント消費確認ページ取得完了");
                 //ポイント消費確定・支払い方法ページへ
                 string url2 = "https://www.2ndstreet.jp/reduce/next";
                 var param2 = new Dictionary<string, string>();
@@ -112,6 +126,7 @@ namespace SSLand {
                 param2.Add("isAgree", "1");
                 var rawres2 = postSecondStreetAPI(url2, param2, SecondStreetAPI.USER_AGENT);
                 Log.Logger.Info("支払い確定・最終確認ページへ");
+                Console.WriteLine("支払い確定・最終確認ページへ");
                 //支払い方法確定・最終確認ページへ
                 //HTMLから住所情報およびトークンを取り出す
                 string html = System.Web.HttpUtility.HtmlDecode(rawres2.response);//HTML特殊文字列をデコード
@@ -229,11 +244,12 @@ namespace SSLand {
                 //クッキーコンテナの追加
                 req.CookieContainer = this.cc;
                 //タイムアウト設定
-                req.Timeout = 5000;
+                req.Timeout = 500000;//でかくないとダメ
                 //POST
                 string content = "";
                 var task = Task.Factory.StartNew(() => executePostRequest(ref req, bytes));
-                task.Wait(10000);
+                //task.Wait(10000);
+                task.Wait();
                 if (task.IsCompleted)
                     content = task.Result;
                 else
@@ -327,10 +343,14 @@ namespace SSLand {
             }
             catch(WebException ex)
             {
-                using (var stream = ex.Response.GetResponseStream())
-                using (var reader = new StreamReader(stream)) {
-                    Console.WriteLine(reader.ReadToEnd());
+                Console.WriteLine(ex.StackTrace);
+                using (var stream = ex.Response.GetResponseStream()) {
+                    using (var reader = new StreamReader(stream)) {
+                        return reader.ReadToEnd();
+                    }
                 }
+            }catch(Exception ex) {
+                Console.Write(ex.StackTrace);
                 return "";
             }
         }
