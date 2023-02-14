@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.itemNameLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.shopNameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.PriceLabel = new System.Windows.Forms.Label();
             this.OpenBrowserButton = new System.Windows.Forms.Button();
@@ -56,34 +54,12 @@
             this.itemNameLabel.TabIndex = 0;
             this.itemNameLabel.Text = "アイテム名";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(2, 82);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "店舗名：";
-            // 
-            // shopNameLabel
-            // 
-            this.shopNameLabel.AutoSize = true;
-            this.shopNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.shopNameLabel.Location = new System.Drawing.Point(46, 82);
-            this.shopNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.shopNameLabel.Name = "shopNameLabel";
-            this.shopNameLabel.Size = new System.Drawing.Size(69, 12);
-            this.shopNameLabel.TabIndex = 3;
-            this.shopNameLabel.Text = "shop_name";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("メイリオ", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(1, 42);
+            this.label1.Location = new System.Drawing.Point(0, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 31);
             this.label1.TabIndex = 37;
@@ -94,7 +70,7 @@
             this.PriceLabel.AutoSize = true;
             this.PriceLabel.Font = new System.Drawing.Font("メイリオ", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.PriceLabel.ForeColor = System.Drawing.Color.Red;
-            this.PriceLabel.Location = new System.Drawing.Point(65, 42);
+            this.PriceLabel.Location = new System.Drawing.Point(65, 53);
             this.PriceLabel.Name = "PriceLabel";
             this.PriceLabel.Size = new System.Drawing.Size(49, 31);
             this.PriceLabel.TabIndex = 38;
@@ -178,9 +154,7 @@
             // 
             this.panel1.Controls.Add(this.itemNameLabel);
             this.panel1.Controls.Add(this.BuyButton);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.OpenBrowserButton);
-            this.panel1.Controls.Add(this.shopNameLabel);
             this.panel1.Controls.Add(this.brandNameLabel);
             this.panel1.Controls.Add(this.PriceLabel);
             this.panel1.Controls.Add(this.sizeLabel);
@@ -197,7 +171,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SecondStreetItemPanel";
             this.Size = new System.Drawing.Size(267, 376);
             this.Load += new System.EventHandler(this.SecondStreetItemPanel_Load);
@@ -211,8 +185,6 @@
         #endregion
 
         private System.Windows.Forms.Label itemNameLabel;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label shopNameLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label PriceLabel;
         private System.Windows.Forms.Button OpenBrowserButton;

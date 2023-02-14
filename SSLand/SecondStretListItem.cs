@@ -37,15 +37,15 @@ namespace SSLand
                 this.shops_id = int.Parse(json.shops_id);
                 this.goods_name = json.goods_name;
                 this.brand_name = json.brand_name;
-                this.shop_name = json.shop_name;
+                //this.shop_name = json.shop_name;//2023-2-14廃止確認
                 this.price = (int)json.price;//なぜかdouble
                 this.price_org = (int)json.price_org;//なぜかdouble
                 this.sale_label = json.sale_label;
                 this.is_favorite_goods = int.Parse(json.is_favorite_goods);
-                this.is_favorite_shop = int.Parse(json.is_favorite_shop);
+                //this.is_favorite_shop = int.Parse(json.is_favorite_shop);//2023-2-14廃止確認
                 this.size_detail = json.size_detail;
-                this.color_name = json.color_name;
-                this.pattern_name = json.pattern_name;
+                //this.color_name = json.color_name;//2023-2-14廃止確認
+                //this.pattern_name = json.pattern_name;//2023-2-14廃止確認
                 this.image_url = json.image_url;
             }
             catch (Exception ex)

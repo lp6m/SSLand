@@ -442,62 +442,62 @@ namespace SSLand
                     chromeDriver.Url = "https://www.2ndstreet.jp/cart/updateForApp";//?releaseurl=1&num=1&sp=on&ver=3.0.5&goodsId={0}&shopsID={1}", goodsId, shopsId);
                     //決済へ進む
                     try {
-                        var element = chromeDriver.FindElementByXPath("/html/body/article/ul/form");
+                        var element = chromeDriver.FindElement(By.XPath("/html/body/article/ul/form"));
                         element.Submit();
                     } catch {
                         //submit成功後elementが消えてエラーになる: TODO:真面目に処理
                     }
                     //ポイントを使用するか
                     try {
-                        var element2 = chromeDriver.FindElementByXPath("//*[@id=\"reduceForm\"]");
+                        var element2 = chromeDriver.FindElement(By.XPath("//*[@id=\"reduceForm\"]"));
                         element2.Submit();
                     } catch {
 
                     }
                     if (useCard) {
                         //クレジットカード払いを選択
-                        var credit_radio_input = chromeDriver.FindElementByXPath("//*[@id=\"payment_choose_member2\"]");
+                        var credit_radio_input = chromeDriver.FindElement(By.XPath("//*[@id=\"payment_choose_member2\"]"));
                         credit_radio_input.Click();
                         //カード情報および住所の入力:住所はデフォルトで選択されているものを使用する
                         bool input_new_card = true;
                         if (input_new_card) {
                             //新しいカード番号を入力するを選択
-                            var radio_input = chromeDriver.FindElementByXPath("//input[@id=\"card_choose_other\"]");
+                            var radio_input = chromeDriver.FindElement(By.XPath("//input[@id=\"card_choose_other\"]"));
                             radio_input.Click();
                             //情報の記入
-                            var cardTypeSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditCardType\"]");
+                            var cardTypeSelct = chromeDriver.FindElement(By.XPath("//select[@name=\"creditCardType\"]"));
                             new SelectElement(cardTypeSelct).SelectByText("VISA");
-                            var cardnumber_input = chromeDriver.FindElementByXPath("//input[@id=\"card_number\"]");
+                            var cardnumber_input = chromeDriver.FindElement(By.XPath("//input[@id=\"card_number\"]"));
                             cardnumber_input.Click();
                             cardnumber_input.SendKeys(cardnumber);
-                            var cccsc_input = chromeDriver.FindElementByXPath("//input[@id=\"cc-csc\"]");
+                            var cccsc_input = chromeDriver.FindElement(By.XPath("//input[@id=\"cc-csc\"]"));
                             System.Threading.Thread.Sleep(3000);
                             cccsc_input.Click();
                             cccsc_input.SendKeys(securitycode);
-                            var monthSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditAvailableMonth\"]");
+                            var monthSelct = chromeDriver.FindElement(By.XPath("//select[@name=\"creditAvailableMonth\"]"));
                             new SelectElement(monthSelct).SelectByText(cardmonth);
-                            var yearSelct = chromeDriver.FindElementByXPath("//select[@name=\"creditAvailableYear\"]");
+                            var yearSelct = chromeDriver.FindElement(By.XPath("//select[@name=\"creditAvailableYear\"]"));
                             new SelectElement(yearSelct).SelectByText(cardyear);
-                            var lastname_input = chromeDriver.FindElementByXPath("//input[@id=\"creditLastName\"]");
+                            var lastname_input = chromeDriver.FindElement(By.XPath("//input[@id=\"creditLastName\"]"));
                             lastname_input.Click();
                             lastname_input.SendKeys(cardlastname);
-                            var firstname_input = chromeDriver.FindElementByXPath("//input[@id=\"creditFirstName\"]");
+                            var firstname_input = chromeDriver.FindElement(By.XPath("//input[@id=\"creditFirstName\"]"));
                             firstname_input.Click();
                             firstname_input.SendKeys(cardfirstname);
                             System.Threading.Thread.Sleep(4000);
                         } else {
                             //既に登録されているクレカ選択
-                            var registered_card = chromeDriver.FindElementByXPath("//*[@id=\"card_choose_0\"]");
+                            var registered_card = chromeDriver.FindElement(By.XPath("//*[@id=\"card_choose_0\"]"));
                             registered_card.Click();
                         }
                     } else {
                         //代引き払い
-                        /*var radio_input = chromeDriver.FindElementByXPath("//*[@id=\"payment_choose_member1\"]");
+                        /*var radio_input = chromeDriver.FindElement(By.XPath("//*[@id=\"payment_choose_member1\"]");
                         radio_input.Click();*/
                     }
                     //支払い方法・住所確定
                     try {
-                        var element3 = chromeDriver.FindElementByXPath("//button[@id=\"submit-btn\"]");
+                        var element3 = chromeDriver.FindElement(By.XPath("//button[@id=\"submit-btn\"]"));
                         var remote = element3 as RemoteWebElement;
                         var hack = remote.LocationOnScreenOnceScrolledIntoView;
                         element3.Click();
@@ -507,7 +507,7 @@ namespace SSLand
                     //最終確認へ
                     System.Threading.Thread.Sleep(2000);
                     try {
-                        var element4 = chromeDriver.FindElementByXPath("//*[@id=\"flownext_btn\"]/button");
+                        var element4 = chromeDriver.FindElement(By.XPath("//*[@id=\"flownext_btn\"]/button"));
                         var remote = element4 as RemoteWebElement;
                         var hack = remote.LocationOnScreenOnceScrolledIntoView;
                         element4.Click();
@@ -518,7 +518,7 @@ namespace SSLand
                         //VPASSのみ使用可能
                         System.Threading.Thread.Sleep(2000);
                         try {
-                            var element5 = chromeDriver.FindElementByXPath("//input[@name=\"Password\"]");
+                            var element5 = chromeDriver.FindElement(By.XPath("//input[@name=\"Password\"]"));
                             element5.Click();
                             element5.SendKeys(vpasspassword);
                         } catch {
